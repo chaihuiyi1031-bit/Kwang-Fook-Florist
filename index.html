@@ -218,13 +218,6 @@
             .card-price { font-size: 13px; }
             .card-action-btn { font-size: 10px; padding: 6px; }
             
-            /* 弹窗 */
-            .modal-box { width: 95%; height: 85vh; }
-            .modal-right-body { padding: 20px; }
-            .modal-title { font-size: 22px; }
-            .modal-quote-text { font-size: 14px; }
-            .material-item { font-size: 13px; }
-            
             /* 底部 */
             .footer-contact { gap: 20px; flex-direction: column; align-items: center; }
             footer p { font-size: 11px; padding-top: 20px; }
@@ -241,22 +234,54 @@
             .code-tag { font-size: 9px; padding: 2px 6px; top: 6px; left: 6px; }
             .cat-item { padding: 6px 12px; font-size: 12px; }
             .shop-content { padding: 15px; }
-            .modal-box { height: 90vh; }
-            .modal-left-img { height: 200px; }
-            .modal-right-body { height: calc(100% - 200px); padding: 15px; }
-            .modal-title { font-size: 18px; }
-            .btn-modal-action { font-size: 12px; padding: 10px; }
             .whatsapp-float { width: 50px; height: 50px; bottom: 20px; right: 20px; }
         }
 
-        @keyframes modalSlideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        
-        @media (max-width: 992px) { 
-            .modal-box { grid-template-columns: 1fr; height: 92vh; max-height: none; } 
-            .modal-left-img { height: 240px; } 
-            .modal-right-body { padding: 25px 20px; height: calc(100% - 240px); } 
-            .modal-title { font-size: 24px; margin-bottom: 15px; }
+        /* 手机端弹窗图片完整显示优化 */
+        @media (max-width: 992px) {
+            .modal-box { 
+                grid-template-columns: 1fr; 
+                height: 92vh; 
+                max-height: none; 
+                width: 95%;
+            }
+            .modal-left-img { 
+                height: auto; 
+                max-height: 40vh; 
+                width: 100%;
+                object-fit: contain;   /* 关键修改：保证图片完整可见，不被裁剪 */
+                background: #f0f0ea;
+            }
+            .modal-right-body { 
+                padding: 20px; 
+                height: auto; 
+                max-height: 55vh; 
+                overflow-y: auto;
+            }
+            .modal-title { font-size: 22px; margin-bottom: 12px; }
+            .modal-quote-text { font-size: 14px; }
+            .material-item { font-size: 13px; }
+            .btn-modal-action { padding: 12px; font-size: 13px; }
         }
+
+        /* 更小屏幕（例如 iPhone SE）进一步优化 */
+        @media (max-width: 480px) and (orientation: portrait) {
+            .modal-left-img {
+                max-height: 35vh;
+            }
+            .modal-right-body {
+                padding: 16px;
+                max-height: 58vh;
+            }
+            .modal-title {
+                font-size: 20px;
+            }
+            .modal-id-badge {
+                font-size: 11px;
+            }
+        }
+
+        @keyframes modalSlideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
