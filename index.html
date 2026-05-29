@@ -43,7 +43,6 @@
 
         .whatsapp-float { position: fixed; bottom: 40px; right: 40px; background-color: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3); z-index: 1999; transition: var(--transition-smooth); }
         .whatsapp-float:hover { transform: scale(1.1); }
-        .whatsapp-float::before { content: ''; position: absolute; width: 100%; height: 100%; background-color: #25D366; border-radius: 50%; z-index: -1; animation: pulse-wave 2s infinite; }
         
         footer { background-color: var(--clr-beige); border-top: 1px solid var(--clr-light-gray); padding: 80px 0 60px 0; text-align: center; }
         .footer-contact { display: flex; justify-content: center; gap: 50px; margin-bottom: 40px; flex-wrap: wrap; }
@@ -65,10 +64,6 @@
         .section-header h2 { font-family: var(--font-serif); font-size: 38px; font-weight: 400; margin-bottom: 15px; letter-spacing: 1px; }
         .section-header p { color: var(--clr-text-muted); font-size: 14px; letter-spacing: 1px; }
         
-        .filter-controls { display: flex; justify-content: center; gap: 15px; margin-bottom: 60px; flex-wrap: wrap; }
-        .filter-btn { background: var(--clr-white); border: 1px solid var(--clr-light-gray); padding: 12px 30px; font-size: 13px; letter-spacing: 1px; cursor: pointer; transition: var(--transition-smooth); }
-        .filter-btn:hover, .filter-btn.active { background-color: var(--clr-sage); color: var(--white); border-color: var(--clr-sage); }
-
         .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 50px 30px; }
         .product-card { background: var(--clr-white); transition: var(--transition-smooth); cursor: pointer; }
         .product-card.hidden { display: none; }
@@ -185,7 +180,6 @@
         }
 
         @media (max-width: 768px) {
-            /* 导航栏 */
             .navbar { height: auto; padding: 15px 0; }
             .logo { font-size: 20px; white-space: normal; }
             .nav-right-container { width: 100%; justify-content: space-between; }
@@ -193,7 +187,6 @@
             .nav-links a { font-size: 12px; white-space: nowrap; }
             .lang-switcher { padding-left: 12px; border-left: none; }
             
-            /* 首页 */
             .hero { min-height: 90vh; height: auto; }
             .hero-content h1 { font-size: 32px; letter-spacing: 1px; }
             .hero-content p { font-size: 11px; letter-spacing: 2px; margin-bottom: 30px; }
@@ -205,7 +198,6 @@
             .delivery-grid { grid-template-columns: 1fr; gap: 30px; }
             .delivery-card { padding: 30px 25px; }
             
-            /* 商城视图 */
             #view-mall { padding-top: 100px; }
             .search-section { padding: 15px 20px; }
             .shop-layout { flex-direction: column; }
@@ -218,7 +210,6 @@
             .card-price { font-size: 13px; }
             .card-action-btn { font-size: 10px; padding: 6px; }
             
-            /* 底部 */
             .footer-contact { gap: 20px; flex-direction: column; align-items: center; }
             footer p { font-size: 11px; padding-top: 20px; }
         }
@@ -249,7 +240,7 @@
                 height: auto; 
                 max-height: 40vh; 
                 width: 100%;
-                object-fit: contain;   /* 关键修改：保证图片完整可见，不被裁剪 */
+                object-fit: contain;   
                 background: #f0f0ea;
             }
             .modal-right-body { 
@@ -263,491 +254,422 @@
             .material-item { font-size: 13px; }
             .btn-modal-action { padding: 12px; font-size: 13px; }
         }
-
-        /* 更小屏幕（例如 iPhone SE）进一步优化 */
         @media (max-width: 480px) and (orientation: portrait) {
-            .modal-left-img {
-                max-height: 35vh;
-            }
-            .modal-right-body {
-                padding: 16px;
-                max-height: 58vh;
-            }
-            .modal-title {
-                font-size: 20px;
-            }
-            .modal-id-badge {
-                font-size: 11px;
-            }
+            .modal-left-img { max-height: 35vh; }
+            .modal-right-body { padding: 16px; max-height: 58vh; }
+            .modal-title { font-size: 20px; }
         }
-
         @keyframes modalSlideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="container navbar">
-            <div class="logo" onclick="openHome()" data-bc="广福花苑" data-bi="Kwang Fook Florist">广福花苑</div>
-            <div class="nav-right-container">
-                <nav class="nav-links">
-                    <a id="nav-home" class="active" onclick="openHome()" data-bc="美学首页" data-bi="Home">美学首页</a>
-                    <a id="nav-categories" onclick="openHomeAndScroll('categories')" data-bc="品类空间" data-bi="Collections">品类空间</a>
-                    <a id="nav-mall" onclick="openMall('all')" data-bc="搜索商城" data-bi="Search Mall">搜索商城</a>
-                    <a id="nav-delivery" onclick="openHomeAndScroll('delivery')" data-bc="配送须知" data-bi="Delivery Info">配送须知</a>
-                    <a id="nav-contact" onclick="scrollToFooter()" data-bc="联系我们" data-bi="Contact">联系我们</a>
-                </nav>
-                <div class="lang-switcher">
-                    <span class="lang-btn active" id="btn-bc" onclick="toggleLanguage('bc')">BC</span>
-                    <span style="color:#eee">|</span>
-                    <span class="lang-btn" id="btn-bi" onclick="toggleLanguage('bi')">BI</span>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <main id="view-home">
-        <section class="hero">
-            <div class="hero-content">
-                <h1 data-bc="每朵花，都有属于自己的故事" data-bi="Every Flower Tells A Story">每朵花，都有属于自己的故事</h1>
-                <p data-bc="韩式自然系现代花艺 · 独家高定美学设计" data-bi="Premium Korean-inspired Bespoke Floral Arrangements">韩式自然系现代花艺 · 独家高定美学设计</p>
-                <a onclick="openHomeAndScroll('categories')" class="btn-luxury" data-bc="即刻探索" data-bi="Shop Now">即刻探索</a>
-            </div>
-        </section>
-
-        <section class="category-showcase section-padding" id="categories">
-            <div class="container">
-                <div class="section-header">
-                    <h2 data-bc="全系列花艺美学" data-bi="Our Curated Collections">全系列花艺美学</h2>
-                    <p data-bc="轻点商品可查阅深度的花材配比与高定设计理念" data-bi="Click on any piece to reveal its intricate design philosophy">轻点商品可查阅深度的花材配比与高定设计理念</p>
-                </div>
-                <div class="product-grid">
-                    <div class="product-card" data-home-cat="bouquet" onclick="openMall('bouquet')">
-                        <div class="product-img-wrapper"><img src="GRD1.jpg" alt="落樱柔粉"></div>
-                        <div class="product-info">
-                            <span class="product-category-tag" data-bc="时尚花束系列" data-bi="Flower Bouquet">时尚花束系列</span>
-                            <h3 class="product-title" data-bc="落樱柔粉 · 韩式艺术花束" data-bi="Pastel Dreams Bouquet">落樱柔粉 · 韩式艺术花束</h3>
-                        </div>
-                    </div>
-                    <div class="product-card" data-home-cat="wreath" onclick="openMall('wreath')">
-                        <div class="product-img-wrapper"><img src="Wreath1.jpg" alt="白芒静谧"></div>
-                        <div class="product-info">
-                            <span class="product-category-tag" data-bc="追思慰问系列" data-bi="Flower Wreath">追思慰问系列</span>
-                            <h3 class="product-title" data-bc="白芒静谧 · 高雅慰问花圈" data-bi="Serene Condolence Wreath">白芒静谧 · 高雅慰问花圈</h3>
-                        </div>
-                    </div>
-                    <div class="product-card" data-home-cat="basket" onclick="openMall('basket')">
-                        <div class="product-img-wrapper"><img src="Basket1.jpg" alt="莫奈花园"></div>
-                        <div class="product-info">
-                            <span class="product-category-tag" data-bc="艺术礼品花篮" data-bi="Flower Basket">艺术礼品花篮</span>
-                            <h3 class="product-title" data-bc="莫奈花园 · 祝愿藤编花篮" data-bi="English Garden Basket">莫奈花园 · 祝愿藤编花篮</h3>
-                        </div>
-                    </div>
-                    <div class="product-card" data-home-cat="opening" onclick="openMall('opening')">
-                        <div class="product-img-wrapper"><img src="GOF1.jpg" alt="意向交织"></div>
-                        <div class="product-info">
-                            <span class="product-category-tag" data-bc="商务庆典系列" data-bi="Grand Opening">商务庆典系列</span>
-                            <h3 class="product-title" data-bc="意向交织 · 极简开业花架" data-bi="The Monolith Luxury Stand">意向交织 · 极简开业花架</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="section-padding" id="delivery">
-            <div class="container">
-                <div class="section-header">
-                    <h2 data-bc="广福花苑 · 配送与自取须知" data-bi="Guang Fu Flower Garden · Delivery & Pickup Info">广福花苑 · 配送与自取须知</h2>
-                </div>
-                <div class="delivery-grid">
-                    <div class="delivery-card">
-                        <h3 data-bc="17 哩配送" data-bi="17 Mile Delivery">17 哩配送</h3>
-                        <ul class="delivery-list">
-                            <li data-bc="charge RM20 车油费" data-bi="RM20 petrol delivery charge applicable">charge RM20 车油费</li>
-                            <li data-bc="<span class='badge-pickup'>可</span>到店自取（广福金店）" data-bi="<span class='badge-pickup'>OK</span>Self-pickup available at Guang Fu Gold Shop"><span class="badge-pickup">可</span>到店自取（广福金店）</li>
-                        </ul>
-                    </div>
-                    <div class="delivery-card">
-                        <h3 data-bc="西连配送" data-bi="Serian Delivery">西连配送</h3>
-                        <ul class="delivery-list">
-                            <li data-bc="在 kampung 区 / 偏远地区就说好在大路旁 / 学校前面拿货" data-bi="For kampung or remote areas, collection point agreed at main roadside or school.">在 kampung 区 / 偏远地区就说好在大路旁 / 学校前面拿货</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <main id="view-mall" class="view-hidden">
-        <section class="search-section">
-            <div class="search-wrapper">
-                <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                <input type="text" id="mallSearchInput" class="search-input" oninput="runCombinedFilter()" placeholder="搜索花名、花材、标签（如：玫瑰、满天星、#毕业快乐、Bouquet51）...">
-            </div>
-        </section>
-
-        <div class="shop-layout">
-            <aside class="shop-sidebar">
-                <div class="sidebar-heading" data-bc="品类筛选" data-bi="COLLECTIONS">品类筛选</div>
-                <ul class="cat-list">
-                    <li class="cat-item active" id="cat-all" onclick="selectMallCategory('all')"><span data-bc="全部款式" data-bi="All Catalog">全部款式</span><span class="count-badge" id="cnt-all">0</span></li>
-                    <li class="cat-item" id="cat-bouquet" onclick="selectMallCategory('bouquet')"><span data-bc="意境花束" data-bi="Bouquets">意境花束</span><span class="count-badge" id="cnt-bouquet">0</span></li>
-                    <li class="cat-item" id="cat-wreath" onclick="selectMallCategory('wreath')"><span data-bc="白事花圈" data-bi="Funeral Wreaths">白事花圈</span><span class="count-badge" id="cnt-wreath">0</span></li>
-                    <li class="cat-item" id="cat-basket" onclick="selectMallCategory('basket')"><span data-bc="高雅花篮" data-bi="Baskets">高雅花篮</span><span class="count-badge" id="cnt-basket">0</span></li>
-                    <li class="cat-item" id="cat-opening" onclick="selectMallCategory('opening')"><span data-bc="开业礼花" data-bi="Grand Opening">开业礼花</span><span class="count-badge" id="cnt-opening">0</span></li>
-                </ul>
-            </aside>
-
-            <div class="shop-content">
-                <div class="content-header">
-                    <h2 id="gallery-title" data-bc="全部花艺商品" data-bi="All Curated Masterpieces">全部花艺商品</h2>
-                    <p data-bc="轻点卡片查阅深度的设计理念及大图，并在弹窗内一键联系我们。" data-bi="Click card to view details and inquire via WhatsApp.">轻点卡片查阅深度的设计理念及大图，并在弹窗内一键联系我们。</p>
-                </div>
-                <div class="catalog-grid" id="catalogGridContainer"></div>
-            </div>
-        </div>
-    </main>
-
-    <div class="detail-modal" id="productModal" onclick="closeProductModalOnOutsideClick(event)">
-        <div class="modal-box">
-            <button class="modal-close-btn" onclick="closeProductModal()">✕</button>
-            <img src="" alt="Product" class="modal-left-img" id="modalImg">
-            <div class="modal-right-body">
-                <div class="modal-id-badge" id="modalTag"></div>
-                <h2 class="modal-title" id="modalTitle"></h2>
-                
-                <div class="modal-quote-box view-hidden" id="boxQuote">
-                    <p class="modal-quote-text" id="modalQuote"></p>
-                </div>
-
-                <div class="modal-info-section view-hidden" id="boxMaterial">
-                    <div class="info-header" id="modalMaterialHeader" data-bc="花材清单" data-bi="MATERIALS">花材清单</div>
-                    <div id="modalMaterialList"></div>
-                </div>
-
-                <div class="modal-tag-cloud" id="modalTags"></div>
-                
-                <div class="modal-action-wrapper">
-                    <div class="modal-price-row">
-                        <span id="modalPrice"></span>
-                    </div>
-                    <a href="" target="_blank" class="btn-modal-action" id="modalWaBtn">
-                        <svg style="width:18px" viewBox="0 0 24 24"><path fill="white" d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.4 0 11.973 0c3.184.001 6.177 1.242 8.426 3.496 2.248 2.254 3.487 5.251 3.486 8.439-.004 6.625-5.342 11.974-11.918 11.974-2.004-.001-3.973-.504-5.716-1.464L0 24zm6.066-3.446l.433.257c1.63.967 3.51 1.478 5.436 1.479 5.474 0 9.93-4.447 9.934-9.913.002-2.648-1.03-5.138-2.906-7.017C17.139 3.48 14.654 2.451 12.01 2.451 6.533 2.451 2.077 6.897 2.075 12.365c-.001 1.996.52 3.947 1.508 5.666l.282.493-1.01 3.693 3.768-.989z"/></svg>
-                        <span id="modalWaText" data-bc="即刻咨询及询价" data-bi="INQUIRE VIA WHATSAPP">即刻咨询及询价</span>
-                    </a>
-                </div>
+<header>
+    <div class="container navbar">
+        <div class="logo" onclick="openHome()" data-bc="广福花苑" data-bi="Kwang Fook Florist">广福花苑</div>
+        <div class="nav-right-container">
+            <nav class="nav-links">
+                <a id="nav-home" class="active" onclick="openHome()" data-bc="美学首页" data-bi="Home">美学首页</a>
+                <a id="nav-categories" onclick="openHomeAndScroll('categories')" data-bc="品类空间" data-bi="Collections">品类空间</a>
+                <a id="nav-mall" onclick="openMall('all')" data-bc="搜索商城" data-bi="Search Mall">搜索商城</a>
+                <a id="nav-delivery" onclick="openHomeAndScroll('delivery')" data-bc="配送须知" data-bi="Delivery Info">配送须知</a>
+                <a id="nav-contact" onclick="scrollToFooter()" data-bc="联系我们" data-bi="Contact">联系我们</a>
+            </nav>
+            <div class="lang-switcher">
+                <span class="lang-btn active" id="btn-bc" onclick="toggleLanguage('bc')">BC</span>
+                <span style="color:#eee">|</span>
+                <span class="lang-btn" id="btn-bi" onclick="toggleLanguage('bi')">BI</span>
             </div>
         </div>
     </div>
+</header>
 
-    <a href="https://wa.me/60189832276" target="_blank" class="whatsapp-float"><svg style="width:26px; height:26px; fill:white" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.4 0 11.973 0c3.184.001 6.177 1.242 8.426 3.496 2.248 2.254 3.487 5.251 3.486 8.439-.004 6.625-5.342 11.974-11.918 11.974-2.004-.001-3.973-.504-5.716-1.464L0 24zm6.066-3.446l.433.257c1.63.967 3.51 1.478 5.436 1.479 5.474 0 9.93-4.447 9.934-9.913.002-2.648-1.03-5.138-2.906-7.017C17.139 3.48 14.654 2.451 12.01 2.451 6.533 2.451 2.077 6.897 2.075 12.365c-.001 1.996.52 3.947 1.508 5.666l.282.493-1.01 3.693 3.768-.989z"/></svg></a>
-
-    <footer id="footer">
-        <div class="container">
-            <div class="footer-contact">
-                <a href="https://wa.me/60189832276" target="_blank" class="contact-item"><span class="contact-label">WhatsApp:</span> 018-983 2276</a>
-                <a href="https://www.facebook.com/share/1BL9wWidXd/?mibextid=wwXIfr" target="_blank" class="contact-item"><span class="contact-label">Facebook:</span> @广福花苑</a>
-                <a href="https://www.instagram.com/kwangfook_florist" target="_blank" class="contact-item"><span class="contact-label">Instagram:</span> @kwangfook_florist</a>
-            </div>
-            <p data-bc="© 2026 广福花苑 美学工作室. 保留所有权利。" data-bi="© 2026 Guang Fu Flower Garden Studio. All Rights Reserved.">© 2026 广福花苑 美学工作室. 保留所有权利。</p>
+<main id="view-home">
+    <section class="hero">
+        <div class="hero-content">
+            <h1 data-bc="每朵花，都有属于自己的故事" data-bi="Every Flower Tells A Story">每朵花，都有属于自己的故事</h1>
+            <p data-bc="用花传递每一份心意" data-bi="Premium Korean-inspired Bespoke Floral Arrangements">用花传递每一份心意</p>
+            <a onclick="openHomeAndScroll('categories')" class="btn-luxury" data-bc="即刻探索" data-bi="Shop Now">即刻探索</a>
         </div>
-    </footer>
+    </section>
 
-    <script>
-        function openHome() { document.getElementById('view-mall').classList.add('view-hidden'); document.getElementById('view-home').classList.remove('view-hidden'); window.scrollTo(0, 0); }
-        function openHomeAndScroll(id) { openHome(); setTimeout(() => { const t = document.getElementById(id); if (t) window.scrollTo({ top: t.offsetTop - 80, behavior: 'smooth' }); }, 100); }
-        function scrollToFooter() { window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); }
-        function openMall(cat) { document.getElementById('view-home').classList.add('view-hidden'); document.getElementById('view-mall').classList.remove('view-hidden'); window.scrollTo(0, 0); selectMallCategory(cat); }
-        function filterHomeCategory(cat, el) { document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active')); el.classList.add('active'); document.querySelectorAll('#view-home .product-card').forEach(c => (cat==='all' || c.dataset.homeCat===cat) ? c.classList.remove('hidden') : c.classList.add('hidden')); }
+    <section class="category-showcase section-padding" id="categories">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-bc="全系列花艺美学" data-bi="Our Curated Collections">全系列花艺美学</h2>
+                <p data-bc="轻点商品可查阅深度的花材配比与高定设计理念" data-bi="Click on any piece to reveal its intricate design philosophy">轻点商品可查阅深度的花材配比与高定设计理念</p>
+            </div>
+            <div class="product-grid">
+                <div class="product-card" data-home-cat="bouquet" onclick="openMall('bouquet')">
+                    <div class="product-img-wrapper"><img src="GRD1.jpg" alt="前程似锦毕业花束"></div>
+                    <div class="product-info">
+                        <span class="product-category-tag" data-bc="轻奢定制系列" data-bi="Flower Bouquet">轻奢定制系列</span>
+                        <h3 class="product-title" data-bc="柔樱漫语花束" data-bi="Brilliant Graduation Bouquet">柔樱漫语花束</h3>
+                    </div>
+                </div>
+                <div class="product-card" data-home-cat="wreath" onclick="openMall('wreath')">
+                    <div class="product-img-wrapper"><img src="Wreath1.jpg" alt="白芒静谧"></div>
+                    <div class="product-info">
+                        <span class="product-category-tag" data-bc="追思慰问系列" data-bi="Flower Wreath">追思慰问系列</span>
+                        <h3 class="product-title" data-bc="白芒静谧 · 高雅慰问花圈" data-bi="Serene Condolence Wreath">白芒静谧 · 高雅慰问花圈</h3>
+                    </div>
+                </div>
+                <div class="product-card" data-home-cat="basket" onclick="openMall('basket')">
+                    <div class="product-img-wrapper"><img src="Basket1.jpg" alt="玫瑰满庭花篮"></div>
+                    <div class="product-info">
+                        <span class="product-category-tag" data-bc="艺术花篮系列" data-bi="Flower Basket">艺术花篮系列</span>
+                        <h3 class="product-title" data-bc="繁花序曲 · 温柔祝福花篮" data-bi="Enchanted Rose Basket">繁花序曲 · 温柔祝福花篮</h3>
+                    </div>
+                </div>
+                <div class="product-card" data-home-cat="opening" onclick="openMall('opening')">
+                    <div class="product-img-wrapper"><img src="GOF1.jpg" alt="向阳盛放开业花篮"></div>
+                    <div class="product-info">
+                        <span class="product-category-tag" data-bc="开业庆典系列" data-bi="Grand Opening">开业庆典系列</span>
+                        <h3 class="product-title" data-bc="鸿运序章 · 开业花架" data-bi="Radiant Sunflower Stand">鸿运序章 · 开业花架</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        let currentLanguageState = 'bc';
-        let currentMallCategory = 'all';
-        let currentActiveProduct = null;
-        const CONFIG_PHONE = "60189832276";
+    <section class="section-padding" id="delivery">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-bc="广福花苑 · 配送与自取须知" data-bi="Guang Fu Flower Garden · Delivery & Pickup Info">广福花苑 · 配送与自取须知</h2>
+            </div>
+            <div class="delivery-grid">
+                <div class="delivery-card">
+                    <h3 data-bc="17 哩区域配送" data-bi="17 Mile Delivery">17 哩区域配送</h3>
+                    <ul class="delivery-list">
+                        <li data-bc="配送费 RM20" data-bi="RM20 delivery charge applicable">配送费 RM20</li>
+                        <li data-bc="<span class='badge-pickup'>支持到店自取（广福金店）" data-bi="<span class='badge-pickup'>OK</span>Self-pickup available at Kwang Fook Gold Shop"><span class="badge-pickup">支持到店自取（广福金店）</li>
+                    </ul>
+                </div>
+                <div class="delivery-card">
+                    <h3 data-bc="西连配送" data-bi="Serian Delivery">西连配送</h3>
+                    <ul class="delivery-list">
+                        <li data-bc="Kampung 区域／偏远地区
+可约在大路旁、学校前等方便地点取货" data-bi="For kampung or remote areas, collection point agreed at main roadside or school.">Kampung 区域／偏远地区
+可约在大路旁、学校前等方便地点取货</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
 
-        const localProductDatabase = [];
+<main id="view-mall" class="view-hidden">
+    <section class="search-section">
+        <div class="search-wrapper">
+            <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" id="mallSearchInput" class="search-input" oninput="runCombinedFilter()" placeholder="搜索花名、花材、标签（如：玫瑰、满天星、#毕业快乐、Bouquet51）...">
+        </div>
+    </section>
 
-        // 1. 花圈数据库 (37款)
-        function injectWreaths(s, e, p, lC, lE) { 
-            for(let i=s; i<=e; i++) {
-                localProductDatabase.push({ 
-                    id:`Wreath${i}`, 
-                    type:'wreath', 
-                    priceBc:`RM ${p}.00`, 
-                    priceBi:`RM ${p}.00`, 
-                    nameBc:`静谧远行 · ${lC}`, 
-                    nameBi:`Serene Eulogy · ${lE}`, 
-                    img:`Wreath${i}.jpg`,
-                    quoteBc:'庄严素雅，表达最深切的怀念。', 
-                    quoteBi:'A dignified and elegant tribute offering profound comfort and eternal remembrance.',
-                    hashtagBc:'#白事花圈 #致敬 #追思',
-                    hashtagBi:'#FuneralWreath #SympathyFlowers #Condolences #RestInPeace'
-                }); 
-            }
+    <div class="shop-layout">
+        <aside class="shop-sidebar">
+            <div class="sidebar-heading" data-bc="品类筛选" data-bi="COLLECTIONS">品类筛选</div>
+            <ul class="cat-list">
+                <li class="cat-item active" id="cat-all" onclick="selectMallCategory('all')"><span data-bc="全部款式" data-bi="All Catalog">全部款式</span><span class="count-badge" id="cnt-all">0</span></li>
+                <li class="cat-item" id="cat-bouquet" onclick="selectMallCategory('bouquet')"><span data-bc="意境花束" data-bi="Bouquets">意境花束</span><span class="count-badge" id="cnt-bouquet">0</span></li>
+                <li class="cat-item" id="cat-wreath" onclick="selectMallCategory('wreath')"><span data-bc="白事花圈" data-bi="Funeral Wreaths">白事花圈</span><span class="count-badge" id="cnt-wreath">0</span></li>
+                <li class="cat-item" id="cat-basket" onclick="selectMallCategory('basket')"><span data-bc="高雅花篮" data-bi="Baskets">高雅花篮</span><span class="count-badge" id="cnt-basket">0</span></li>
+                <li class="cat-item" id="cat-opening" onclick="selectMallCategory('opening')"><span data-bc="开业礼花" data-bi="Grand Opening">开业礼花</span><span class="count-badge" id="cnt-opening">0</span></li>
+            </ul>
+        </aside>
+
+        <div class="shop-content">
+            <div class="content-header">
+                <h2 id="gallery-title" data-bc="全部花艺商品" data-bi="All Curated Masterpieces">全部花艺商品</h2>
+                <p data-bc="轻点卡片查阅深度的设计理念及大图，并在弹窗内一键联系我们。" data-bi="Click card to view details and inquire via WhatsApp.">轻点卡片查阅深度的设计理念及大图，并在弹窗内一键联系我们。</p>
+            </div>
+            <div class="catalog-grid" id="catalogGridContainer"></div>
+        </div>
+    </div>
+</main>
+
+<div class="detail-modal" id="productModal" onclick="closeProductModalOnOutsideClick(event)">
+    <div class="modal-box">
+        <button class="modal-close-btn" onclick="closeProductModal()">✕</button>
+        <img src="" alt="Product" class="modal-left-img" id="modalImg">
+        <div class="modal-right-body">
+            <div class="modal-id-badge" id="modalTag"></div>
+            <h2 class="modal-title" id="modalTitle"></h2>
+            <div class="modal-quote-box view-hidden" id="boxQuote"><p class="modal-quote-text" id="modalQuote"></p></div>
+            <div class="modal-info-section view-hidden" id="boxMaterial"><div class="info-header" id="modalMaterialHeader" data-bc="花材清单" data-bi="MATERIALS">花材清单</div><div id="modalMaterialList"></div></div>
+            <div class="modal-tag-cloud" id="modalTags"></div>
+            <div class="modal-action-wrapper">
+                <div class="modal-price-row"><span id="modalPrice"></span></div>
+                <a href="" target="_blank" class="btn-modal-action" id="modalWaBtn"><svg style="width:18px" viewBox="0 0 24 24"><path fill="white" d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.4 0 11.973 0c3.184.001 6.177 1.242 8.426 3.496 2.248 2.254 3.487 5.251 3.486 8.439-.004 6.625-5.342 11.974-11.918 11.974-2.004-.001-3.973-.504-5.716-1.464L0 24zm6.066-3.446l.433.257c1.63.967 3.51 1.478 5.436 1.479 5.474 0 9.93-4.447 9.934-9.913.002-2.648-1.03-5.138-2.906-7.017C17.139 3.48 14.654 2.451 12.01 2.451 6.533 2.451 2.077 6.897 2.075 12.365c-.001 1.996.52 3.947 1.508 5.666l.282.493-1.01 3.693 3.768-.989z"/></svg><span id="modalWaText" data-bc="即刻咨询及询价" data-bi="INQUIRE VIA WHATSAPP">即刻咨询及询价</span></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<a href="https://wa.me/60189832276" target="_blank" class="whatsapp-float"><svg style="width:26px; height:26px; fill:white" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.4 0 11.973 0c3.184.001 6.177 1.242 8.426 3.496 2.248 2.254 3.487 5.251 3.486 8.439-.004 6.625-5.342 11.974-11.918 11.974-2.004-.001-3.973-.504-5.716-1.464L0 24zm6.066-3.446l.433.257c1.63.967 3.51 1.478 5.436 1.479 5.474 0 9.93-4.447 9.934-9.913.002-2.648-1.03-5.138-2.906-7.017C17.139 3.48 14.654 2.451 12.01 2.451 6.533 2.451 2.077 6.897 2.075 12.365c-.001 1.996.52 3.947 1.508 5.666l.282.493-1.01 3.693 3.768-.989z"/></svg></a>
+
+<footer id="footer">
+    <div class="container">
+        <div class="footer-contact">
+            <a href="https://wa.me/60189832276" target="_blank" class="contact-item"><span class="contact-label">WhatsApp:</span> 018-983 2276</a>
+            <a href="https://www.facebook.com/share/1BL9wWidXd/?mibextid=wwXIfr" target="_blank" class="contact-item"><span class="contact-label">Facebook:</span> @广福花苑</a>
+            <a href="https://www.instagram.com/kwangfook_florist" target="_blank" class="contact-item"><span class="contact-label">Instagram:</span> @kwangfook_florist</a>
+        </div>
+        <p data-bc="© 2026 广福花苑 美学工作室. 保留所有权利。" data-bi="© 2026 Guang Fu Flower Garden Studio. All Rights Reserved.">© 2026 广福花苑 美学工作室. 保留所有权利。</p>
+    </div>
+</footer>
+
+<script>
+    function openHome() { document.getElementById('view-mall').classList.add('view-hidden'); document.getElementById('view-home').classList.remove('view-hidden'); window.scrollTo(0, 0); }
+    function openHomeAndScroll(id) { openHome(); setTimeout(() => { const t = document.getElementById(id); if (t) window.scrollTo({ top: t.offsetTop - 80, behavior: 'smooth' }); }, 100); }
+    function scrollToFooter() { window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); }
+    function openMall(cat) { document.getElementById('view-home').classList.add('view-hidden'); document.getElementById('view-mall').classList.remove('view-hidden'); window.scrollTo(0, 0); selectMallCategory(cat); }
+
+    let currentLanguageState = 'bc';
+    let currentMallCategory = 'all';
+    let currentActiveProduct = null;
+    const CONFIG_PHONE = "60189832276";
+    const localProductDatabase = [];
+
+    // 1. 花圈数据库 (37款) – 保持不变
+    function injectWreaths(s, e, p, lC, lE) { 
+        for(let i=s; i<=e; i++) {
+            localProductDatabase.push({ 
+                id:`Wreath${i}`, type:'wreath', priceBc:`RM ${p}.00`, priceBi:`RM ${p}.00`, 
+                nameBc:`静谧远行 · ${lC}`, nameBi:`Serene Eulogy · ${lE}`, img:`Wreath${i}.jpg`,
+                quoteBc:'庄严素雅，表达最深切的怀念。', quoteBi:'A dignified and elegant tribute offering profound comfort and eternal remembrance.',
+                hashtagBc:'#白事花圈 #致敬 #追思', hashtagBi:'#FuneralWreath #SympathyFlowers #Condolences #RestInPeace'
+            }); 
         }
-        injectWreaths(1,9,150,"单层花圈","Single Layer Wreath"); injectWreaths(10,16,200,"双层花圈","Double Layer Wreath"); injectWreaths(17,26,250,"双层花圈","Double Layer Wreath"); injectWreaths(27,27,300,"三层花圈","Triple Layer Wreath"); injectWreaths(28,33,400,"三层花圈","Triple Layer Wreath"); injectWreaths(34,37,600,"三层花圈","Triple Layer Wreath");
+    }
+    injectWreaths(1,9,150,"单层花圈","Single Layer Wreath"); injectWreaths(10,16,200,"双层花圈","Double Layer Wreath"); injectWreaths(17,26,250,"双层花圈","Double Layer Wreath"); injectWreaths(27,27,300,"三层花圈","Triple Layer Wreath"); injectWreaths(28,33,400,"三层花圈","Triple Layer Wreath"); injectWreaths(34,37,600,"三层花圈","Triple Layer Wreath");
 
-        // 2. 开业花 (GOF) 与 年宵花 (CNY) 数据
-        const gofData = [
-            { id:'GOF1', nC:'向阳盛放开业花篮', nE:'Radiant Sunflower Grand Opening Stand', tagC:'#开业花 #开张大吉 #高级感', tagE:'#GrandOpening #BusinessLaunch #SunflowerStand', qC:'🌻 向阳而生，开业大吉。愿新店如向日葵般灿烂盛放，客似云来，生意兴隆。', qE:'🌻 May your business flourish and shine as bright as a sunflower. Wishing you immense success and endless prosperity ahead.' },
-            { id:'GOF2', nC:'繁花盛启开业花篮', nE:'Prosperous Abundance Floral Stand', tagC:'#生意兴隆 #鲜花花篮 #花艺设计', tagE:'#GrandOpening #FloralDesign #BusinessSuccess', qC:'✨ 鸿运齐开，财源广进。愿事业蒸蒸日上，生意红红火火。', qE:'✨ A grand beginning filled with wealth and fortune. Wishing your venture thriving growth and spectacular success.' },
-            { id:'GOF3', nC:'花漾启航开业礼花', nE:'Elegance Voyage Grand Opening Stand', tagC:'#新店开业 #鲜花设计 #GrandOpening', tagE:'#GrandOpening #LuxuryFloral Stand #NewBeginnings', qC:'🌷 以花传喜，以礼传情。祝新店开门红，顾客络绎不绝。', qE:'🌷 Celebrating your milestones with stunning floral artistry. Wishing you a phenomenal opening with an unending stream of customers.' },
-            { id:'CNY1', nC:'步步高升年宵礼篮', nE:'Ascending Prosperity Lunar New Year Basket', tagC:'#鸿运当头 #年宵花礼 #好运连连', tagE:'#CNYFlowers #LunarNewYear #ProsperityBasket', qC:'✨ 鸿运高照，喜气盈门。愿新春好运常伴，事业步步高升。', qE:'✨ Wishing you soaring success and a home filled with joy. May the New Year bring unceasing good fortune and career advancement.' },
-            { id:'CNY2', nC:'花开锦年年宵花', nE:'Splendid Spring Blossoms Arrangement', tagC:'#花开富贵 #新年花艺 #喜庆', tagE:'#CNYFloralArt #SpringFestival #FortuneBlossoms', qC:'🎊 花开锦绣，喜迎丰年。愿新的一年顺风顺水，财喜双收。', qE:'🎊 Beautiful blossoms welcoming a bountiful harvest. May your year be exceptionally smooth, prosperous, and joyous.' },
-            { id:'CNY3', nC:'福运满满新春花篮', nE:'Bountiful Fortunes CNY Flower Basket', tagC:'#福气满满 #春节礼篮 #招财', tagE:'#CNYFlowerBasket #WealthAndFortune #AuspiciousGift', qC:'🪭 福到运到，好事来到。愿新年平安喜乐，万事如意。', qE:'🪭 May good luck and blessings find their way to you. Wishing you peace, pure bliss, and complete fulfillment in the New Year.' },
-            { id:'CNY4', nC:'金辉迎福年花篮', nE:'Golden Aura Auspicious CNY Basket', tagC:'#新年限定 #招财纳福 #花艺', tagE:'#CNYLimitedEdition #GoldenProsperity #NewYearGift', qC:'💛 金辉映喜，福运盈门。愿新春吉祥如意，幸福常伴。', qE:'💛 Radiant gold reflecting divine blessings. May this festive spring wrap you in eternal joy and auspicious grace.' },
-            { id:'CNY5', nC:'春满花开年宵花篮', nE:'Spring Awakening Floral Basket', tagC:'#春满花开 #新年花篮 #送福', tagE:'#CNYFlowers #SpringAwakening #FestiveWishes', qC:'🌸 春风送暖，繁花迎福。愿新一年喜乐安康，福气满满。', qE:'🌸 The warm spring breeze delivers a bounty of beautiful blossoms. Wishing you absolute health and overflowing luck.' },
-            { id:'CNY6', nC:'锦绣迎春花礼', nE:'Vibrant Spring Horizon Festive Gift', tagC:'#高级感 #迎春 #春节限定', tagE:'#CNYLuxuryCollection #PremiumCNYFlowers #SpringGreetings', qC:'✨ 花开迎春，锦绣满堂。愿新一年红红火火，好运常在。', qE:'✨ Magnificent blooms ushering in the spectacular spring. Wishing you an exceptionally vibrant and fortunate year ahead.' }
-        ];
-        gofData.forEach(d => localProductDatabase.push({ 
-            id:d.id, type:'opening', priceBc:'请拿图联系卖家询价', priceBi:'PM for Price Inquiry', 
-            nameBc:d.nC, nameBi:d.nE, 
-            img:`${d.id}.jpg`,
-            hashtagBc:d.tagC, hashtagBi:d.tagE, quoteBc:d.qC, quoteBi:d.qE 
-        }));
+    // 2. 开业花与年宵花 (GOF/CNY) 保持不变
+    const gofData = [
+        { id:'GOF1', nC:'向阳盛放开业花篮', nE:'Radiant Sunflower Grand Opening Stand', tagC:'#开业花 #开张大吉 #高级感', tagE:'#GrandOpening #BusinessLaunch #SunflowerStand', qC:'🌻 向阳而生，开业大吉。愿新店如向日葵般灿烂盛放，客似云来，生意兴隆。', qE:'🌻 May your business flourish and shine as bright as a sunflower. Wishing you immense success and endless prosperity ahead.' },
+        { id:'GOF2', nC:'繁花盛启开业花篮', nE:'Prosperous Abundance Floral Stand', tagC:'#生意兴隆 #鲜花花篮 #花艺设计', tagE:'#GrandOpening #FloralDesign #BusinessSuccess', qC:'✨ 鸿运齐开，财源广进。愿事业蒸蒸日上，生意红红火火。', qE:'✨ A grand beginning filled with wealth and fortune. Wishing your venture thriving growth and spectacular success.' },
+        { id:'GOF3', nC:'花漾启航开业礼花', nE:'Elegance Voyage Grand Opening Stand', tagC:'#新店开业 #鲜花设计 #GrandOpening', tagE:'#GrandOpening #LuxuryFloral Stand #NewBeginnings', qC:'🌷 以花传喜，以礼传情。祝新店开门红，顾客络绎不绝。', qE:'🌷 Celebrating your milestones with stunning floral artistry. Wishing you a phenomenal opening with an unending stream of customers.' },
+        { id:'CNY1', nC:'步步高升年宵礼篮', nE:'Ascending Prosperity Lunar New Year Basket', tagC:'#鸿运当头 #年宵花礼 #好运连连', tagE:'#CNYFlowers #LunarNewYear #ProsperityBasket', qC:'✨ 鸿运高照，喜气盈门。愿新春好运常伴，事业步步高升。', qE:'✨ Wishing you soaring success and a home filled with joy. May the New Year bring unceasing good fortune and career advancement.' },
+        { id:'CNY2', nC:'花开锦年年宵花', nE:'Splendid Spring Blossoms Arrangement', tagC:'#花开富贵 #新年花艺 #喜庆', tagE:'#CNYFloralArt #SpringFestival #FortuneBlossoms', qC:'🎊 花开锦绣，喜迎丰年。愿新的一年顺风顺水，财喜双收。', qE:'🎊 Beautiful blossoms welcoming a bountiful harvest. May your year be exceptionally smooth, prosperous, and joyous.' },
+        { id:'CNY3', nC:'福运满满新春花篮', nE:'Bountiful Fortunes CNY Flower Basket', tagC:'#福气满满 #春节礼篮 #招财', tagE:'#CNYFlowerBasket #WealthAndFortune #AuspiciousGift', qC:'🪭 福到运到，好事来到。愿新年平安喜乐，万事如意。', qE:'🪭 May good luck and blessings find their way to you. Wishing you peace, pure bliss, and complete fulfillment in the New Year.' },
+        { id:'CNY4', nC:'金辉迎福年花篮', nE:'Golden Aura Auspicious CNY Basket', tagC:'#新年限定 #招财纳福 #花艺', tagE:'#CNYLimitedEdition #GoldenProsperity #NewYearGift', qC:'💛 金辉映喜，福运盈门。愿新春吉祥如意，幸福常伴。', qE:'💛 Radiant gold reflecting divine blessings. May this festive spring wrap you in eternal joy and auspicious grace.' },
+        { id:'CNY5', nC:'春满花开年宵花篮', nE:'Spring Awakening Floral Basket', tagC:'#春满花开 #新年花篮 #送福', tagE:'#CNYFlowers #SpringAwakening #FestiveWishes', qC:'🌸 春风送暖，繁花迎福。愿新一年喜乐安康，福气满满。', qE:'🌸 The warm spring breeze delivers a bounty of beautiful blossoms. Wishing you absolute health and overflowing luck.' },
+        { id:'CNY6', nC:'锦绣迎春花礼', nE:'Vibrant Spring Horizon Festive Gift', tagC:'#高级感 #迎春 #春节限定', tagE:'#CNYLuxuryCollection #PremiumCNYFlowers #SpringGreetings', qC:'✨ 花开迎春，锦绣满堂。愿新一年红红火火，好运常在。', qE:'✨ Magnificent blooms ushering in the spectacular spring. Wishing you an exceptionally vibrant and fortunate year ahead.' }
+    ];
+    gofData.forEach(d => localProductDatabase.push({ id:d.id, type:'opening', priceBc:'请拿图联系卖家询价', priceBi:'PM for Price Inquiry', nameBc:d.nC, nameBi:d.nE, img:`${d.id}.jpg`, hashtagBc:d.tagC, hashtagBi:d.tagE, quoteBc:d.qC, quoteBi:d.qE }));
 
-        // 3. 完美注入 12 个高级花篮
-        const basketData = [
-            { id:'Basket1', nC:'玫瑰满庭花篮', nE:'Enchanted Rose Garden Basket', matC:'高端工艺绢花', matE:'Premium Faux Silk Roses', tagC:'#玫瑰花篮 #高级花礼 #GrandOpening', tagE:'#RoseBasket #LuxuryFloralGift #GrandOpening', qC:'🌹 玫瑰满庭，香气溢人。开业送礼首选，愿事业蒸蒸日上。', qE:'🌹 A breathtaking abundance of roses representing peak beauty and success. The premier choice for corporate gifting.' },
-            { id:'Basket2', nC:'绯红之喜开业花礼', nE:'Scarlet Symphony Opening Basket', matC:'高级绢花 + 陶瓷招财猫', matE:'Premium Faux Flowers & Ceramic Lucky Cat', tagC:'#财源广进 #红玫瑰 #开张大吉', tagE:'#ScarletRoses #LuckyCatBasket #BusinessLaunch', qC:'✨ 红运当头，财气满满。祝新店开张大吉，生意红红火火。', qE:'✨ Striking red tones symbolizing magnificent wealth and luck. May your store opening bring an avalanche of success.' },
-            { id:'Basket3', nC:'玫瑰盛宴开业花篮', nE:'Imperial Rose Banquet Stand', matC:'高级绢花 + 陶瓷招财猫', matE:'Premium Faux Flowers & Ceramic Lucky Cat', tagC:'#开业花篮 #玫瑰花篮 #高级感花礼', tagE:'#RoseFeastBasket #LuxuryInauguration #CorporateFlowers', qC:'🎉 开业大吉，繁花献礼。愿事业一路长虹，未来灿烂辉煌。', qE:'🎉 Celebrating a glorious milestone with exquisite floral mastery. Wishing your enterprise a magnificent and brilliant future.' },
-            { id:'Basket4', nC:'繁星玫瑰开业篮', nE:'Starry Rose Grand Opening Basket', matC:'高级绢花 + 陶瓷招财猫', matE:'Premium Faux Flowers & Ceramic Lucky Cat', tagC:'#开业花礼 #鲜花花篮 #玫瑰系列', tagE:'#InaugurationBasket #StarryRose #GrandOpening', qC:'🎉 喜迎开业，前程似锦。愿顾客盈门，好运常在。', qE:'🎉 A splendid creation to salute your new business journey. May good luck and patrons overflow unconditionally.' },
-            { id:'Basket5', nC:'盛景花语开业花篮', nE:'Grand Vistas Celebration Basket', matC:'高端假花', matE:'Premium Artifical Foliage', tagC:'#开业必备 #祝贺花篮 #花艺设计', tagE:'#CelebrationStand #BusinessOpening #FloralMasterpiece', qC:'💐 以花传喜，以礼贺成。祝事业腾飞，日日兴旺。', qE:'💐 Conveying deep joy and honoring true achievements. May your business soar to unprecedented heights day by day.' },
-            { id:'Basket6', nC:'富贵盈门礼篮', nE:'Overflowing Abundance Luxury Basket', matC:'高端工艺假花', matE:'Premium Artifical Silk Flowers', tagC:'#富贵花篮 #开业祝福 #新店开张', tagE:'#AbundanceFloralBasket #GrandOpeningGift #ThrivingVenture', qC:'✨ 黄金满地，富贵盈门。愿您开业大吉，财源滚滚来。', qE:'✨ Golden paths and overflowing luxury. May your grand opening pave the way for extraordinary financial success.' },
-            { id:'Basket7', nC:'向日葵之约祝贺花篮', nE:'Golden Helianthus Celebration Basket', matC:'特选向日葵 + 时令配花', matE:'Premium Sunflowers & Seasonal Accent Foliage', tagC:'#向日葵花篮 #开业志庆 #阳光美学', tagE:'#SunflowerBasket #CorporateCongratulations #VibrantAesthetics', qC:'🌻 向日葵盛开，代表无限的希望与朝气。祝愿新店蒸蒸日上。', qE:'🌻 Vibrant sunflowers radiating infinite hope and endless vitality. Wishing your new store exponential and brilliant growth.' },
-            { id:'Basket8', nC:'向光而行荣休花篮', nE:'Chasing Light Retirement Honor Basket', matC:'特选向日葵 + 精品配花', matE:'Premium Sunflowers & Specially Selected Accompaniments', tagC:'#向日葵 #退休快乐 #感恩', tagE:'#RetirementBasket #SunflowersOfHonor #GratitudeGift', qC:'🌻 岁月沉淀荣耀，时光见证付出。愿退休生活阳光灿烂，自在从容。', qE:'🌻 A brilliant career honored by time. May your retirement chapter be profoundly peaceful, wonderfully serene.' },
-            { id:'Basket9', nC:'温馨祝福康乃馨花篮', nE:'Sweet Devotion Carnation Family Basket', matC:'珍选康乃馨 + 优雅配花', matE:'Selected Premium Carnations & Delicate Accents', tagC:'#温馨礼篮 #生日快乐 #祝寿花礼', tagE:'#WarmCarnationBasket #HappyBirthday #LongevityBlessings', qC:'🌸 温馨岁月，挚爱相随。愿健康常伴，笑口常开。', qE:'🌸 Surrounded by warmth and unconditional devotion. Wishing you absolute health, eternal youth, and endless smiles.' },
-            { id:'Basket10', nC:'优雅淑女粉色礼篮', nE:'Blushing Pastel Luxury Hydrangea Basket', matC:'粉色名贵玫瑰 + 进口绣球 + 高级配花', matE:'Pink Premium Roses, Imported Hydrangeas & Elite Fillers', tagC:'#粉色系花篮 #女神专属 #精美花艺', tagE:'#BlushingPastelBasket #GoddessExclusive #ExquisiteFloristry', qC:'💕 温柔细腻，静谧绽放。祝您生日快乐，永远年轻美丽。', qE:'💕 Delicate, tender, and softly captivating. Wishing a beautiful soul a fantastic birthday. Stay forever youthful and radiant.' },
-            { id:'Basket11', nC:'日落香槟花篮', nE:'Sunset Champagne Premium Wine Basket', matC:'进口向日葵 + 雅致配花 + 特选红酒', matE:'Imported Sunflowers, Elegant Fillers & Selected Premium Wine', tagC:'#红酒花篮 #香槟 #生日惊喜', tagE:'#PremiumWineBasket #SunsetAesthetic #BirthdaySurprise', qC:'🍾 日落微醺，鲜花盛放。把温柔与仪式感全部献上。', qE:'🍾 A gentle sunset glow met with premium blossoms and fine wine. Delivering the ultimate definition of modern luxury romance.' },
-            { id:'Basket12', nC:'至尊奢华开业双层篮', nE:'The Grand Monarch Luxury Double-Tier Basket', matC:'顶级高档混搭花材', matE:'Elite Selection of Mixed Premium Flowers', tagC:'#巨型开业花篮 #气派非凡 #高端定制', tagE:'#GrandDoubleTierStand #PrestigiousOpening #BespokeLuxury', qC:'👑 宏图大展，百业兴旺。最尊贵的配置，祝生意兴隆通四海！', qE:'👑 Magnificent prospects and limitless business triumphs. The ultimate prestigious presentation to wish your business global success.' }
-        ];
-        basketData.forEach(d => localProductDatabase.push({ 
-            id:d.id, type:'basket', priceBc:'请拿图联系卖家询价', priceBi:'PM for Price Inquiry', 
-            nameBc:d.nC, nameBi:d.nE, 
-            img:`${d.id}.jpg`,
-            materialBc:d.matC, materialBi:d.matE, hashtagBc:d.tagC, hashtagBi:d.tagE, quoteBc:d.qC, quoteBi:d.qE 
-        }));
+    // 3. 高级花篮 12款 – 保持不变
+    const basketData = [
+        { id:'Basket1', nC:'玫瑰满庭花篮', nE:'Enchanted Rose Garden Basket', matC:'高端工艺绢花', matE:'Premium Faux Silk Roses', tagC:'#玫瑰花篮 #高级花礼 #GrandOpening', tagE:'#RoseBasket #LuxuryFloralGift #GrandOpening', qC:'🌹 玫瑰满庭，香气溢人。开业送礼首选，愿事业蒸蒸日上。', qE:'🌹 A breathtaking abundance of roses representing peak beauty and success. The premier choice for corporate gifting.' },
+        { id:'Basket2', nC:'绯红之喜开业花礼', nE:'Scarlet Symphony Opening Basket', matC:'高级绢花 + 陶瓷招财猫', matE:'Premium Faux Flowers & Ceramic Lucky Cat', tagC:'#财源广进 #红玫瑰 #开张大吉', tagE:'#ScarletRoses #LuckyCatBasket #BusinessLaunch', qC:'✨ 红运当头，财气满满。祝新店开张大吉，生意红红火火。', qE:'✨ Striking red tones symbolizing magnificent wealth and luck. May your store opening bring an avalanche of success.' },
+        { id:'Basket3', nC:'玫瑰盛宴开业花篮', nE:'Imperial Rose Banquet Stand', matC:'高级绢花 + 陶瓷招财猫', matE:'Premium Faux Flowers & Ceramic Lucky Cat', tagC:'#开业花篮 #玫瑰花篮 #高级感花礼', tagE:'#RoseFeastBasket #LuxuryInauguration #CorporateFlowers', qC:'🎉 开业大吉，繁花献礼。愿事业一路长虹，未来灿烂辉煌。', qE:'🎉 Celebrating a glorious milestone with exquisite floral mastery. Wishing your enterprise a magnificent and brilliant future.' },
+        { id:'Basket4', nC:'繁星玫瑰开业篮', nE:'Starry Rose Grand Opening Basket', matC:'高级绢花 + 陶瓷招财猫', matE:'Premium Faux Flowers & Ceramic Lucky Cat', tagC:'#开业花礼 #鲜花花篮 #玫瑰系列', tagE:'#InaugurationBasket #StarryRose #GrandOpening', qC:'🎉 喜迎开业，前程似锦。愿顾客盈门，好运常在。', qE:'🎉 A splendid creation to salute your new business journey. May good luck and patrons overflow unconditionally.' },
+        { id:'Basket5', nC:'盛景花语开业花篮', nE:'Grand Vistas Celebration Basket', matC:'高端假花', matE:'Premium Artifical Foliage', tagC:'#开业必备 #祝贺花篮 #花艺设计', tagE:'#CelebrationStand #BusinessOpening #FloralMasterpiece', qC:'💐 以花传喜，以礼贺成。祝事业腾飞，日日兴旺。', qE:'💐 Conveying deep joy and honoring true achievements. May your business soar to unprecedented heights day by day.' },
+        { id:'Basket6', nC:'富贵盈门礼篮', nE:'Overflowing Abundance Luxury Basket', matC:'高端工艺假花', matE:'Premium Artifical Silk Flowers', tagC:'#富贵花篮 #开业祝福 #新店开张', tagE:'#AbundanceFloralBasket #GrandOpeningGift #ThrivingVenture', qC:'✨ 黄金满地，富贵盈门。愿您开业大吉，财源滚滚来。', qE:'✨ Golden paths and overflowing luxury. May your grand opening pave the way for extraordinary financial success.' },
+        { id:'Basket7', nC:'向日葵之约祝贺花篮', nE:'Golden Helianthus Celebration Basket', matC:'特选向日葵 + 时令配花', matE:'Premium Sunflowers & Seasonal Accent Foliage', tagC:'#向日葵花篮 #开业志庆 #阳光美学', tagE:'#SunflowerBasket #CorporateCongratulations #VibrantAesthetics', qC:'🌻 向日葵盛开，代表无限的希望与朝气。祝愿新店蒸蒸日上。', qE:'🌻 Vibrant sunflowers radiating infinite hope and endless vitality. Wishing your new store exponential and brilliant growth.' },
+        { id:'Basket8', nC:'向光而行荣休花篮', nE:'Chasing Light Retirement Honor Basket', matC:'特选向日葵 + 精品配花', matE:'Premium Sunflowers & Specially Selected Accompaniments', tagC:'#向日葵 #退休快乐 #感恩', tagE:'#RetirementBasket #SunflowersOfHonor #GratitudeGift', qC:'🌻 岁月沉淀荣耀，时光见证付出。愿退休生活阳光灿烂，自在从容。', qE:'🌻 A brilliant career honored by time. May your retirement chapter be profoundly peaceful, wonderfully serene.' },
+        { id:'Basket9', nC:'温馨祝福康乃馨花篮', nE:'Sweet Devotion Carnation Family Basket', matC:'珍选康乃馨 + 优雅配花', matE:'Selected Premium Carnations & Delicate Accents', tagC:'#温馨礼篮 #生日快乐 #祝寿花礼', tagE:'#WarmCarnationBasket #HappyBirthday #LongevityBlessings', qC:'🌸 温馨岁月，挚爱相随。愿健康常伴，笑口常开。', qE:'🌸 Surrounded by warmth and unconditional devotion. Wishing you absolute health, eternal youth, and endless smiles.' },
+        { id:'Basket10', nC:'优雅淑女粉色礼篮', nE:'Blushing Pastel Luxury Hydrangea Basket', matC:'粉色名贵玫瑰 + 进口绣球 + 高级配花', matE:'Pink Premium Roses, Imported Hydrangeas & Elite Fillers', tagC:'#粉色系花篮 #女神专属 #精美花艺', tagE:'#BlushingPastelBasket #GoddessExclusive #ExquisiteFloristry', qC:'💕 温柔细腻，静谧绽放。祝您生日快乐，永远年轻美丽。', qE:'💕 Delicate, tender, and softly captivating. Wishing a beautiful soul a fantastic birthday. Stay forever youthful and radiant.' },
+        { id:'Basket11', nC:'日落香槟花篮', nE:'Sunset Champagne Premium Wine Basket', matC:'进口向日葵 + 雅致配花 + 特选红酒', matE:'Imported Sunflowers, Elegant Fillers & Selected Premium Wine', tagC:'#红酒花篮 #香槟 #生日惊喜', tagE:'#PremiumWineBasket #SunsetAesthetic #BirthdaySurprise', qC:'🍾 日落微醺，鲜花盛放。把温柔与仪式感全部献上。', qE:'🍾 A gentle sunset glow met with premium blossoms and fine wine. Delivering the ultimate definition of modern luxury romance.' },
+        { id:'Basket12', nC:'至尊奢华开业双层篮', nE:'The Grand Monarch Luxury Double-Tier Basket', matC:'顶级高档混搭花材', matE:'Elite Selection of Mixed Premium Flowers', tagC:'#巨型开业花篮 #气派非凡 #高端定制', tagE:'#GrandDoubleTierStand #PrestigiousOpening #BespokeLuxury', qC:'👑 宏图大展，百业兴旺。最尊贵的配置，祝生意兴隆通四海！', qE:'👑 Magnificent prospects and limitless business triumphs. The ultimate prestigious presentation to wish your business global success.' }
+    ];
+    basketData.forEach(d => localProductDatabase.push({ id:d.id, type:'basket', priceBc:'请拿图联系卖家询价', priceBi:'PM for Price Inquiry', nameBc:d.nC, nameBi:d.nE, img:`${d.id}.jpg`, materialBc:d.matC, materialBi:d.matE, hashtagBc:d.tagC, hashtagBi:d.tagE, quoteBc:d.qC, quoteBi:d.qE }));
 
-        // 4. 批量注入第一阶段海量花束资料 (Bouquet1 - Bouquet55)
-        const bouquetData1 = [
-            { id:'GRD1', nC:'前程似锦毕业花束', nE:'Brilliant Horizons Graduation Bouquet', matC:'精品向日葵 + 季节性配花', matE:'Selected Sunflowers & Seasonal Accent Foliage', tagC:'#毕业花束 #毕业快乐 #向日葵花束 #毕业季', tagE:'#GraduationBouquet #HappyGraduation #Sunflowers #GradSeason', qC:'🎓 愿此去前程似锦，再相逢依旧如故。', qE:'🎓 May your journey ahead be brilliant and magnificent, and may your future sparkle with infinite success.' },
-            { id:'GRD2', nC:'毕业快乐向阳花束', nE:'Sunny Dawn Graduation Bouquet', matC:'精品向日葵 + 白色满天星', matE:'Selected Sunflowers & White Baby’s Breath', tagC:'#毕业快乐 #向阳花束 #毕业礼物 #鲜花花束', tagE:'#HappyGraduation #SunnyBouquet #GraduationGift #FreshFlowers', qC:'🌞 愿你永远向阳而生，一路奔赴属于自己的光。', qE:'🌞 May you forever chase the sun, stepping fearlessly into a life filled with your own brilliant light.' },
-            { id:'GRD3', nC:'梦想启航毕业礼', nE:'Dream Voyage Graduation Bouquet', matC:'特选向日葵 + 现代韩式包装', matE:'Elite Sunflowers & Modern Korean Wrap Style', tagC:'#梦想启航 #毕业向日葵 #韩系花束', tagE:'#DreamsAloft #GraduationSunflowers #KoreanStyleBouquet', qC:'✨ 愿你带着热爱与勇气，奔赴下一场山海。', qE:'✨ May you step forward with burning passion and absolute courage as you journey to your next destination.' },
-            { id:'GRD4', nC:'青春收官花束', nE:'Youth Finale Premium Bouquet', matC:'精品向日葵 + 雅致配草', matE:'Selected Sunflowers & Elegant Greenery', tagC:'#毕业花束 #青春花礼 #高级感鲜花', tagE:'#YouthFinale #GraduationFlowers #PremiumAesthetics', qC:'📖 故事暂时写到这里，但人生的新篇章才刚开始。', qE:'📖 This beautiful chapter concludes here, but the grandest pages of your life are waiting to be written.' },
-            
-            { id:'Bear1', nC:'星球漫游花礼', nE:'Astral Wanderer Plush Doll Bouquet', matC:'星星人玩偶（自备）+ 香皂花/编织花/假花配草', matE:'Customer Doll + Soap Flowers/Crochet Flowers/Faux Fillers', tagC:'#星星人花束 #玩偶礼物 #公仔花束', tagE:'#PlushDollBouquet #StarWanderer #CreativeGift', qC:'🚀 带着浪漫去宇宙旅行，把满天星光送给特别的人。', qE:'🚀 Embark on a romantic cosmic voyage, gathering the stars of the universe for someone truly irreplaceable.' },
-            { id:'Bear2', nC:'心动小熊花束', nE:'Heartbeat Teddy Plush Bouquet', matC:'精品公仔玩偶（自备）+ 浪漫雅致配草', matE:'Customer Teddy Plush + Romantic Delicate Fillers', tagC:'#小熊花束 #玩偶系列 #浪漫礼物', tagE:'#TeddyBearBouquet #PlushDollSeries #RomanticGift', qC:'💐 小熊陪你，鲜花伴你，把温柔与浪漫一次送达。', qE:'💐 With a sweet teddy by your side and blossoms in hand, delivering endless warmth and modern romance.' },
-            { id:'Bear3', nC:'抱抱熊玩偶花束', nE:'Teddy Hug Soft Doll Bouquet', matC:'可爱公仔（自备）+ 少女风高级配饰', matE:'Customer Cuddly Plush + Soft Pastel Accent Foliage', tagC:'#玩偶花束 #抱抱熊花束 #公仔花束', tagE:'#PlushDollBouquet #CuddlyBear #SoftPastelAesthetic', qC:'🧸 鲜花与玩偶的双倍浪漫，把快乐和心动一起送给你。', qE:'🧸 Double the sweetness with beautiful blooms and an adorable plush. Sending pure delight straight to your heart.' },
-            { id:'Bear4', nC:'梦幻公仔花束', nE:'Whimsical Wonderland Plush Bouquet', matC:'卡通公仔（自备）+ 梦幻星光假花创意配饰', matE:'Customer Cartoon Plush + Whimsical Faux Florals & Accessories', tagC:'#公仔花束 #梦幻花礼 #玩偶鲜花', tagE:'#WhimsicalPlushBouquet #DreamyFloralGift #CreativeFloristry', qC:'✨ 把可爱装进花束里，让惊喜加倍心动。', qE:'✨ Packaging pure cuteness into an elegant bouquet to double the surprise and make their heart skip a beat.' },
-            
-            { id:'Crochet1', nC:'暖阳织梦手工花礼', nE:'Warm Sun Artisanal Crochet Bouquet', matC:'双层太阳花-1 + 玫瑰-3 + 郁金香-2 + 胖胖郁金香-1 + 风铃花-2 + 雏菊-2 + 尤加利叶-2 (需提早2星期预订)', matE:'1 Sunflower, 3 Roses, 2 Tulips, 1 Plump Tulip, 2 Bellflowers, 2 Daisies, 2 Eucalyptus. (2-week advance booking required)', tagC:'#编织向日葵 #手工礼物 #温柔系花束', tagE:'#HandcraftedCrochet #ArtisanalSunflowers #TimelessGift', qC:'✨ 用毛线编织阳光，把温暖与浪漫永久珍藏。', qE:'✨ Weaving pure sunshine into intricate yarn, preserving warmth and everlasting romance forever.' },
-            { id:'Crochet2', nC:'阳光满满编织花束', nE:'Sun-Drenched Handwoven Yarn Bouquet', matC:'双层太阳花-1 + 玫瑰-4 + 风铃花-3 + 康乃馨-3 + 郁金香-2 + 可自定金额纸钞 (需提早2星期预订)', matE:'1 Sunflower, 4 Roses, 3 Bellflowers, 3 Carnations, 2 Tulips + Custom Cash Notes. (2-week advance booking required)', tagC:'#阳光花束 #编织花系列 #高级感包装', tagE:'#SunDrenchedYarnFlowers #HandwovenCollection #PremiumWrap', qC:'💛 把阳光装进花束里，愿你的生活永远明亮温暖。', qE:'💛 Wrapping the spirit of golden sunbeams into a gorgeous bouquet. May your life be forever radiant.' },
-            { id:'Crochet3', nC:'郁见浪漫编织花束', nE:'Romantic Enchantment Crochet Tulip Bouquet', matC:'手作郁金香-8 + 盛开郁金香-3 + 尤加利叶-3 (需提早2星期预订)', matE:'8 Handcrafted Tulips, 3 Blooming Tulips, 3 Eucalyptus Leaves. (2-week advance booking required)', tagC:'#郁金香编织花束 #毛线郁金香 #手工花束', tagE:'#CrochetTulips #HandcraftedBouquet #ModernArtisanal', qC:'🌷 把浪漫编织成花，让心动永远盛开。', qE:'🌷 Crafting romance stitch by stitch into a floral wonder, letting your heartfelt affection bloom eternally.' },
-            { id:'Crochet4', nC:'奶油郁金香手作花礼', nE:'Creamy Pastel Handwoven Tulip Bouquet', matC:'精编奶油色系郁金香-11支 (需提早2星期预订)', matE:'11 Premium Creamy Pastel Handwoven Tulips. (2-week advance booking required)', tagC:'#奶油风花束 #编织郁金香 #手作花束', tagE:'#CreamyPastelAesthetic #HandwovenTulips #ArtisanalFlowerGift', qC:'🌸 治愈系粉郁金香，把心动藏进每一针每一线。', qE:'🌸 Healing pastel tones to brighten up any space. Tucking heartfelt affection into every single weave.' },
-            { id:'Crochet5', nC:'暖心织梦艺术花束', nE:'Dream-Weaver Mixed Crochet Masterpiece', matC:'多款高阶精编手工混搭花材 (需提早2星期预订)', matE:'Curated Selection of Elite Mixed Handcrafted Florals. (2-week advance booking required)', tagC:'#织梦花束 #编织向日葵 #手工花艺', tagE:'#DreamWeaverBouquet #ArtisanalHandcraft #BespokeYarnArt', qC:'🌻 用双手编织温暖，把美好悄悄收藏。', qE:'🌻 Fashioning pure warmth with dedicated hands, capturing the finest fragments of life’s beauty.' },
-            
-            { id:'Money1', nC:'财运满满现金花礼', nE:'Aura of Wealth Cash Bouquet', matC:'自定数量/面额纸币 + 雅致配花', matE:'Custom Cash Banknotes & Delicate Accent Foliage', tagC:'#发财花束 #有钱花系列 #生日惊喜', tagE:'#CashBouquet #WealthAndFortune #LuxuryBirthdaySurprise', qC:'✨ 鲜花配钞票，浪漫与财富一个都不少。', qE:'✨ Merging premium floral beauty with crisp bank notes. The ultimate convergence of modern romance and prosperity.' },
-            { id:'Money2', nC:'钞能力至尊花束', nE:'Ultimate Prosperity Money Bouquet', matC:'14张RM50纸币 + 鲜盛太阳花 + 高阶配草', matE:'14x RM50 Banknotes, Premium Sunflowers & Elite Greenery', tagC:'#钞能力花束 #有钱花花礼 #暴富系列', tagE:'#UltimateProsperity #MoneyFlowerGift #WealthSymbol', qC:'🌟 生活不止要有花，还要有随时能花的钱。', qE:'🌟 Because life deserves the elegance of breathtaking blooms alongside the wonderful power of freedom.' },
-            { id:'Money3', nC:'公主请暴富现金花束', nE:'Royal Fortune Princess Cash Bouquet', matC:'10张RM100纸币 + 精选康乃馨 + 少女粉包装', matE:'10x RM100 Banknotes, Selected Carnations & Blush Pink Wrap', tagC:'#有钱花系列 #现金花束 #少女心花束', tagE:'#RoyalFortune #CashFlowerBouquet #PrincessAesthetic', qC:'🎀 公主不仅要被爱，还要有花不完的钱。', qE:'🎀 A royal presentation because a true princess deserves endless devotion and unlimited fortune.' },
-            
-            { id:'Snack1', nC:'快乐加倍零食花束', nE:'Double Euphoria Snack Bouquet', matC:'进口香皂花 + 精选美味零食组合', matE:'Imported Soap Roses & Specially Curated Gourmet Snacks', tagC:'#零食花束 #零食礼物 #创意花束', tagE:'#SnackBouquet #GourmetTreats #CreativeFlowerGift', qC:'🍫 把快乐装进花束里，每一口都是小幸福。', qE:'🍫 Packaging pure snack delight into an elegant arrangement. Every bite is a fragment of pure happiness.' },
-            { id:'Snacks2', nC:'小卖部de浪漫零食花', nE:'Vintage Treats Nostalgia Snack Bouquet', matC:'进口香皂花 + 怀旧经典零食', matE:'Imported Soap Roses & Nostalgic Classic Snacks', tagC:'#小卖部花束 #创意礼物 #快乐加倍', tagE:'#NostalgiaSnackBouquet #CreativeGifting #DoubleTheJoy', qC:'🍿 把青春 and 快乐包成花束，送给最特别的人。', qE:'🍿 Transforming sweet youth and comforting treats into a gorgeous bouquet for someone genuinely special.' },
-            { id:'Snacks3', nC:'甜心零食花束', nE:'Sweetheart Confetti Candy Bouquet', matC:'高端工艺工艺花 + 缤纷甜心零食', matE:'Premium Faux Accent Flowers & Whimsical Sweet Snacks', tagC:'#甜系花束 #零食花束 #少女感礼物', tagE:'#SweetheartBouquet #ConfectioneryArt #PlayfulGifting', qC:'🍭 甜的不只是零食，还有收到礼物时的心情。', qE:'🍭 It is not just the treats that are exceptionally sweet, it’s the magical feeling of being deeply cared for.' },
-            
-            { id:'Qingming1', nC:'静念追思慰问花礼', nE:'Silent Remembrance Tonal Eulogy Bouquet', matC:'珍选特大白菊花 + 庄严素雅包装', matE:'Selected Premium White Chrysanthemums & Solemn Wrappings', tagC:'#清明节花束 #白菊花束 #追思花礼', tagE:'#ChingMingFlowers #WhiteChrysanthemums #RemembranceTribute', qC:'🕊️ 以花寄思念，愿思念化作温柔陪伴。', qE:'🕊️ Sending profound thoughts through gentle blossoms. May sweet memories bring comfort and peace.' },
-            { id:'Qingming2', nC:'清思白菊花束', nE:'Pure Soul White Chrysanthemum Bouquet', matC:'高阶白菊花 + 雅致思念绿植配叶', matE:'Elite White Chrysanthemums & Elegant Commemorative Foliage', tagC:'#追思花束 #清明鲜花 #白色花束', tagE:'#CommemorativeBouquet #SolemnWhites #EternalRespect', qC:'🤍 花开无声，思念有痕，愿爱与回忆长存心间。', qE:'🤍 Blossoms unfold in quiet grace, carrying deep affection. May love and precious memories stay forever in our hearts.' },
-            { id:'Qingming3', nC:'清风寄念花束', nE:'Ethereal Breeze Commemorative Bouquet', matC:'特选白色系菊花 + 清新衬叶', matE:'Specially Sourced White Florals & Refreshing Foliage', tagC:'#清明花礼 #纪念亲人 #鲜花追思', tagE:'#EtherealBreeze #AncestorRemembrance #ChingMingFestival', qC:'🌿 清风寄哀思，愿思念随花轻轻传达。', qE:'🌿 May the gentle spring breeze carry your profound respect and love through these elegant blooms.' },
-            { id:'Qingming4', nC:'素雅思忆花束', nE:'Elegant Solitude Chrysanthemum Bouquet', matC:'精品白菊花 + 黄莺配草', matE:'Selected White Chrysanthemums & Delicate Fillers', tagC:'#素雅花束 #白菊花礼 #追忆时光', tagE:'#ElegantSolitude #WhiteChrysanthemums #TimeHonoredRespect', qC:'🕯️ 一束素花，一份思念，愿故人安息，思念长留。', qE:'🕯️ A humble presentation of pure blossoms carrying profound respect. May peace reign eternally.' },
-            
-            { id:'Bouquet1', nC:'Hello Kitty 梦幻花束', nE:'Hello Kitty Whimsical Dream Bouquet', matC:'Hello Kitty 玩偶 + 粉色香皂玫瑰 + 蕾丝纱网包装', matE:'Hello Kitty Plush, Pink Soap Roses & Luxurious Lace Tulle Wrap', tagC:'#HelloKitty花束 #可爱花束 #定制花束', tagE:'#HelloKittyBouquet #KawaiiAesthetic #BespokeFloristry', qC:'🌸 代表纯真与可爱，象征幸福与温柔的祝福。不只是花束，更是一份治愈系的心意。', qE:'🌸 Radiating pure innocence and unmatched charm. Far more than a bouquet—it is a deeply comforting gesture of affection.' },
-            { id:'Bouquet2', nC:'温柔独白单支康乃馨', nE:'Gentle Soliloquy Single Carnation', matC:'顶级进口康乃馨 1支 + 高级极简单支纸盒包装', matE:'1x Ultra-Premium Imported Carnation & Minimalist Luxury Sleeve', tagC:'#单支康乃馨 #康乃馨花束 #温柔花礼', tagE:'#SingleCarnation #MinimalistLuxury #DelicateGesture', qC:'🌷 一支花也有满满心意，温柔从来不需要太多。', qE:'🌷 A single premium bloom holding immense depth. True elegance never demands an crowd.' },
-            { id:'Bouquet3', nC:'馨语·康乃馨花束', nE:'Maternal Whispers Premium Carnation Bouquet', matC:'11支粉嫩康乃馨 + 丰满满天星 + 情人草 + 黄莺', matE:'11x Selected Pink Carnations, Fluffy Baby’s Breath & Statice', tagC:'#康乃馨花束 #高级花艺 #感恩花束', tagE:'#CarnationBouquet #PremiumFloristry #GratitudeFlowerGift', qC:'🌸 馨香寄语，温柔如初。每一个束康乃馨，都是未说出口的感谢与爱意。', qE:'🌸 Soft scents carrying deep gratitude. Every masterfully arranged carnation represents unspoken appreciation.' },
-            { id:'Bouquet4', nC:'致爱·康乃馨花艺', nE:'To My Eternal Devotion Carnation Bouquet', matC:'9支顶级康乃馨 + 情人草 + 黄莺', matE:'9x Elite Carnations, Statice Flowers & Solidago Fillers', tagC:'#康乃馨礼物 #感恩花束 #母亲节花束', tagE:'#CarnationElegance #MothersDayFlowers #HeartfeltGratitude', qC:'💗 致最重要的你：谢谢你，让世界变得温柔。', qE:'💗 Dedicated to the anchor of my life: Thank you for painting my entire world with your absolute gentleness.' },
-            { id:'Bouquet5', nC:'柔光·康乃馨花束', nE:'Muted Luminescence Petite Carnation Bouquet', matC:'3支珍选康乃馨 + 唯美满天星', matE:'3x Premium Sourced Carnations & Dreamy Baby’s Breath', tagC:'#极简花艺 #康乃馨花束 #ins风花束', tagE:'#MinimalistFloristry #PetiteCarnations #InsStyleBouquet', qC:'🌿 柔光之下，爱意安静生长。简单，却足够温柔。', qE:'🌿 Under the muted light, deep affection matures quietly. Understated, yet remarkably moving.' },
-            { id:'Bouquet6', nC:'玫瑰星河浪漫花束', nE:'Stellar Rose Galaxy Romantic Bouquet', matC:'5支精选粉玫瑰 + 满天星 + 情人草 + 黄莺', matE:'5x Selected Pink Roses, Fluffy Baby’s Breath & Statice Fillers', tagC:'#梦幻花束 #高级花礼 #告白花束', tagE:'#StellarGalaxyRose #DreamyAesthetics #RomanceCollection', qC:'🌌 把星河揉进玫瑰里，送你一场不落幕的浪漫。', qE:'🌌 Weaving the majesty of the cosmos straight into premium roses. Offering you a romance that never fades.' },
-            { id:'Bouquet7', nC:'暖心守护康乃馨花礼', nE:'Warm Guardian Carnation Heritage Bouquet', matC:'16支名贵康乃馨 + 情人草 + 黄莺', matE:'16x Aristocratic Carnations, Statice Flowers & Solidago Fillers', tagC:'#康乃馨花礼 #感恩花束 #生日惊喜', tagE:'#WarmGuardian #CarnationHeritage #BirthdaySurprise', qC:'💗 一束康乃馨，一份长久守护。愿你岁岁平安，事事顺心。', qE:'💗 A timeless presentation of guardian affection. Wishing you absolute peace, longevity, and endless joy.' },
-            { id:'Bouquet8', nC:'幸福绽放康乃馨花束', nE:'Blissful Radiance Carnation Bouquet', matC:'16支名贵康乃馨 + 饱满满天星 + 情人草', matE:'16x Elite Carnations, Abundant Baby’s Breath & Accents', tagC:'#幸福花束 #康乃馨花艺 #感恩花礼', tagE:'#BlissfulRadiance #EliteCarnations #GratefulHeart', qC:'✨ 幸福正在悄悄绽放，愿你的每一天都温暖明亮。', qE:'✨ Pure joy unfolding silently within beautiful petals. May your everyday life be extraordinarily radiant.' },
-            { id:'Bouquet9', nC:'致爱时光康乃馨花束', nE:'Timeless Grace Lily & Carnation Bouquet', matC:'9支高端康乃馨 + 1支特大粉百合 + 满天星', matE:'9x Elite Carnations, 1x Giant Pink Lily & Baby’s Breath', tagC:'#康乃馨花束 #感恩母爱 #生日花礼', tagE:'#TimelessGrace #LilyAndCarnation #PremiumMaternalGift', qC:'🌷 时光很慢，爱却很长。愿所有温柔都刚刚好落在你身上。', qE:'🌷 Time drifts slowly, yet love endures boundlessly. May the world’s finest blessings settle beautifully upon your soul.' },
-            { id:'Bouquet10', nC:'柔光岁月康乃馨花礼', nE:'Velvet Serenade Carnation Gift Bouquet', matC:'6支珍品康乃馨 + 满天星 + 黄莺', matE:'6x Specially Selected Carnations, Baby’s Breath & Accents', tagC:'#康乃馨花礼 #柔系花束 #高级感礼物', tagE:'#VelvetSerenade #PastelCarnations #RefinedAesthetics', qC:'🌙 岁月温柔，花也温柔。愿你被生活轻轻善待。', qE:'🌙 The passing years are infinitely gentle, and so are these blooms. May life embrace you with absolute warmth.' },
-            { id:'Bouquet11', nC:'甜暖心意康乃馨花束', nE:'Confectionery Warmth Carnation Bouquet', matC:'6支珍品康乃馨 + 情人草 + 黄莺', matE:'6x Premium Carnations, Delicate Statice & Yellow Peacock', tagC:'#康乃馨花束 #甜系花礼 #少女心花束', tagE:'#ConfectioneryWarmth #SweetAesthetic #PlayfulFloristry', qC:'🍰 甜一点，暖一点，再靠近一点。愿你永远被偏爱。', qE:'🍰 A little sweeter, a little warmer, and infinitely closer. May you forever be fiercely cherished and loved.' },
-            { id:'Bouquet12', nC:'初心如花康乃馨花束', nE:'Primal Innocence Premium Carnation Bouquet', matC:'16支顶级康乃馨 + 顶级满天星', matE:'16x Top-Grade Carnations & Premium Baby’s Breath Cloud', tagC:'#康乃馨花束 #初心花礼 #生日花束', tagE:'#PrimalInnocence #EliteCarnations #PureDevotion', qC:'🌷 保持初心，也保持温柔。愿你一路盛开，一路被爱。', qE:'🌷 Safeguard your beautiful authenticity and your endless gentleness. May your path be lined with blooming love.' },
-            { id:'Bouquet13', nC:'晨曦微光康乃馨花束', nE:'First Light Dawn Carnation Bouquet', matC:'16支名贵康乃馨 + 新鲜洋甘菊衬托', matE:'16x Elite Carnations Trimmed with Fresh Country Chamomile', tagC:'#康乃馨花束 #晨曦花束 #ins风花束', tagE:'#FirstLightDawn #ChamomileAccents #ModernInsStyle', qC:'🌤️ 像清晨第一缕光，温柔、干净、刚刚好照亮你。', qE:'🌤️ Echoing the very first sunbeam of dawn—immaculately clean, profoundly pure, and perfectly illuminating your beauty.' },
-            { id:'Bouquet14', nC:'安然岁月康乃馨花礼', nE:'Serene Epoch Luxury Carnation Bouquet', matC:'16支精品康乃馨 + 满天星 + 银叶尤加利叶', matE:'16x Premium Carnations, Baby’s Breath & Silver Dollar Eucalyptus', tagC:'#康乃馨花礼 #岁月静好 #高级感花艺', tagE:'#SereneEpoch #LuxuryCarnations #SilverDollarEucalyptus', qC:'🌷 愿你安然度过每一个日常，被生活温柔拥抱。', qE:'🌷 May you traverse every single everyday moment with pure peace, gracefully embraced by life’s tenderness.' },
-            { id:'Bouquet15', nC:'安然岁月迷你康乃馨', nE:'Serene Epoch Petite Carnation Trio/Single', matC:'1支或3支精选康乃馨 + 满天星伴随', matE:'1x or 3x Sourced Carnations Nestled in Baby’s Breath Cloud', tagC:'#康乃馨花礼 #岁月静好 #高级感花艺', tagE:'#SereneEpochMini #PetiteFloristry #ElegantToken', qC:'🌷 愿你安然度过每一个日常，被生活温柔拥抱。', qE:'🌷 May you traverse every single everyday moment with pure peace, gracefully embraced by life’s tenderness.' },
-            { id:'Bouquet16', nC:'轻柔絮语花束', nE:'Soft Murmurs Pastel Fusion Bouquet', matC:'4支优雅康乃馨 + 3支高阶粉玫瑰 + 满天星衬托', matE:'4x Elegant Carnations, 3x Elite Pink Roses & Baby’s Breath Fillers', tagC:'#康乃馨花束 #轻柔花礼 #温柔系花束', tagE:'#SoftMurmurs #PastelFusion #GenteelRomance', qC:'🌸 花会说话，只是声音很轻。它在说：你值得被温柔对待。', qE:'🌸 Flowers whisper in absolute softness. They are softly chanting: You deserve the world’s ultimate gentleness.' },
-            { id:'Bouquet17', nC:'幸福续写康乃馨花束', nE:'Endless Chapters Luxury Carnation Bouquet', matC:'16支顶级特选康乃馨 + 奢华缎带设计', matE:'16x Premium Sourced Carnations & Luxury Satin Ribbon Detailing', tagC:'#康乃馨花束 #幸福花礼 #高级花艺', tagE:'#EndlessChapters #LuxuryCarnations #InfiniteBlessings', qC:'✨ 幸福不会停止，它会一页一页继续写下去。', qE:'✨ True happiness never ceases; it simply turns the page to write an even more beautiful chapter with you.' },
-            { id:'Bouquet18', nC:'暮色心动玫瑰花束', nE:'Twilight Infatuation Premium Rose Bouquet', matC:'5支红玫瑰 + 5支顶级卡布奇诺玫瑰 + 白色孔雀草', matE:'5x Crimson Red Roses, 5x Elite Cappuccino Roses & White Aster', tagC:'#玫瑰花束 #浪漫礼物 #告白花束', tagE:'#TwilightInfatuation #CappuccinoRoses #ModernRomance', qC:'🌹 在暮色里心动，在你眼里沦陷。愿爱意不止当下，而是长久。', qE:'🌹 Caught in a twilight heartbeat, completely captivated by your gaze. May our love transcend time itself.' },
-            { id:'Bouquet19', nC:'微醺浪漫玫瑰花束', nE:'Tipsy Amour Premium Rose Bouquet', matC:'3支罕贵闺蜜玫瑰 + 情人草 + 黄莺配饰', matE:'3x Rare Palette Soulmate Roses, Statice Flowers & Fillers', tagC:'#玫瑰花束 #浪漫花礼 #高级感花束', tagE:'#TipsyAmour #SoulmateRoses #RefinedLuxury', qC:'🌹 闺蜜玫瑰花语：你的开心和难过我都知道。像微醺一样的喜欢，刚刚好沉醉。', qE:'🌹 Soulmate Rose Language: Your joy and sorrow are entirely safe with me. A romance akin to a pleasant tipsiness.' },
-            { id:'Bouquet20', nC:'偏爱限定花束', nE:'Exclusive Privilege Limited Edition Bouquet', matC:'3支高阶康乃馨 + 3支优雅郁金香 + 5支玫瑰 + 奢华配花', matE:'3x Premium Carnations, 3x Regal Tulips, 5x Roses & Elite Foliage', tagC:'#玫瑰花束 #偏爱系列 #高级感花束', tagE:'#ExclusivePrivilege #LimitedEditionRose #BespokeFloristry', qC:'✨ 你是我唯一的偏爱限定，也是我最坚定的选择。', qE:'✨ You are my absolute exclusive choice, my definitive definition of love and my truest certainty.' },
-            { id:'Bouquet21', nC:'心绪微澜花束', nE:'Ripple of Affection Premium Bouquet', matC:'3支高阶康乃馨 + 6支精品玫瑰 + 4支郁金香 + 高阶配叶', matE:'3x Carnations, 6x Premium Roses, 4x Elegant Tulips & Selected Fillers', tagC:'#玫瑰花束 #浪漫花礼 #高级感花束', tagE:'#RippleOfAffection #PremiumRoses #EliteCombination', qC:'🌹 心动像微澜一样轻轻扩散，而你是源头。', qE:'🌹 Fluttering heartbeat spreading softly like ripples across still water—and you are the beautiful epicentre.' },
-            { id:'Bouquet22', nC:'心动不止玫瑰花束', nE:'Ceaseless Devotion Crimson Rose Bouquet', matC:'12支特选顶级红玫瑰', matE:'12x Ultra-Premium Selected Crimson Red Roses', tagC:'#玫瑰花束 #浪漫礼物 #高级感花艺', tagE:'#CeaselessDevotion #CrimsonRedRoses #TenOutOfTenLove', qC:'🌹 12支红玫瑰花语：完美的愛，代表「十全十美」。在柔光里说喜欢，在花里说永远。', qE:'🌹 12 Crimson Roses: Symbolizes flawless devotion and absolute perfection. Voicing eternity beneath the soft petals.' },
-            { id:'Bouquet23', nC:'热恋进行时玫瑰巨型束', nE:'Monarch Crimson 40-Rose Majestic Bouquet', matC:'40支顶级红玫瑰 + 奢华黑金黑高定包装', matE:'40x Elite Crimson Red Roses & Bespoke Matte Black Luxury Wrap', tagC:'#玫瑰花束 #热恋花束 #爱情花礼', tagE:'#MonarchCrimson #40RosesMajestic #UnapologeticLove', qC:'🔥 40支红玫瑰花语：爱你至死不渝。热恋不是状态，是我一直想你。', qE:'🔥 40 Crimson Roses: Infinite love until the end of time. Intense passion is not a phase; it is my eternal state of wanting you.' },
-            { id:'Bouquet24', nC:'一眼沦陷玫瑰花束', nE:'Fatal Attraction Premium Red Rose Bouquet', matC:'29支甄选顶级红玫瑰', matE:'29x Specially Sourced Premium Crimson Red Roses', tagC:'#玫瑰花束 #沦陷系列 #浪漫花礼', tagE:'#FatalAttraction #29RosesGrand #CaptivatedByYou', qC:'🌹 30支级红玫瑰花语：不需言语的爱。有些人只需要一眼，就注定沦陷。', qE:'🌹 29 Premium Roses: An all-consuming love that defies spoken language. One single gaze was all it took to fall completely.' },
-            { id:'Bouquet25', nC:'不期而遇玫瑰花束', nE:'Serendipity Encounter Mixed Rose Bouquet', matC:'14支高阶混色玫瑰 + 艺术撞色双面纸包装', matE:'14x Premium Mixed Palette Roses & High-Fashion Duo Wrap', tagC:'#玫瑰花束 #浪漫花礼 #高级感礼物', tagE:'#SerendipityEncounter #MixedPaletteRoses #ModernAesthetics', qC:'🌹 14朵玫瑰花语：骄傲的爱。最好的相遇不是安排，而是不期而遇的你。', qE:'🌹 14 Mixed Roses: Proud and unyielding love. The most beautiful encounter is never planned; it is simply bumping into you.' },
-            { id:'Bouquet26', nC:'心动序章顶级玫瑰花束', nE:'The Grand Prologue Couture Rose Bouquet', matC:'顶级荔枝玫瑰 + 贵族奶油杯玫瑰 + 弗洛伊德多头玫瑰', matE:'Premium Lychee Roses, Elite Creamy Teacup Roses & Spray Roses', tagC:'#玫瑰花束 #心动花礼 #浪漫鲜花', tagE:'#TheGrandPrologue #CoutureRoses #LycheeRoseAura', qC:'👑 荔枝玫瑰花语：铭记于心、宠爱、甜蜜。故事刚刚开始，而你是最重要的序章。', qE:'👑 Lychee Rose: Guardian devotion, intense adoration, and deep romance. The story has just begun, and you are the magnificent prologue.' },
-            { id:'Bouquet27', nC:'雾粉浪漫玫瑰花束', nE:'Misty Blush Velvet Rose Bouquet', matC:'5支精选特级粉玫瑰 + 雾面柔光纸设计', matE:'5x Carefully Selected Premium Pink Roses & Frosted Soft Wrap', tagC:'#粉玫瑰花束 #少女感花束 #浪漫礼物', tagE:'#MistyBlushVelvet #PremiumPinkRoses #SoftLuminary', qC:'🌸 5支粉玫瑰花语：无悔的爱，感谢你的存在。像雾一样轻柔，像喜欢一样慢慢靠近。', qE:'🌸 5 Pink Roses: Unconditional love with zero regrets. Floating gently like morning mist, moving closer into your heart.' },
-            
-            { id:'Bouquet28', nC:'银河热恋玫瑰花束', nE:'Cosmic Radiance Pink Floyd Rose Bouquet', matC:'7支顶级弗洛伊德玫瑰 + 3支高阶洛神玫瑰', matE:'7x Elite Pink Floyd Roses & 3x Selected Premium Roselle Roses', tagC:'#玫瑰花束 #银河花束 #热恋花礼', tagE:'#CosmicRadiance #PinkFloydRoses #AvantGardeFloral', qC:'🌌 弗洛伊德玫瑰花语：你漫不经心穿梭于我的梦境，使我的心变成了充满芳香的花园。', qE:'🌌 Pink Floyd Rose: You wander through my subconscious effortlessly, turning my very heart into a fragrant, blooming garden.' },
-            { id:'Bouquet29', nC:'温柔降临玫瑰花束', nE:'Seraphic Descent Crimson & Bubble Rose Bouquet', matC:'6支顶级红玫瑰 + 稀有折射泡泡多头玫瑰 + 满天星', matE:'6x Premium Red Roses, Rare Reflexed Bubble Spray Roses & Gypsophila', tagC:'#玫瑰花束 #温柔系花束 #高级感花艺', tagE:'#SeraphicDescent #ReflexedBubbleRose #EliteFloristry', qC:'✨ 温柔正在降临，而你刚好值得这一切。', qE:'✨ Absolute tenderness is descending upon the earth, and you are completely worthy of all its beauty.' },
-            { id:'Bouquet30', nC:'甜系心动玫瑰花束', nE:'Diana Sweetheart Long-Stem Rose Bouquet', matC:'9支珍品戴安娜粉玫瑰 + 满天星黄莺衬托', matE:'9x Premium Long-Stem Diana Pink Roses & Solidago Fillers', tagC:'#甜系花束 #玫瑰花礼 #生日礼物', tagE:'#DianaSweetheart #LongStemRoses #EverlastingAffection', qC:'💕 9支玫瑰花语：长长久久、坚定不移。遇见你，空气都变成甜的了。', qE:'💕 9 Diana Roses: Symbolizes an enduring love and eternal companionship. Meeting you turned the very air sweet.' },
-            { id:'Bouquet31', nC:'红袖添香玫瑰花束', nE:'Red Sleeves Poetical Luxury Rose Bouquet', matC:'10支顶级红袖玫瑰 + 精致满天星', matE:'10x Elite Sourced Red Sleeves Bi-Color Roses & Gypsophila', tagC:'#红袖玫瑰 #浪漫花艺 #告白花束', tagE:'#RedSleevesRoses #BiColorLuxury #PoeticalRomance', qC:'☕ 红袖玫瑰花语：红颜知己、知心、浪漫的爱情。岁月静好，有你添香。', qE:'☕ Red Sleeves Rose: Intellectual intimacy, romantic affinity, and profound soul connection. Peaceful years enriched by you.' },
-            { id:'Bouquet32', nC:'纯白爱恋玫瑰花束', nE:'Immaculate Devotion Alabaster Rose Bouquet', matC:'10支顶级雪山白玫瑰 + 满天星云雾', matE:'10x Premium Avalanche White Roses & Gypsophila Cloud', tagC:'#白玫瑰花束 #纯爱系列 #求婚告白', tagE:'#ImmaculateDevotion #AvalancheWhite #PerfectLoveStory', qC:'🤍 10支白玫瑰花语：十全十美。纯白无瑕，许你一生纯粹，执手共度。', qE:'🤍 10 White Roses: Perfect, flawless union. Pure and unblemished, promising you a lifetime of honest devotion.' },
-            { id:'Bouquet33', nC:'优雅序曲香槟玫瑰花束', nE:'Champagne Prelude Aristocratic Rose Bouquet', matC:'11支特选香槟玫瑰 + 精致满天星', matE:'11x Specially Sourced Champagne Roses & Gypsophila Accents', tagC:'#香槟玫瑰 #优雅花束 #求婚求婚', tagE:'#ChampagnePrelude #AristocraticRoses #MyOneAndOnly', qC:'✨ 11支香槟玫瑰花语：心中唯一。香槟色的优雅，藏着一生的执着。', qE:'✨ 11 Champagne Roses: You are the ultimate unique treasure of my heart. Regal tones harboring a lifetime’s devotion.' },
-            { id:'Bouquet34', nC:'纯粹偏爱白玫瑰花束', nE:'Absolute Sovereignty White Rose Bouquet', matC:'11支顶级雪山白玫瑰 + 漫天星点缀', matE:'11x Premium Sourced White Roses & Subtle Gypsophila Dots', tagC:'#白玫瑰花束 #偏爱系列 #高级感花艺', tagE:'#AbsoluteSovereignty #WhiteAvalanche #ExclusiveFavor', qC:'🤍 11支白玫瑰花语：一心一意。世界喧嚣，而你是我唯一的纯粹与偏爱。', qE:'🤍 11 White Roses: Undivided attention and absolute loyalty. Amidst the world’s noise, you remain my pure sanctuary.' },
-            { id:'Bouquet35', nC:'金辉盛宴黄玫瑰花束', nE:'Aureolin Feast Golden Rose Bouquet', matC:'20支顶级金辉黄玫瑰 + 丰满满天星', matE:'20x Elite Sourced Aureolin Golden Roses & Abundant Gypsophila', tagC:'#黄玫瑰花束 #金辉玫瑰 #致敬友情', tagE:'#AureolinFeast #GoldenRosesOfSuccess #RetirementHonor', qC:'💛 20支黄玫瑰花语：此情不渝。像金辉般耀眼，祝愿前程似锦，幸福美满。', qE:'💛 20 Golden Roses: Undying respect and unwavering celebration. Shining brilliantly to toast a magnificent future.' },
-            { id:'Bouquet36', nC:'无尽温柔名贵粉玫瑰束', nE:'Endless Adoration 33-Pink Rose Grand Bouquet', matC:'33支顶级戴安娜粉玫瑰 + 复古法式波浪高级 wrap', matE:'33x Ultra-Premium Diana Pink Roses & French Wave Couture Wrap', tagC:'#粉玫瑰花束 #求婚花束 #表白神器', tagE:'#EndlessAdoration #33PinkRosesGrand #FrenchCoutureStyle', qC:'🌸 33朵玫瑰花语：三生三世。藏着执手的诺言，把无尽的温柔全部给你。', qE:'🌸 33 Pink Roses: For three lifetimes and beyond. Whispering vows of eternal protection and giving you all my tenderness.' },
-            { id:'Bouquet37', nC:'永恒挚爱99朵红玫瑰巨型束', nE:'Imperial Majesty 99-Crimson Rose Grand Bouquet', matC:'99支顶级高山红玫瑰 + 顶级奢华高定黑纱金纸包装', matE:'99x Ultra-Premium Mountain Crimson Roses & Black Tulle Couture Wrap', tagC:'#99朵红玫瑰 #求婚必胜 #一生一世', tagE:'#ImperialMajesty #99RedRosesGrand #ProposalWinner #Eternity', qC:'🌹 99朵红玫瑰花语：天长地久。是一生一世的执着，愿我们的爱永不凋零。', qE:'🌹 99 Crimson Roses: Boundless eternity. A monumental testament of unconditional devotion. May our love bloom forever.' },
-            
-            { id:'Bouquet38', nC:'郁见幸福优雅花束', nE:'Elysian Pastel Premium Tulip Bouquet', matC:'5支顶级进口粉色郁金香 + 精致满天星', matE:'5x Elite Sourced Imported Pink Tulips & Delicate Gypsophila', tagC:'#郁金香花束 #粉色郁金香 #温柔系花束', tagE:'#ElysianTulips #ImportedPinkTulips #SoftAesthetics', qC:'🌷 郁金香开，幸福自来。愿你的世界永远温柔，美好如期而至。', qE:'🌷 As the majestic tulips unfold, pure happiness arrives effortlessly. May your world be forever serene and beautiful.' },
-            { id:'Bouquet39', nC:'浪漫不落幕郁金香花束', nE:'Infinite Solstice 10-Tulip Luxury Bouquet', matC:'10支顶级进口珍贵粉色郁金香', matE:'10x Ultra-Premium Sourced Premium Pink Tulips', tagC:'#郁金香花束 #浪漫花礼 #高级感鲜花', tagE:'#InfiniteSolstice #10PremiumTulips #TimelessRomance', qC:'🎀 浪漫不曾落幕，心动从未停止。送你一束郁金香，许你一份久违的温柔。', qE:'🎀 True romance never concludes; heartbeats never cease. Granting you an extraordinary touch of rare floral luxury.' },
-            
-            { id:'Bouquet40', nC:'元气满满太阳花束', nE:'Vibrant Helianthus Petit Sunshine Bouquet', matC:'3支精品太阳花 + 满天星 + 黄莺衬草', matE:'3x Premium Helianthus Sunflowers, Gypsophila & Accents', tagC:'#向日葵花束 #太阳花 #毕业花束', tagE:'#VibrantHelianthus #SunflowerPetit #GraduationGifting', qC:'🌻 元气满满，阳光灿烂。愿你带着微笑，奔赴每一个炽热的明天。', qE:'🌻 Radiating unparalleled positive energy and pure sunshine. Step forward into your fiery future with a brilliant smile.' },
-            { id:'Bouquet41', nC:'金色暖阳向日葵花束', nE:'Aureous Sunbeam Sunflower Bouquet', matC:'3支特选高山向日葵 + 云雾满天星', matE:'3x High-Mountain Helianthus Sunflowers & Heavy Gypsophila', tagC:'#向日葵花束 #暖阳花束 #毕业礼物', tagE:'#AureousSunbeam #MountainSunflowers #HealingFloral', qC:'☀️ 像一缕金色暖阳，治愈每一个日常。愿你无忧无虑，永远快乐。', qE:'☀️ Behaving exactly like a ray of pure golden sun, healing every ordinary day. Stay blissfully untroubled and happy.' },
-            { id:'Bouquet42', nC:'璀璨前程太阳花束', nE:'Stellar Path Academic Sunflower Bouquet', matC:'3支精品向日葵 + 情人草 + 黄莺衬叶', matE:'3x Selected Sunflowers, Statice Flowers & Yellow Peacock Foliage', tagC:'#向日葵花束 #毕业花束 #前程似锦', tagE:'#StellarPath #AcademicGraduation #BrightFutureWishes', qC:'🎓 愿你前路璀璨，眼有星辰，不负韶华，顶峰相见。', qE:'🎓 May your future path be spectacularly bright and your eyes full of stars. Meet you at the mountain peak of success.' },
-            { id:'Bouquet43', nC:'追光少年向日葵花礼', nE:'Chaser Of Light Premium Sunflower Bouquet', matC:'5支精品向日葵 + 满天星密织 + 黄莺', matE:'5x Premium Sunflowers, Dense Gypsophila Netting & Solidago', tagC:'#向日葵花束 #追光少年 #毕业季送花', tagE:'#ChaserOfLight #5SunflowersGrand #InspirationalGift', qC:'🌻 追光的人，终会身披万丈光芒。愿你无畏无惧，一往无前。', qE:'🌻 He who relentlessly pursues the light will eventually stand cloaked in pure brilliance. March forward fearlessly.' },
-            { id:'Bouquet44', nC:'阳光满怀向日葵花束', nE:'Embrace Of Sol Gold Leaf Sunflower Bouquet', matC:'6支精品向日葵 + 满天星海', matE:'6x Specially Sourced Sunflowers & Heavy Gypsophila Ocean', tagC:'#向日葵花束 #阳光花礼 #感恩花束', tagE:'#EmbraceOfSol #6SunflowersDeluxe #GratefulTribute', qC:'💛 满怀的阳光，全网最好的祝福。愿你的世界每天都洒满温暖。', qE:'💛 A whole embrace of warm solar grace. Wishing your beautiful world to be bathed in absolute warmth every single day.' },
-            { id:'Bouquet45', nC:'花漾暖意混搭花束', nE:'Floral Radiance Crimson & Sunflower Bouquet', matC:'1支向日葵 + 5支高阶红玫瑰 + 满天星黄莺', matE:'1x Sunflower, 5x Premium Red Roses, Gypsophila & Accents', tagC:'#向日葵混搭 #红玫瑰花束 #暖系花礼', tagE:'#CrimsonAndSun #VibrantAesthetics #LuxuryMixedBouquet', qC:'✨ 阳光与浪漫相遇，碰撞出最美的暖意。祝你快乐，不止今天。', qE:'✨ Where golden sunshine merges with rich red romance, forging the ultimate aesthetic bliss. Be endlessly happy.' },
-            { id:'Bouquet46', nC:'浪漫晨曦混搭花束', nE:'Romantic Dawn Champagne & Sunflower Bouquet', matC:'1支向日葵 + 6支香槟玫瑰 + 满天星云雾', matE:'1x Sunflower, 6x Champagne Roses & Fluffy Gypsophila', tagC:'#香槟玫瑰混搭 #向日葵花束 #晨曦系列', tagE:'#RomanticDawn #ChampagneSun #EliteCoutureStyle', qC:'🌤️ 迎着清晨的第一缕微光，把温柔与希望一起打包送给你。', qE:'🌤️ Greeting the very first whisper of dawn, packaging pure grace and beautiful hope flawlessly for you.' },
-            { id:'Bouquet47', nC:'一半阳光一半浪漫混搭束', nE:'Equinox Sun & Amour Luxury Fusion Bouquet', matC:'3支向日葵 + 6支精品香槟玫瑰 + 满天星衬叶', matE:'3x Sunflowers, 6x Elite Champagne Roses & Gypsophila Cloud', tagC:'#向日葵香槟 #高级混搭 #浪漫花礼', tagE:'#EquinoxSunAmour #ChampagneFusion #SophisticatedGifting', qC:'☀️ 一半是阳光，一半是浪漫。给最特别的人双倍的心意。', qE:'☀️ Unveiling a perfect equinox—one half pure golden sunshine, the other half unadulterated high romance.' },
-            { id:'Bouquet48', nC:'暖风花语花束', nE:'Zephyr Whispers Elite Mixed Masterpiece', matC:'3支向日葵 + 4支红玫瑰 + 4支粉玫瑰 + 浅紫色洋桔梗 + 满天星', matE:'3x Sunflowers, 4x Red Roses, 4x Pink Roses, Lavender Eustoma, Gypsophila', tagC:'#向日葵花束 #暖系花束 #高阶混搭鲜花', tagE:'#ZephyrWhispers #LavenderEustoma #LuxuryMultiPalette', qC:'🍃 风很温柔，花很灿烂，而你刚刚好。', qE:'🍃 The gentle breeze is profoundly tender, the blossoms are spectacular, and you are simply flawless.' },
-            { id:'Bouquet49', nC:'日落橙光花束', nE:'Amber Sunset Premium Glow Bouquet', matC:'2支向日葵 + 3支高阶粉玫瑰 + 3支黄玫瑰 + 满天星 + 银叶尤加利叶', matE:'2x Sunflowers, 3x Pink Roses, 3x Yellow Roses, Gypsophila, Eucalyptus', tagC:'#橙色花束 #向日葵混搭 #日落系花束', tagE:'#AmberSunsetGlow #NouveauAesthetic #WarmPaletteRoses', qC:'🌇 把日落与鲜花一起送给你，愿生活永远温暖有光。', qE:'🌇 Presenting the majestic beauty of an amber sunset synthesized with luxury blooms. May your life be forever warm.' },
-            { id:'Bouquet50', nC:'向光而行极简花束', nE:'Solitary Sol Chasing Light Minimalist Bouquet', matC:'1支精品向日葵 + 满天星环绕 + 极简韩式单支 wrap', matE:'1x Premium Sunflower Encircled by Gypsophila & Minimalist Sleeve', tagC:'#太阳花花束 #向光而行 #极简花艺', tagE:'#SolitarySol #SingleSunflower #MinimalistLuxuryToken', qC:'🌻 无论经历什么，都要向光而行。愿你内心明朗，步履坚定。', qE:'🌻 Regardless of life’s trials, always march resolutely towards the light. Stay bright within and steadfast in pace.' },
-            
-            { id:'Bouquet51', nC:'暖橘时光玫瑰花束', nE:'Warm Cappuccino Solace Premium Rose Bouquet', matC:'10支顶级卡布奇诺玫瑰 + 满天星云雾', matE:'10x Ultra-Premium Cappuccino Vintage Roses & Gypsophila Cloud', tagC:'#温柔系花礼 #生日鲜花 #高级感花艺 #ins风花束 #鲜花推荐 #荣休花束', tagE:'#WarmCappuccino #VintageRoseAesthetic #LuxuryFloristry #ModernIns', qC:'🧡 卡布奇诺玫瑰花语：是不期而遇的温柔。把温暖装进花束里，送给生命中极重要的人。', qE:'🧡 Cappuccino Rose Language: An enchanting, accidental tenderness and destined affinity. Bestowing deep warmth.' },
-            { id:'Bouquet52', nC:'香槟梦语玫瑰花束', nE:'Champagne Reverie Luxury Rose Bouquet', matC:'7支精选香槟玫瑰 + 稀有折射泡泡多头玫瑰 + 满天星', matE:'7x Selected Champagne Roses, Reflexed Bubble Spray Roses & Gypsophila', tagC:'#香槟玫瑰 #高级花束 #轻奢花礼 #浪漫鲜花', tagE:'#ChampagneReverie #ReflexedBubbleRose #AffordableLuxury', qC:'✨ 香槟色的浪漫，藏着最温柔的喜欢与高级仪式感。', qE:'✨ Exquisite champagne tones harboring the most soft, authentic affection and exceptional modern ritual.' },
-            { id:'Bouquet53', nC:'青春不散场巨型混搭束', nE:'Immortal Youth Majestic Multi-Palette Bouquet', matC:'3支向日葵 + 9支红玫瑰 + 10支香槟玫瑰 + 折射泡泡 + 尤加利叶', matE:'3x Sunflowers, 9x Red Roses, 10x Champagne Roses, Bubble Sprays, Eucalyptus', tagC:'#毕业花束 #青春不散场 #毕业季礼物 #高级感鲜花', tagE:'#ImmortalYouth #MajesticMultiPalette #GraduationCouture #EliteGift', qC:'🎓 青春或许会结束，但关于我们的回忆永远热烈赤诚。', qE:'🎓 Youthful seasons may eventually conclude, but our shared memories will burn fiercely and beautifully forever.' },
-            { id:'Bouquet54', nC:'星途闪耀高阶毕业花礼', nE:'Astral Stardust Academic Achievement Bouquet', matC:'2支向日葵 + 10支香槟玫瑰 + 猩红多头玫瑰 + 新鲜洋甘菊 + 尤加利叶', matE:'2x Sunflowers, 10x Champagne Roses, Scarlet Spray Roses, Chamomile, Eucalyptus', tagC:'#毕业花礼 #毕业快乐 #星途闪耀 #高级感花束', tagE:'#AstralStardust #AcademicAchievement #PremiumGraduation #Couture', qC:'✨ 愿未来星途闪耀，你所有的坚持与付出都开花结果。', qE:'✨ Wishing your path ahead to be aligned with shining stars. May every drop of your hard work blossom into victory.' },
-            { id:'Bouquet55', nC:'爱意回响高仿艺术花束', nE:'Echos of Amour Premium Faux Floral Bouquet', matC:'全套顶级奢华高阶工艺假花工艺花配草', matE:'Full Bespoke Collection of Ultra-Premium Faux Silk Florals & Foliage', tagC:'#玫瑰花束 #爱意系列 #浪漫花礼 #高级感鲜花', tagE:'#EchosOfAmour #PremiumFauxSilkRoses #TimelessRomanceGift', qC:'✨ 所有爱意都会有回响。就像我一直在想你，而花永远盛开。', qE:'✨ Every echo of profound love finds its way back home. Just as I am thinking of you, these blooms stay immortal.' }
-        ];
+    // 4. 花束数据 – 完整校正 (根据文档花束1.docx, 花束2.docx, 花束3.docx)
+    const bouquetData1 = [
+        // 毕业花束 GRD1~4 (正确)
+        { id:'GRD1', nC:'前程似锦毕业花束', nE:'Brilliant Horizons Graduation Bouquet', matC:'精品向日葵 + 季节性配花', matE:'Selected Sunflowers & Seasonal Accent Foliage', tagC:'#毕业花束 #毕业快乐 #向日葵花束 #毕业季 #GraduationBouquet #毕业礼物', tagE:'#GraduationBouquet #HappyGraduation #Sunflowers #GradSeason', qC:'🎓 愿此去前程似锦，再相逢依旧如故。', qE:'🎓 May your journey ahead be brilliant and magnificent, and may your future sparkle with infinite success.' },
+        { id:'GRD2', nC:'毕业快乐向阳花束', nE:'Sunny Dawn Graduation Bouquet', matC:'精品向日葵 + 白色满天星', matE:'Selected Sunflowers & White Baby’s Breath', tagC:'#毕业快乐 #向阳花束 #毕业礼物 #鲜花花束', tagE:'#HappyGraduation #SunnyBouquet #GraduationGift #FreshFlowers', qC:'🌞 愿你永远向阳而生，一路奔赴属于自己的光。', qE:'🌞 May you forever chase the sun, stepping fearlessly into a life filled with your own brilliant light.' },
+        { id:'GRD3', nC:'梦想启航毕业礼', nE:'Dream Voyage Graduation Bouquet', matC:'特选向日葵 + 现代韩式包装', matE:'Elite Sunflowers & Modern Korean Wrap Style', tagC:'#梦想启航 #毕业向日葵 #韩系花束', tagE:'#DreamsAloft #GraduationSunflowers #KoreanStyleBouquet', qC:'✨ 愿你带着热爱与勇气，奔赴下一场山海。', qE:'✨ May you step forward with burning passion and absolute courage as you journey to your next destination.' },
+        { id:'GRD4', nC:'青春收官花束', nE:'Youth Finale Premium Bouquet', matC:'精品向日葵 + 雅致配草', matE:'Selected Sunflowers & Elegant Greenery', tagC:'#毕业花束 #青春花礼 #高级感鲜花', tagE:'#YouthFinale #GraduationFlowers #PremiumAesthetics', qC:'📖 故事暂时写到这里，但人生的新篇章才刚开始。', qE:'📖 This beautiful chapter concludes here, but the grandest pages of your life are waiting to be written.' },
+        
+        // 玩偶花束 Bear1~4 (正确)
+        { id:'Bear1', nC:'星球漫游花礼', nE:'Astral Wanderer Plush Doll Bouquet', matC:'星星人玩偶（自备）+ 香皂花/编织花/假花配草', matE:'Customer Doll + Soap Flowers/Crochet Flowers/Faux Fillers', tagC:'#星星人花束 #玩偶礼物 #公仔花束', tagE:'#PlushDollBouquet #StarWanderer #CreativeGift', qC:'🚀 带着浪漫去宇宙旅行，把满天星光送给特别的人。', qE:'🚀 Embark on a romantic cosmic voyage, gathering the stars of the universe for someone truly irreplaceable.' },
+        { id:'Bear2', nC:'心动小熊花束', nE:'Heartbeat Teddy Plush Bouquet', matC:'精品公仔玩偶（自备）+ 浪漫雅致配草', matE:'Customer Teddy Plush + Romantic Delicate Fillers', tagC:'#小熊花束 #玩偶系列 #浪漫礼物', tagE:'#TeddyBearBouquet #PlushDollSeries #RomanticGift', qC:'💐 小熊陪你，鲜花伴你，把温柔与浪漫一次送达。', qE:'💐 With a sweet teddy by your side and blossoms in hand, delivering endless warmth and modern romance.' },
+        { id:'Bear3', nC:'抱抱熊玩偶花束', nE:'Teddy Hug Soft Doll Bouquet', matC:'可爱公仔（自备）+ 少女风高级配饰', matE:'Customer Cuddly Plush + Soft Pastel Accent Foliage', tagC:'#玩偶花束 #抱抱熊花束 #公仔花束', tagE:'#PlushDollBouquet #CuddlyBear #SoftPastelAesthetic', qC:'🧸 鲜花与玩偶的双倍浪漫，把快乐和心动一起送给你。', qE:'🧸 Double the sweetness with beautiful blooms and an adorable plush. Sending pure delight straight to your heart.' },
+        { id:'Bear4', nC:'梦幻公仔花束', nE:'Whimsical Wonderland Plush Bouquet', matC:'卡通公仔（自备）+ 梦幻星光假花创意配饰', matE:'Customer Cartoon Plush + Whimsical Faux Florals & Accessories', tagC:'#公仔花束 #梦幻花礼 #玩偶鲜花', tagE:'#WhimsicalPlushBouquet #DreamyFloralGift #CreativeFloristry', qC:'✨ 把可爱装进花束里，让惊喜加倍心动。', qE:'✨ Packaging pure cuteness into an elegant bouquet to double the surprise and make their heart skip a beat.' },
+        
+        // 编织花束 Crochet1~5 (正确)
+        { id:'Crochet1', nC:'暖阳织梦手工花礼', nE:'Warm Sun Artisanal Crochet Bouquet', matC:'双层太阳花-1，玫瑰-3，郁金香-2，胖胖郁金香-1，风铃花-2，雏菊-2，尤加利叶-2 (需提早2星期预订)', matE:'1 Sunflower, 3 Roses, 2 Tulips, 1 Plump Tulip, 2 Bellflowers, 2 Daisies, 2 Eucalyptus. (2-week advance booking required)', tagC:'#编织向日葵 #手工礼物 #温柔系花束', tagE:'#HandcraftedCrochet #ArtisanalSunflowers #TimelessGift', qC:'✨ 用毛线编织阳光，把温暖与浪漫永久珍藏。', qE:'✨ Weaving pure sunshine into intricate yarn, preserving warmth and everlasting romance forever.' },
+        { id:'Crochet2', nC:'阳光满满编织花束', nE:'Sun-Drenched Handwoven Yarn Bouquet', matC:'双层太阳花-1，玫瑰-4，风铃花-3，康乃馨-3，郁金香-2 + 可自定金额纸钞 (需提早2星期预订)', matE:'1 Sunflower, 4 Roses, 3 Bellflowers, 3 Carnations, 2 Tulips + Custom Cash Notes. (2-week advance booking required)', tagC:'#阳光花束 #编织花系列 #高级感包装', tagE:'#SunDrenchedYarnFlowers #HandwovenCollection #PremiumWrap', qC:'💛 把阳光装进花束里，愿你的生活永远明亮温暖。', qE:'💛 Wrapping the spirit of golden sunbeams into a gorgeous bouquet. May your life be forever radiant.' },
+        { id:'Crochet3', nC:'郁见浪漫编织花束', nE:'Romantic Enchantment Crochet Tulip Bouquet', matC:'手作郁金香-8，盛开郁金香-3，尤加利叶-3 (需提早2星期预订)', matE:'8 Handcrafted Tulips, 3 Blooming Tulips, 3 Eucalyptus Leaves. (2-week advance booking required)', tagC:'#郁金香编织花束 #毛线郁金香 #手工花束', tagE:'#CrochetTulips #HandcraftedBouquet #ModernArtisanal', qC:'🌷 把浪漫编织成花，让心动永远盛开。', qE:'🌷 Crafting romance stitch by stitch into a floral wonder, letting your heartfelt affection bloom eternally.' },
+        { id:'Crochet4', nC:'奶油郁金香手作花礼', nE:'Creamy Pastel Handwoven Tulip Bouquet', matC:'精编奶油色系郁金香-11支 (需提早2星期预订)', matE:'11 Premium Creamy Pastel Handwoven Tulips. (2-week advance booking required)', tagC:'#奶油风花束 #编织郁金香 #手作花束', tagE:'#CreamyPastelAesthetic #HandwovenTulips #ArtisanalFlowerGift', qC:'🌸 治愈系粉郁金香，把心动藏进每一针每一线。', qE:'🌸 Healing pastel tones to brighten up any space. Tucking heartfelt affection into every single weave.' },
+        { id:'Crochet5', nC:'暖心织梦艺术花束', nE:'Dream-Weaver Mixed Crochet Masterpiece', matC:'多款高阶精编手工混搭花材 (需提早2星期预订)', matE:'Curated Selection of Elite Mixed Handcrafted Florals. (2-week advance booking required)', tagC:'#织梦花束 #编织向日葵 #手工花艺', tagE:'#DreamWeaverBouquet #ArtisanalHandcraft #BespokeYarnArt', qC:'🌻 用双手编织温暖，把美好悄悄收藏。', qE:'🌻 Fashioning pure warmth with dedicated hands, capturing the finest fragments of life’s beauty.' },
+        
+        // 有钱花花束 Money1~3 (正确)
+        { id:'Money1', nC:'财运满满现金花礼', nE:'Aura of Wealth Cash Bouquet', matC:'自定数量/面额纸币 + 雅致配花', matE:'Custom Cash Banknotes & Delicate Accent Foliage', tagC:'#发财花束 #有钱花系列 #生日惊喜', tagE:'#CashBouquet #WealthAndFortune #LuxuryBirthdaySurprise', qC:'✨ 鲜花配钞票，浪漫与财富一个都不少。', qE:'✨ Merging premium floral beauty with crisp bank notes. The ultimate convergence of modern romance and prosperity.' },
+        { id:'Money2', nC:'钞能力至尊花束', nE:'Ultimate Prosperity Money Bouquet', matC:'14张纸币加起来=RM50 + 鲜盛太阳花 + 高阶配草', matE:'14xBanknotes=RM50, Premium Sunflowers & Elite Greenery', tagC:'#钞能力花束 #有钱花花礼 #暴富系列', tagE:'#UltimateProsperity #MoneyFlowerGift #WealthSymbol', qC:'🌟 生活不止要有花，还要有随时能花的钱。', qE:'🌟 Because life deserves the elegance of breathtaking blooms alongside the wonderful power of freedom.' },
+        { id:'Money3', nC:'公主请暴富现金花束', nE:'Royal Fortune Princess Cash Bouquet', matC:'10张RM100纸币 + 精选康乃馨 + 少女粉包装', matE:'10x RM100 Banknotes, Selected Carnations & Blush Pink Wrap', tagC:'#有钱花系列 #现金花束 #少女心花束', tagE:'#RoyalFortune #CashFlowerBouquet #PrincessAesthetic', qC:'🎀 公主不仅要被爱，还要有花不完的钱。', qE:'🎀 A royal presentation because a true princess deserves endless devotion and unlimited fortune.' },
+        
+        // 零食花束 Snack1, Snacks2, Snacks3 (正确)
+        { id:'Snack1', nC:'快乐加倍零食花束', nE:'Double Euphoria Snack Bouquet', matC:'进口香皂花 + 精选美味零食组合', matE:'Imported Soap Roses & Specially Curated Gourmet Snacks', tagC:'#零食花束 #零食礼物 #创意花束', tagE:'#SnackBouquet #GourmetTreats #CreativeFlowerGift', qC:'🍫 把快乐装进花束里，每一口都是小幸福。', qE:'🍫 Packaging pure snack delight into an elegant arrangement. Every bite is a fragment of pure happiness.' },
+        { id:'Snacks2', nC:'小卖部de浪漫零食花', nE:'Vintage Treats Nostalgia Snack Bouquet', matC:'进口香皂花 + 怀旧经典零食', matE:'Imported Soap Roses & Nostalgic Classic Snacks', tagC:'#小卖部花束 #创意礼物 #快乐加倍', tagE:'#NostalgiaSnackBouquet #CreativeGifting #DoubleTheJoy', qC:'🍿 把青春 and 快乐包成花束，送给最特别的人。', qE:'🍿 Transforming sweet youth and comforting treats into a gorgeous bouquet for someone genuinely special.' },
+        { id:'Snacks3', nC:'甜心零食花束', nE:'Sweetheart Confetti Candy Bouquet', matC:'高端工艺工艺花 + 缤纷甜心零食', matE:'Premium Faux Accent Flowers & Whimsical Sweet Snacks', tagC:'#甜系花束 #零食花束 #少女感礼物', tagE:'#SweetheartBouquet #ConfectioneryArt #PlayfulGifting', qC:'🍭 甜的不只是零食，还有收到礼物时的心情。', qE:'🍭 It is not just the treats that are exceptionally sweet, it’s the magical feeling of being deeply cared for.' },
+        
+        // 清明节花束 Qingming1~4 (正确)
+        { id:'Qingming1', nC:'静念追思慰问花礼', nE:'Silent Remembrance Tonal Eulogy Bouquet', matC:'珍选特大白菊花 + 庄严素雅包装', matE:'Selected Premium White Chrysanthemums & Solemn Wrappings', tagC:'#清明节花束 #白菊花束 #追思花礼', tagE:'#ChingMingFlowers #WhiteChrysanthemums #RemembranceTribute', qC:'🕊️ 以花寄思念，愿思念化作温柔陪伴。', qE:'🕊️ Sending profound thoughts through gentle blossoms. May sweet memories bring comfort and peace.' },
+        { id:'Qingming2', nC:'清思白菊花束', nE:'Pure Soul White Chrysanthemum Bouquet', matC:'高阶白菊花 + 雅致思念绿植配叶', matE:'Elite White Chrysanthemums & Elegant Commemorative Foliage', tagC:'#追思花束 #清明鲜花 #白色花束', tagE:'#CommemorativeBouquet #SolemnWhites #EternalRespect', qC:'🤍 花开无声，思念有痕，愿爱与回忆长存心间。', qE:'🤍 Blossoms unfold in quiet grace, carrying deep affection. May love and precious memories stay forever in our hearts.' },
+        { id:'Qingming3', nC:'清风寄念花束', nE:'Ethereal Breeze Commemorative Bouquet', matC:'特选白色系菊花 + 清新衬叶', matE:'Specially Sourced White Florals & Refreshing Foliage', tagC:'#清明花礼 #纪念亲人 #鲜花追思', tagE:'#EtherealBreeze #AncestorRemembrance #ChingMingFestival', qC:'🌿 清风寄哀思，愿思念随花轻轻传达。', qE:'🌿 May the gentle spring breeze carry your profound respect and love through these elegant blooms.' },
+        { id:'Qingming4', nC:'素雅思忆花束', nE:'Elegant Solitude Chrysanthemum Bouquet', matC:'精品白菊花 + 黄莺配草', matE:'Selected White Chrysanthemums & Delicate Fillers', tagC:'#素雅花束 #白菊花礼 #追忆时光', tagE:'#ElegantSolitude #WhiteChrysanthemums #TimeHonoredRespect', qC:'🕯️ 一束素花，一份思念，愿故人安息，思念长留。', qE:'🕯️ A humble presentation of pure blossoms carrying profound respect. May peace reign eternally.' },
+        
+        // Bouquet1~Bouquet27 (根据花束1.docx, 花束2.docx 已正确，此处仅展示关键部分，确保数据完整)
+        { id:'Bouquet1', nC:'Hello Kitty 梦幻花束', nE:'Hello Kitty Whimsical Dream Bouquet', matC:'Hello Kitty 玩偶 + 粉色香皂玫瑰 + 蕾丝纱网包装', matE:'Hello Kitty Plush, Pink Soap Roses & Luxurious Lace Tulle Wrap', tagC:'#HelloKitty花束 #可爱花束 #定制花束', tagE:'#HelloKittyBouquet #KawaiiAesthetic #BespokeFloristry', qC:'🌸 代表纯真与可爱，象征幸福与温柔的祝福。不只是花束，更是一份治愈系的心意。', qE:'🌸 Radiating pure innocence and unmatched charm. Far more than a bouquet—it is a deeply comforting gesture of affection.' },
+        { id:'Bouquet2', nC:'温柔独白单支康乃馨', nE:'Gentle Soliloquy Single Carnation', matC:'顶级进口康乃馨 1支 + 高级极简单支纸盒包装', matE:'1x Ultra-Premium Imported Carnation & Minimalist Luxury Sleeve', tagC:'#单支康乃馨 #康乃馨花束 #温柔花礼', tagE:'#SingleCarnation #MinimalistLuxury #DelicateGesture', qC:'🌷 一支花也有满满心意，温柔从来不需要太多。', qE:'🌷 A single premium bloom holding immense depth. True elegance never demands an crowd.' },
+        { id:'Bouquet3', nC:'馨语·康乃馨花束', nE:'Maternal Whispers Premium Carnation Bouquet', matC:'11支粉嫩康乃馨 + 丰满满天星 + 情人草 + 黄莺', matE:'11x Selected Pink Carnations, Fluffy Baby’s Breath & Statice', tagC:'#康乃馨花束 #高级花艺 #感恩花束', tagE:'#CarnationBouquet #PremiumFloristry #GratitudeFlowerGift', qC:'🌸 馨香寄语，温柔如初。每一个束康乃馨，都是未说出口的感谢与爱意。', qE:'🌸 Soft scents carrying deep gratitude. Every masterfully arranged carnation represents unspoken appreciation.' },
+        { id:'Bouquet4', nC:'致爱·康乃馨花艺', nE:'To My Eternal Devotion Carnation Bouquet', matC:'9支顶级康乃馨 + 情人草 + 黄莺', matE:'9x Elite Carnations, Statice Flowers & Solidago Fillers', tagC:'#康乃馨礼物 #感恩花束 #母亲节花束', tagE:'#CarnationElegance #MothersDayFlowers #HeartfeltGratitude', qC:'💗 致最重要的你：谢谢你，让世界变得温柔。', qE:'💗 Dedicated to the anchor of my life: Thank you for painting my entire world with your absolute gentleness.' },
+        { id:'Bouquet5', nC:'柔光·康乃馨花束', nE:'Muted Luminescence Petite Carnation Bouquet', matC:'3支珍选康乃馨 + 唯美满天星', matE:'3x Premium Sourced Carnations & Dreamy Baby’s Breath', tagC:'#极简花艺 #康乃馨花束 #ins风花束', tagE:'#MinimalistFloristry #PetiteCarnations #InsStyleBouquet', qC:'🌿 柔光之下，爱意安静生长。简单，却足够温柔。', qE:'🌿 Under the muted light, deep affection matures quietly. Understated, yet remarkably moving.' },
+        { id:'Bouquet6', nC:'玫瑰星河浪漫花束', nE:'Stellar Rose Galaxy Romantic Bouquet', matC:'5支精选粉玫瑰 + 满天星 + 情人草 + 黄莺', matE:'5x Selected Pink Roses, Fluffy Baby’s Breath & Statice Fillers', tagC:'#梦幻花束 #高级花礼 #告白花束', tagE:'#StellarGalaxyRose #DreamyAesthetics #RomanceCollection', qC:'🌌 把星河揉进玫瑰里，送你一场不落幕的浪漫。', qE:'🌌 Weaving the majesty of the cosmos straight into premium roses. Offering you a romance that never fades.' },
+        { id:'Bouquet7', nC:'暖心守护康乃馨花礼', nE:'Warm Guardian Carnation Heritage Bouquet', matC:'16支名贵康乃馨 + 情人草 + 黄莺', matE:'16x Aristocratic Carnations, Statice Flowers & Solidago Fillers', tagC:'#康乃馨花礼 #感恩花束 #生日惊喜', tagE:'#WarmGuardian #CarnationHeritage #BirthdaySurprise', qC:'💗 一束康乃馨，一份长久守护。愿你岁岁平安，事事顺心。', qE:'💗 A timeless presentation of guardian affection. Wishing you absolute peace, longevity, and endless joy.' },
+        { id:'Bouquet8', nC:'幸福绽放康乃馨花束', nE:'Blissful Radiance Carnation Bouquet', matC:'16支名贵康乃馨 + 饱满满天星 + 情人草', matE:'16x Elite Carnations, Abundant Baby’s Breath & Accents', tagC:'#幸福花束 #康乃馨花艺 #感恩花礼', tagE:'#BlissfulRadiance #EliteCarnations #GratefulHeart', qC:'✨ 幸福正在悄悄绽放，愿你的每一天都温暖明亮。', qE:'✨ Pure joy unfolding silently within beautiful petals. May your everyday life be extraordinarily radiant.' },
+        { id:'Bouquet9', nC:'致爱时光康乃馨花束', nE:'Timeless Grace Lily & Carnation Bouquet', matC:'9支高端康乃馨 + 1支特大粉百合 + 满天星', matE:'9x Elite Carnations, 1x Giant Pink Lily & Baby’s Breath', tagC:'#康乃馨花束 #感恩母爱 #生日花礼', tagE:'#TimelessGrace #LilyAndCarnation #PremiumMaternalGift', qC:'🌷 时光很慢，爱却很长。愿所有温柔都刚刚好落在你身上。', qE:'🌷 Time drifts slowly, yet love endures boundlessly. May the world’s finest blessings settle beautifully upon your soul.' },
+        { id:'Bouquet10', nC:'柔光岁月康乃馨花礼', nE:'Velvet Serenade Carnation Gift Bouquet', matC:'6支珍品康乃馨 + 满天星 + 黄莺', matE:'6x Specially Selected Carnations, Baby’s Breath & Accents', tagC:'#康乃馨花礼 #柔系花束 #高级感礼物', tagE:'#VelvetSerenade #PastelCarnations #RefinedAesthetics', qC:'🌙 岁月温柔，花也温柔。愿你被生活轻轻善待。', qE:'🌙 The passing years are infinitely gentle, and so are these blooms. May life embrace you with absolute warmth.' },
+        { id:'Bouquet11', nC:'甜暖心意康乃馨花束', nE:'Confectionery Warmth Carnation Bouquet', matC:'6支珍品康乃馨 + 情人草 + 黄莺', matE:'6x Premium Carnations, Delicate Statice & Yellow Peacock', tagC:'#康乃馨花束 #甜系花礼 #少女心花束', tagE:'#ConfectioneryWarmth #SweetAesthetic #PlayfulFloristry', qC:'🍰 甜一点，暖一点，再靠近一点。愿你永远被偏爱。', qE:'🍰 A little sweeter, a little warmer, and infinitely closer. May you forever be fiercely cherished and loved.' },
+        { id:'Bouquet12', nC:'初心如花康乃馨花束', nE:'Primal Innocence Premium Carnation Bouquet', matC:'16支顶级康乃馨 + 顶级满天星', matE:'16x Top-Grade Carnations & Premium Baby’s Breath Cloud', tagC:'#康乃馨花束 #初心花礼 #生日花束', tagE:'#PrimalInnocence #EliteCarnations #PureDevotion', qC:'🌷 保持初心，也保持温柔。愿你一路盛开，一路被爱。', qE:'🌷 Safeguard your beautiful authenticity and your endless gentleness. May your path be lined with blooming love.' },
+        { id:'Bouquet13', nC:'晨曦微光康乃馨花束', nE:'First Light Dawn Carnation Bouquet', matC:'16支名贵康乃馨 + 新鲜洋甘菊衬托', matE:'16x Elite Carnations Trimmed with Fresh Country Chamomile', tagC:'#康乃馨花束 #晨曦花束 #ins风花束', tagE:'#FirstLightDawn #ChamomileAccents #ModernInsStyle', qC:'🌤️ 像清晨第一缕光，温柔、干净、刚刚好照亮你。', qE:'🌤️ Echoing the very first sunbeam of dawn—immaculately clean, profoundly pure, and perfectly illuminating your beauty.' },
+        { id:'Bouquet14', nC:'安然岁月康乃馨花礼', nE:'Serene Epoch Luxury Carnation Bouquet', matC:'16支精品康乃馨 + 满天星 + 银叶尤加利叶', matE:'16x Premium Carnations, Baby’s Breath & Silver Dollar Eucalyptus', tagC:'#康乃馨花礼 #岁月静好 #高级感花艺', tagE:'#SereneEpoch #LuxuryCarnations #SilverDollarEucalyptus', qC:'🌷 愿你安然度过每一个日常，被生活温柔拥抱。', qE:'🌷 May you traverse every single everyday moment with pure peace, gracefully embraced by life’s tenderness.' },
+        { id:'Bouquet15', nC:'安然岁月迷你康乃馨', nE:'Serene Epoch Petite Carnation Trio/Single', matC:'1支或3支精选康乃馨 + 满天星伴随', matE:'1x or 3x Sourced Carnations Nestled in Baby’s Breath Cloud', tagC:'#康乃馨花礼 #岁月静好 #高级感花艺', tagE:'#SereneEpochMini #PetiteFloristry #ElegantToken', qC:'🌷 愿你安然度过每一个日常，被生活温柔拥抱。', qE:'🌷 May you traverse every single everyday moment with pure peace, gracefully embraced by life’s tenderness.' },
+        { id:'Bouquet16', nC:'轻柔絮语花束', nE:'Soft Murmurs Pastel Fusion Bouquet', matC:'4支优雅康乃馨 + 3支高阶粉玫瑰 + 满天星衬托', matE:'4x Elegant Carnations, 3x Elite Pink Roses & Baby’s Breath Fillers', tagC:'#康乃馨花束 #轻柔花礼 #温柔系花束', tagE:'#SoftMurmurs #PastelFusion #GenteelRomance', qC:'🌸 花会说话，只是声音很轻。它在说：你值得被温柔对待。', qE:'🌸 Flowers whisper in absolute softness. They are softly chanting: You deserve the world’s ultimate gentleness.' },
+        { id:'Bouquet17', nC:'幸福续写康乃馨花束', nE:'Endless Chapters Luxury Carnation Bouquet', matC:'16支顶级特选康乃馨 + 奢华缎带设计', matE:'16x Premium Sourced Carnations & Luxury Satin Ribbon Detailing', tagC:'#康乃馨花束 #幸福花礼 #高级花艺', tagE:'#EndlessChapters #LuxuryCarnations #InfiniteBlessings', qC:'✨ 幸福不会停止，它会一页一页继续写下去。', qE:'✨ True happiness never ceases; it simply turns the page to write an even more beautiful chapter with you.' },
+        { id:'Bouquet18', nC:'暮色心动玫瑰花束', nE:'Twilight Infatuation Premium Rose Bouquet', matC:'5支红玫瑰 + 5支顶级卡布奇诺玫瑰 + 白色孔雀草', matE:'5x Crimson Red Roses, 5x Elite Cappuccino Roses & White Aster', tagC:'#玫瑰花束 #浪漫礼物 #告白花束', tagE:'#TwilightInfatuation #CappuccinoRoses #ModernRomance', qC:'🌹 在暮色里心动，在你眼里沦陷。愿爱意不止当下，而是长久。', qE:'🌹 Caught in a twilight heartbeat, completely captivated by your gaze. May our love transcend time itself.' },
+        { id:'Bouquet19', nC:'微醺浪漫玫瑰花束', nE:'Tipsy Amour Premium Rose Bouquet', matC:'3支罕贵闺蜜玫瑰 + 情人草 + 黄莺配饰', matE:'3x Rare Palette Soulmate Roses, Statice Flowers & Fillers', tagC:'#玫瑰花束 #浪漫花礼 #高级感花束', tagE:'#TipsyAmour #SoulmateRoses #RefinedLuxury', qC:'🌹 闺蜜玫瑰花语：你的开心和难过我都知道。像微醺一样的喜欢，刚刚好沉醉。', qE:'🌹 Soulmate Rose Language: Your joy and sorrow are entirely safe with me. A romance akin to a pleasant tipsiness.' },
+        { id:'Bouquet20', nC:'偏爱限定花束', nE:'Exclusive Privilege Limited Edition Bouquet', matC:'3支高阶康乃馨 + 3支优雅郁金香 + 5支玫瑰 + 奢华配花', matE:'3x Premium Carnations, 3x Regal Tulips, 5x Roses & Elite Foliage', tagC:'#玫瑰花束 #偏爱系列 #高级感花束', tagE:'#ExclusivePrivilege #LimitedEditionRose #BespokeFloristry', qC:'✨ 你是我唯一的偏爱限定，也是我最坚定的选择。', qE:'✨ You are my absolute exclusive choice, my definitive definition of love and my truest certainty.' },
+        { id:'Bouquet21', nC:'心绪微澜花束', nE:'Ripple of Affection Premium Bouquet', matC:'3支高阶康乃馨 + 6支精品玫瑰 + 4支郁金香 + 高阶配叶', matE:'3x Carnations, 6x Premium Roses, 4x Elegant Tulips & Selected Fillers', tagC:'#玫瑰花束 #浪漫花礼 #高级感花束', tagE:'#RippleOfAffection #PremiumRoses #EliteCombination', qC:'🌹 心动像微澜一样轻轻扩散，而你是源头。', qE:'🌹 Fluttering heartbeat spreading softly like ripples across still water—and you are the beautiful epicentre.' },
+        { id:'Bouquet22', nC:'心动不止玫瑰花束', nE:'Ceaseless Devotion Crimson Rose Bouquet', matC:'12支特选顶级红玫瑰', matE:'12x Ultra-Premium Selected Crimson Red Roses', tagC:'#玫瑰花束 #浪漫礼物 #高级感花艺', tagE:'#CeaselessDevotion #CrimsonRedRoses #TenOutOfTenLove', qC:'🌹 12支红玫瑰花语：完美的愛，代表「十全十美」。在柔光里说喜欢，在花里说永远。', qE:'🌹 12 Crimson Roses: Symbolizes flawless devotion and absolute perfection. Voicing eternity beneath the soft petals.' },
+        { id:'Bouquet23', nC:'热恋进行时玫瑰巨型束', nE:'Monarch Crimson 40-Rose Majestic Bouquet', matC:'40支顶级红玫瑰 + 奢华黑金黑高定包装', matE:'40x Elite Crimson Red Roses & Bespoke Matte Black Luxury Wrap', tagC:'#玫瑰花束 #热恋花束 #爱情花礼', tagE:'#MonarchCrimson #40RosesMajestic #UnapologeticLove', qC:'🔥 40支红玫瑰花语：爱你至死不渝。热恋不是状态，是我一直想你。', qE:'🔥 40 Crimson Roses: Infinite love until the end of time. Intense passion is not a phase; it is my eternal state of wanting you.' },
+        { id:'Bouquet24', nC:'一眼沦陷玫瑰花束', nE:'Fatal Attraction Premium Red Rose Bouquet', matC:'29支甄选顶级红玫瑰', matE:'29x Specially Sourced Premium Crimson Red Roses', tagC:'#玫瑰花束 #沦陷系列 #浪漫花礼', tagE:'#FatalAttraction #29RosesGrand #CaptivatedByYou', qC:'🌹 30支级红玫瑰花语：不需言语的爱。有些人只需要一眼，就注定沦陷。', qE:'🌹 29 Premium Roses: An all-consuming love that defies spoken language. One single gaze was all it took to fall completely.' },
+        { id:'Bouquet25', nC:'不期而遇玫瑰花束', nE:'Serendipity Encounter Mixed Rose Bouquet', matC:'14支高阶混色玫瑰 + 艺术撞色双面纸包装', matE:'14x Premium Mixed Palette Roses & High-Fashion Duo Wrap', tagC:'#玫瑰花束 #浪漫花礼 #高级感礼物', tagE:'#SerendipityEncounter #MixedPaletteRoses #ModernAesthetics', qC:'🌹 14朵玫瑰花语：骄傲的爱。最好的相遇不是安排，而是不期而遇的你。', qE:'🌹 14 Mixed Roses: Proud and unyielding love. The most beautiful encounter is never planned; it is simply bumping into you.' },
+        { id:'Bouquet26', nC:'心动序章顶级玫瑰花束', nE:'The Grand Prologue Couture Rose Bouquet', matC:'顶级荔枝玫瑰 + 贵族奶油杯玫瑰 + 弗洛伊德多头玫瑰', matE:'Premium Lychee Roses, Elite Creamy Teacup Roses & Spray Roses', tagC:'#玫瑰花束 #心动花礼 #浪漫鲜花', tagE:'#TheGrandPrologue #CoutureRoses #LycheeRoseAura', qC:'👑 荔枝玫瑰花语：铭记于心、宠爱、甜蜜。故事刚刚开始，而你是最重要的序章。', qE:'👑 Lychee Rose: Guardian devotion, intense adoration, and deep romance. The story has just begun, and you are the magnificent prologue.' },
+        { id:'Bouquet27', nC:'雾粉浪漫玫瑰花束', nE:'Misty Blush Velvet Rose Bouquet', matC:'5支精选特级粉玫瑰 + 雾面柔光纸设计', matE:'5x Carefully Selected Premium Pink Roses & Frosted Soft Wrap', tagC:'#粉玫瑰花束 #少女感花束 #浪漫礼物', tagE:'#MistyBlushVelvet #PremiumPinkRoses #SoftLuminary', qC:'🌸 5支粉玫瑰花语：无悔的爱，感谢你的存在。像雾一样轻柔，像喜欢一样慢慢靠近。', qE:'🌸 5 Pink Roses: Unconditional love with zero regrets. Floating gently like morning mist, moving closer into your heart.' },
+        
+        // ========== 以下为根据花束3.docx 完全校正的 Bouquet28 ~ Bouquet55 ==========
+        { id:'Bouquet28', nC:'银河热恋玫瑰花束', nE:'Galactic Passion Rose Bouquet', matC:'7支弗洛伊德玫瑰 + 3支洛神玫瑰', matE:'7x Pink Floyd Roses + 3x Roselle Roses', tagC:'#玫瑰花束 #银河花束 #热恋花礼 #浪漫鲜花 #告白花束 #高级感礼物 #创意花艺', tagE:'#RoseBouquet #GalacticPassion #RomanticFlowers #ConfessionGift #LuxuryFloral', qC:'【弗洛伊德玫瑰】🌹花语：你漫不经心地穿梭于我的梦境，使我的心变成了充满芳香的花园。\n【洛神玫瑰】🌹花语：希望、宁静、矜持、等待、信仰与爱的浪漫', qE:'【Pink Floyd Rose】🌹 Language: You wander through my dreams carelessly, turning my heart into a fragrant garden.\n【Roselle Rose】🌹 Language: Hope, tranquility, modesty, waiting, faith and romantic love.' },
+        { id:'Bouquet29', nC:'温柔降临玫瑰花束', nE:'Gentle Descent Rose Bouquet', matC:'6支红玫瑰 + 折射泡泡 + 满天星', matE:'6x Red Roses + Reflex Bubble Spray Roses + Baby’s Breath', tagC:'#玫瑰花束 #温柔系花束 #浪漫礼物 #荣休花束 #高级感花艺 #鲜花设计', tagE:'#RoseBouquet #GentleStyle #RomanticGift #RetirementBouquet #PremiumFloral', qC:'✨ 温柔正在降临，而你刚好值得这一切', qE:'✨ Tenderness is descending, and you are exactly worthy of it all.' },
+        { id:'Bouquet30', nC:'甜系心动玫瑰花束', nE:'Sweet Heartbeat Rose Bouquet', matC:'9支戴安娜玫瑰 + 黄莺', matE:'9x Diana Roses + Yellow Peacock', tagC:'#甜系花束 #玫瑰花礼 #少女心礼物 #浪漫鲜花 #生日礼物 #告白花束 #ins风设计', tagE:'#SweetBouquet #RoseGift #GirlHeart #RomanticFlowers #BirthdayGift #ConfessionBouquet', qC:'【9支玫瑰】🌹花语：长久的爱，象征天长地久\n🍓 喜欢是甜的，见到你以后更甜了', qE:'【9 Roses】🌹 Language: Long-lasting love, symbolizing eternity.\n🍓 Liking you is sweet, and it gets even sweeter when I see you.' },
+        { id:'Bouquet31', nC:'浪漫失控玫瑰花束', nE:'Romance Out of Control Rose Bouquet', matC:'15支戴安娜玫瑰', matE:'15x Diana Roses', tagC:'#玫瑰花束 #浪漫花礼 #热恋花束 #高级感鲜花 #告白礼物 #生日花束 #花艺推荐', tagE:'#RoseBouquet #RomanticGift #PassionateBouquet #PremiumFlowers #ConfessionGift', qC:'【戴安娜玫瑰】🌹花语：爱上你是我今生最大的幸福。\n❤️ 浪漫开始失控，因为你出现了', qE:'【Diana Rose】🌹 Language: Loving you is the greatest happiness of my life.\n❤️ Romance begins to spiral because you appeared.' },
+        { id:'Bouquet32', nC:'白月光玫瑰花束', nE:'Moonlight Rose Bouquet', matC:'10支粉玫瑰 + 满天星', matE:'10x Pink Roses + Baby’s Breath', tagC:'#白月光花束 #纯爱花礼 #高级感花束 #浪漫礼物 #生日花束 #ins风花艺', tagE:'#MoonlightBouquet #PureLoveGift #PremiumBouquet #RomanticGift', qC:'🤍 你像白月光一样，安静却一直照亮我', qE:'🤍 You are like moonlight, quiet yet always illuminating me.' },
+        { id:'Bouquet33', nC:'奶油梦境玫瑰花束', nE:'Creamy Dream Rose Bouquet', matC:'香皂玫瑰 + 满天星 + 尤加利叶 + 配花', matE:'Soap Roses + Baby’s Breath + Eucalyptus + Accent Flowers', tagC:'#玫瑰花礼 #梦境花束 #少女心鲜花 #高级感设计 #生日礼物 #花艺推荐', tagE:'#RoseGift #DreamyBouquet #GirlyFlowers #PremiumDesign', qC:'☁️ 像奶油一样柔软，像梦一样浪漫。', qE:'☁️ As soft as cream, as romantic as a dream.' },
+        { id:'Bouquet34', nC:'心动收藏家玫瑰花束', nE:'Heartbeat Collector Rose Bouquet', matC:'66支混色香皂玫瑰', matE:'66x Mixed Color Soap Roses', tagC:'#玫瑰花束 #心动系列 #浪漫花礼 #高级感礼物 #生日花束 #告白鲜花 #ins风花艺', tagE:'#RoseBouquet #HeartbeatSeries #RomanticGift #PremiumGift', qC:'【66支玫瑰】🌹花语："我的爱永远不变"和"事事顺利"\n💌 收藏所有心动瞬间，而你是最珍贵那一个', qE:'【66 Roses】🌹 Language: "My love never changes" and "All the best".\n💌 Collecting every heartbeat moment, and you are the most precious one.' },
+        { id:'Bouquet35', nC:'爱意沸腾玫瑰花束', nE:'Love Boiling Rose Bouquet', matC:'5支红玫瑰 + 2支蓝玫瑰 + 小雏菊（假花）', matE:'5x Red Roses + 2x Blue Roses + Daisy (Faux)', tagC:'#玫瑰花束 #热恋花束 #爱情花礼 #浪漫礼物 #生日惊喜 #高级感花艺 #鲜花设计', tagE:'#RoseBouquet #PassionateBouquet #LoveGift #RomanticSurprise', qC:'🔥 爱意正在沸腾，喜欢你从来不是小事。', qE:'🔥 Love is boiling; liking you is never a small matter.' },
+        { id:'Bouquet36', nC:'蜜桃甜恋花束', nE:'Peachy Sweet Love Bouquet', matC:'10支粉色郁金香 + 满天星', matE:'10x Pink Tulips + Baby’s Breath', tagC:'#郁金香花束 #甜恋花束 #少女感礼物 #浪漫鲜花 #生日花礼 #高级感花束 #花艺设计', tagE:'#TulipBouquet #SweetLoveBouquet #GirlyGift #RomanticFlowers', qC:'🍑 像蜜桃一样甜，像恋爱一样让人上瘾。', qE:'🍑 As sweet as a peach, as addictive as love.' },
+        { id:'Bouquet37', nC:'午夜浪漫玫瑰花束', nE:'Midnight Romance Rose Bouquet', matC:'30支夜莺玫瑰 + 洋甘菊', matE:'30x Nightingale Roses + Chamomile', tagC:'#玫瑰花礼 #浪漫鲜花 #高级感礼物 #生日花束 #告白礼物 #花艺推荐', tagE:'#RoseGift #RomanticFlowers #PremiumGift #BirthdayBouquet', qC:'【夜莺玫瑰】🌹花语：纯粹而极致的爱\n🌙 午夜适合浪漫，而玫瑰适合你', qE:'【Nightingale Rose】🌹 Language: Pure and ultimate love.\n🌙 Midnight suits romance, and roses suit you.' },
+        { id:'Bouquet38', nC:'热烈偏爱玫瑰花束', nE:'Fervent Favoritism Rose Bouquet', matC:'1支太阳花 + 星悦宝贝多头玫瑰 + 尤加利叶', matE:'1x Sunflower + Starry Baby Spray Roses + Eucalyptus', tagC:'#玫瑰花束 #偏爱花束 #热烈浪漫 #高级花礼 #生日礼物 #告白鲜花 #花店设计', tagE:'#RoseBouquet #FavoritismBouquet #PassionateRomance #PremiumGift', qC:'❤️ 热烈的爱意，永远只为你偏爱', qE:'❤️ Fervent love, always favoring only you.' },
+        { id:'Bouquet39', nC:'热烈偏爱玫瑰花束', nE:'Fervent Favoritism Rose Bouquet', matC:'1支粉百合 + 满天星 + 尤加利叶', matE:'1x Pink Lily + Baby’s Breath + Eucalyptus', tagC:'#百合花 #高级花束 #梦幻花艺 #生日花束 #ins风鲜花 #花店推荐', tagE:'#Lily #PremiumBouquet #DreamyFloral #BirthdayBouquet', qC:'🌙 月色很轻，花也很轻，像你一样让人安心。', qE:'🌙 The moonlight is gentle, the flowers are gentle, just like you bring peace.' },
+        { id:'Bouquet40', nC:'温柔盛放百合花束', nE:'Gentle Bloom Lily Bouquet', matC:'粉百合 + 满天星', matE:'Pink Lily + Baby’s Breath', tagC:'#百合花束 #温柔花束 #高级感鲜花 #生日礼物 #百合花礼 #花艺设计 #送礼推荐', tagE:'#LilyBouquet #GentleBouquet #PremiumFlowers #BirthdayGift', qC:'🌸 温柔不需要刻意，你本身就像花一样美好。', qE:'🌸 Gentleness doesn’t need to be deliberate; you yourself are as beautiful as a flower.' },
+        { id:'Bouquet41', nC:'一岁一礼生日花束', nE:'One Year One Gift Birthday Bouquet', matC:'混合花材', matE:'Mixed Flowers', tagC:'#一岁一礼 #生日花束 #仪式感花礼 #生日惊喜 #高级感花束 #鲜花设计 #生日礼物 #花店推荐', tagE:'#BirthdayBouquet #RitualGift #BirthdaySurprise #PremiumBouquet', qC:'🎂 一岁一礼，一寸欢喜。愿新的一岁平安顺遂，万事胜意。', qE:'🎂 One year, one gift, every inch of joy. May the new year be peaceful and all wishes come true.' },
+        { id:'Bouquet42', nC:'白雪公主梦幻花束', nE:'Snow White Dreamy Bouquet', matC:'8支香槟玫瑰 + 配花', matE:'8x Champagne Roses + Accent Flowers', tagC:'#白雪公主花束 #公主花束 #梦幻花礼 #少女心花束 #生日礼物 #高级感花束 #ins风花艺 #童话花束', tagE:'#SnowWhiteBouquet #PrincessBouquet #DreamyGift #FairyTaleBouquet', qC:'👑 愿你像童话里的公主一样，永远被爱与温柔包围', qE:'👑 May you be like a princess in a fairy tale, always surrounded by love and gentleness.' },
+        { id:'Bouquet43', nC:'岁月静好', nE:'Peaceful Years', matC:'蓝色绣球花 + 粉百合 + 勿忘我', matE:'Blue Hydrangea + Pink Lily + Forget-Me-Not', tagC:'#百合花束 #岁月静好 #高级花礼 #生日鲜花 #温柔花束 #花店推荐 #鲜花设计', tagE:'#LilyBouquet #PeacefulYears #PremiumGift #GentleBouquet', qC:'【绣球花】🌹花语：希望、忠贞、永恒、美满、团聚\n🌷 愿岁月安静美好，你也永远自在快乐。', qE:'【Hydrangea】🌹 Language: Hope, loyalty, eternity, happiness, reunion.\n🌷 May the years be peaceful and beautiful, and may you always be free and happy.' },
+        { id:'Bouquet44', nC:'Jellycat手捧花', nE:'Jellycat Hand-Tied Bouquet', matC:'混合花材', matE:'Mixed Flowers', tagC:'#Jellycat花束 #玩偶花束 #奶呼呼花礼 #少女心花束 #生日礼物 #高级感花束 #ins风礼物 #公仔花束', tagE:'#JellycatBouquet #PlushBouquet #CuteGift #GirlyBouquet', qC:'🧸 把软乎乎的快乐抱回家，连浪漫都变得治愈起来。', qE:'🧸 Bring the soft happiness home, even romance becomes healing.' },
+        { id:'Bouquet45', nC:'向阳甜梦花束', nE:'Sunny Sweet Dream Bouquet', matC:'3支太阳花 + 满天星 + 黄莺 + 情人草', matE:'3x Sunflowers + Baby’s Breath + Yellow Peacock + Statice', tagC:'#太阳花花束 #甜系花束 #向日葵混搭 #少女感花礼 #生日鲜花 #高级感设计 #花店推荐', tagE:'#SunflowerBouquet #SweetBouquet #SunflowerMix #GirlFloralGift', qC:'🌻 愿所有温柔与好运，都朝你奔赴而来', qE:'🌻 May all gentleness and good luck rush towards you.' },
+        { id:'Bouquet46', nC:'盛夏暖光花束', nE:'Midsummer Warm Light Bouquet', matC:'3支太阳花 + 6支香槟玫瑰 + 多头桑巴康乃馨 + 尤加利叶', matE:'3x Sunflowers + 6x Champagne Roses + Samba Carnations + Eucalyptus', tagC:'#向日葵花束 #夏日花束 #混合花艺 #生日花礼 #高级感花束 #鲜花设计 #ins风花束', tagE:'#SunflowerBouquet #SummerBouquet #MixedFloral #BirthdayGift', qC:'🌞 像盛夏的阳光一样，热烈、耀眼又充满希望。', qE:'🌞 Like the midsummer sun, passionate, dazzling, and full of hope.' },
+        { id:'Bouquet47', nC:'暖阳玫瑰花束', nE:'Warm Sun Rose Bouquet', matC:'2支太阳花 + 8支红玫瑰 + 满天星 + 黄莺', matE:'2x Sunflowers + 8x Red Roses + Baby’s Breath + Yellow Peacock', tagC:'#太阳花混搭 #浪漫花礼 #高级感鲜花 #生日礼物 #花束推荐', tagE:'#SunflowerMix #RomanticGift #PremiumFlowers #BirthdayGift', qC:'☀️ 一半是阳光，一半是浪漫。', qE:'☀️ Half sunshine, half romance.' },
+        { id:'Bouquet48', nC:'暖风花语花束', nE:'Warm Breeze Whisper Bouquet', matC:'3支太阳花 + 4支红玫瑰 + 4支粉玫瑰 + 浅紫色洋桔梗 + 满天星 + 尤加利叶', matE:'3x Sunflowers + 4x Red Roses + 4x Pink Roses + Light Purple Eustoma + Baby’s Breath + Eucalyptus', tagC:'#向日葵花束 #暖系花束 #高级感花礼 #生日礼物 #鲜花花束 #花艺设计 #送礼推荐', tagE:'#SunflowerBouquet #WarmBouquet #PremiumGift #FloralDesign', qC:'🍃 风很温柔，花很灿烂，而你刚刚好。', qE:'🍃 The breeze is gentle, the flowers are brilliant, and you are just right.' },
+        { id:'Bouquet49', nC:'日落橙光花束', nE:'Sunset Orange Glow Bouquet', matC:'2支太阳花 + 3支粉玫瑰 + 3支黄玫瑰 + 满天星 + 尤加利叶', matE:'2x Sunflowers + 3x Pink Roses + 3x Yellow Roses + Baby’s Breath + Eucalyptus', tagC:'#橙色花束 #向日葵混搭 #日落系花束 #高级感鲜花 #生日花礼 #花店推荐 #ins风花艺', tagE:'#OrangeBouquet #SunsetBouquet #PremiumFlowers #BirthdayGift', qC:'🌇 把日落与鲜花一起送给你，愿生活永远温暖有光', qE:'🌇 Sending you the sunset together with flowers. May life always be warm and bright.' },
+        { id:'Bouquet50', nC:'向光而行花束', nE:'Chasing Light Bouquet', matC:'1支太阳花 + 满天星', matE:'1x Sunflower + Baby’s Breath', tagC:'#太阳花花束 #向光系列 #高级感花礼 #鲜花设计 #生日花束 #韩系花艺 #花店推荐', tagE:'#SunflowerBouquet #ChasingLight #PremiumGift #FloralDesign', qC:'✨ 愿你一路追光，一路闪闪发亮', qE:'✨ May you chase the light all the way and shine brightly all the way.' },
+        { id:'Bouquet51', nC:'暖橘时光花束', nE:'Warm Orange Time Bouquet', matC:'10支卡布奇诺玫瑰 + 满天星', matE:'10x Cappuccino Roses + Baby’s Breath', tagC:'#温柔系花礼 #生日鲜花 #高级感花艺 #ins风花束 #鲜花推荐 #荣休花束', tagE:'#GentleFloralGift #BirthdayFlowers #PremiumFloral #InsStyle', qC:'【卡布奇诺玫瑰】🌹花语：是偏爱是幸运是不期而遇，寓意着美好和幸福的到来。\n🧡 把温暖装进花束里，送给最重要的人。', qE:'【Cappuccino Rose】🌹 Language: It is favor, luck, and serendipity, symbolizing the arrival of beauty and happiness.\n🧡 Put warmth into the bouquet and give it to the most important person.' },
+        { id:'Bouquet52', nC:'香槟梦语玫瑰花束', nE:'Champagne Dream Whisper Rose Bouquet', matC:'7支香槟玫瑰 + 折射泡泡 + 满天星', matE:'7x Champagne Roses + Reflex Bubble Spray + Baby’s Breath', tagC:'#香槟玫瑰 #高级花束 #轻奢花礼 #浪漫鲜花 #生日礼物 #韩系花束 #鲜花推荐', tagE:'#ChampagneRoses #PremiumBouquet #LightLuxuryGift #RomanticFlowers', qC:'🥂 香槟色的浪漫，藏着最温柔的喜欢。', qE:'🥂 Champagne-colored romance hides the gentlest affection.' },
+        { id:'Bouquet53', nC:'青春不散场花束', nE:'Youth Never Ends Bouquet', matC:'3支太阳花 + 9支红玫瑰 + 10支香槟玫瑰 + 折射泡泡 + 尤加利叶', matE:'3x Sunflowers + 9x Red Roses + 10x Champagne Roses + Reflex Bubble + Eucalyptus', tagC:'#毕业花束 #青春不散场 #毕业季礼物 #高级感鲜花 #花艺设计 #毕业快乐 #送礼推荐', tagE:'#GraduationBouquet #YouthNeverEnds #GraduationGift #PremiumFlowers', qC:'🎈 青春或许会结束，但回忆永远热烈', qE:'🎈 Youth may end, but memories will always be passionate.' },
+        { id:'Bouquet54', nC:'星途闪耀毕业花礼', nE:'Shining Star Path Graduation Gift', matC:'2支太阳花 + 10支香槟玫瑰 + 猩红多头玫瑰 + 洋甘菊 + 尤加利叶', matE:'2x Sunflowers + 10x Champagne Roses + Scarlet Spray Roses + Chamomile + Eucalyptus', tagC:'#毕业花礼 #毕业快乐 #星途闪耀 #高级感花束 #鲜花设计 #毕业送礼 #花店推荐', tagE:'#GraduationGift #HappyGraduation #ShiningStar #PremiumBouquet', qC:'🌟 愿未来星途闪耀，所有努力都开花结果', qE:'🌟 May your future path be shining with stars, and all efforts bloom and bear fruit.' },
+        { id:'Bouquet55', nC:'爱意回响玫瑰花束', nE:'Echoes of Love Rose Bouquet', matC:'假花', matE:'Faux Flowers', tagC:'#玫瑰花束 #爱意系列 #浪漫花礼 #高级感鲜花 #生日花束 #爱情花艺 #告白礼物', tagE:'#RoseBouquet #LoveSeries #RomanticGift #PremiumFlowers', qC:'✨ 所有爱意都会有回响，就像我一直在想你。', qE:'✨ All love will have an echo, just like I keep thinking of you.' }
+    ];
 
-        bouquetData1.forEach(d => localProductDatabase.push({ 
-            id:d.id, type:'bouquet', priceBc:'请拿图联系卖家询价', priceBi:'PM for Price Inquiry', 
-            nameBc:d.nC, nameBi:d.nE, 
-            img:`${d.id}.jpg`,
-            materialBc:d.matC, materialBi:d.matE, hashtagBc:d.tagC, hashtagBi:d.tagE, quoteBc:d.qC, quoteBi:d.qE 
-        }));
+    bouquetData1.forEach(d => localProductDatabase.push({ 
+        id:d.id, type:'bouquet', priceBc:'请拿图联系卖家询价', priceBi:'PM for Price Inquiry', 
+        nameBc:d.nC, nameBi:d.nE, img:`${d.id}.jpg`,
+        materialBc:d.matC, materialBi:d.matE, hashtagBc:d.tagC, hashtagBi:d.tagE, quoteBc:d.qC, quoteBi:d.qE 
+    }));
 
-        function countSidebarBadges() { 
-            document.getElementById('cnt-all').textContent = localProductDatabase.length;
-            document.getElementById('cnt-wreath').textContent = localProductDatabase.filter(x => x.type === 'wreath').length;
-            document.getElementById('cnt-opening').textContent = localProductDatabase.filter(x => x.type === 'opening').length;
-            document.getElementById('cnt-basket').textContent = localProductDatabase.filter(x => x.type === 'basket').length;
-            document.getElementById('cnt-bouquet').textContent = localProductDatabase.filter(x => x.type === 'bouquet').length;
+    function countSidebarBadges() { 
+        document.getElementById('cnt-all').textContent = localProductDatabase.length;
+        document.getElementById('cnt-wreath').textContent = localProductDatabase.filter(x => x.type === 'wreath').length;
+        document.getElementById('cnt-opening').textContent = localProductDatabase.filter(x => x.type === 'opening').length;
+        document.getElementById('cnt-basket').textContent = localProductDatabase.filter(x => x.type === 'basket').length;
+        document.getElementById('cnt-bouquet').textContent = localProductDatabase.filter(x => x.type === 'bouquet').length;
+    }
+
+    function openProductModal(id) {
+        const p = localProductDatabase.find(x => x.id === id);
+        if (!p) return;
+        currentActiveProduct = p;
+        document.getElementById('modalImg').src = p.img;
+        document.getElementById('modalTag').textContent = `${p.id}`;
+        document.getElementById('modalTitle').textContent = currentLanguageState === 'bc' ? p.nameBc : p.nameBi;
+        document.getElementById('modalPrice').textContent = currentLanguageState === 'bc' ? p.priceBc : p.priceBi;
+        const quoteText = currentLanguageState === 'bc' ? p.quoteBc : p.quoteBi;
+        if(quoteText) {
+            document.getElementById('boxQuote').classList.remove('view-hidden');
+            document.getElementById('modalQuote').textContent = quoteText;
+        } else { document.getElementById('boxQuote').classList.add('view-hidden'); }
+        const mList = document.getElementById('modalMaterialList');
+        const materialData = currentLanguageState === 'bc' ? p.materialBc : p.materialBi;
+        if(materialData) {
+            document.getElementById('boxMaterial').classList.remove('view-hidden');
+            mList.innerHTML = materialData.split('+').map(item => `<div class="material-item"><svg viewBox="0 0 24 24"><path d="M17,8C8,10,5.9,16.1,5.1,21c0,0.1,0,0.2,0,0.3c0,0.2,0.1,0.4,0.3,0.5c0.2,0.1,0.4,0.1,0.5-0.1c0.8-1,3-3.2,5.1-4.1 c3.2-1.4,7-1.4,7-1.4s-1-4-4-6.2c-1-0.7-2.2-1.2-3.5-1.5C10.5,8.5,10.5,8,10.5,8s0-2-1.5-3c-1.5-1-4-1-4-1s2,3.5,3,5 c0.3,0.5,0.7,1,1.1,1.4C9.5,9.8,10,10.5,10.1,11c0.1,0.4,0.1,0.8-0.1,1.2c-0.2,0.4-0.5,0.7-0.9,0.9c-0.4,0.2-0.8,0.2-1.2,0.1 c-0.4-0.1-0.7-0.4-0.9-0.8c-0.2-0.4-0.2-0.8-0.1-1.2c0.1-0.4,0.4-0.7,0.8-0.9c0.4-0.2,0.8-0.2,1.2-0.1c0.2,0.1,0.4,0.2,0.6,0.4"/></svg> ${item.trim()}</div>`).join('');
+        } else { document.getElementById('boxMaterial').classList.add('view-hidden'); }
+        const tCloud = document.getElementById('modalTags');
+        const hashtagData = currentLanguageState === 'bc' ? p.hashtagBc : p.hashtagBi;
+        if(hashtagData) {
+            tCloud.innerHTML = hashtagData.split(' ').map(tag => `<span class="tag-pill">${tag}</span>`).join('');
+        } else { tCloud.innerHTML = ''; }
+        let msg = "";
+        if (currentLanguageState === 'bc') {
+            msg = `你好，我想咨询此款式：【${p.nameBc}】，产品编号：${p.id}`;
+        } else {
+            msg = `Hello, I would like to inquire about this arrangement: "${p.nameBi}", Product Code: ${p.id}`;
         }
+        document.getElementById('modalWaBtn').href = `https://wa.me/${CONFIG_PHONE}?text=${encodeURIComponent(msg)}`;
+        document.getElementById('productModal').classList.add('active');
+        document.body.classList.add('modal-open');
+        document.querySelector('.modal-right-body').scrollTop = 0;
+    }
 
-        function openProductModal(id) {
-            const p = localProductDatabase.find(x => x.id === id);
-            if (!p) return;
-            currentActiveProduct = p;
-            
-            document.getElementById('modalImg').src = p.img;
-            document.getElementById('modalTag').textContent = `${p.id}`;
-            document.getElementById('modalTitle').textContent = currentLanguageState === 'bc' ? p.nameBc : p.nameBi;
-            document.getElementById('modalPrice').textContent = currentLanguageState === 'bc' ? p.priceBc : p.priceBi;
+    function closeProductModal() { document.getElementById('productModal').classList.remove('active'); document.body.classList.remove('modal-open'); }
+    function closeProductModalOnOutsideClick(e) { if(e.target.id === 'productModal') closeProductModal(); }
 
-            const quoteText = currentLanguageState === 'bc' ? p.quoteBc : p.quoteBi;
-            if(quoteText) {
-                document.getElementById('boxQuote').classList.remove('view-hidden');
-                document.getElementById('modalQuote').textContent = quoteText;
-            } else { document.getElementById('boxQuote').classList.add('view-hidden'); }
+    function displayMallGrid(dataset) {
+        const grid = document.getElementById('catalogGridContainer');
+        grid.innerHTML = '';
+        dataset.forEach(p => {
+            const card = document.createElement('div');
+            card.className = 'catalog-card';
+            card.onclick = () => openProductModal(p.id);
+            card.innerHTML = `<div class="card-img-holder"><span class="code-tag">${p.id}</span><img src="${p.img}" onerror="this.src='https://placehold.co/400x520/f1f3f5/6c757d?text=${p.id}'"></div>
+            <div class="card-details"><div><h4 class="card-name">${currentLanguageState==='bc'?p.nameBc:p.nameBi}</h4></div>
+            <div><div class="card-price">${currentLanguageState==='bc'?p.priceBc:p.priceBi}</div><div class="card-action-btn">${currentLanguageState==='bc'?'🔍 查看细节图':'🔍 View Details'}</div></div></div>`;
+            grid.appendChild(card);
+        });
+    }
 
-            const mList = document.getElementById('modalMaterialList');
-            const materialData = currentLanguageState === 'bc' ? p.materialBc : p.materialBi;
-            if(materialData) {
-                document.getElementById('boxMaterial').classList.remove('view-hidden');
-                mList.innerHTML = materialData.split('+').map(item => `<div class="material-item"><svg viewBox="0 0 24 24"><path d="M17,8C8,10,5.9,16.1,5.1,21c0,0.1,0,0.2,0,0.3c0,0.2,0.1,0.4,0.3,0.5c0.2,0.1,0.4,0.1,0.5-0.1c0.8-1,3-3.2,5.1-4.1 c3.2-1.4,7-1.4,7-1.4s-1-4-4-6.2c-1-0.7-2.2-1.2-3.5-1.5C10.5,8.5,10.5,8,10.5,8s0-2-1.5-3c-1.5-1-4-1-4-1s2,3.5,3,5 c0.3,0.5,0.7,1,1.1,1.4C9.5,9.8,10,10.5,10.1,11c0.1,0.4,0.1,0.8-0.1,1.2c-0.2,0.4-0.5,0.7-0.9,0.9c-0.4,0.2-0.8,0.2-1.2,0.1 c-0.4-0.1-0.7-0.4-0.9-0.8c-0.2-0.4-0.2-0.8-0.1-1.2c0.1-0.4,0.4-0.7,0.8-0.9c0.4-0.2,0.8-0.2,1.2-0.1c0.2,0.1,0.4,0.2,0.6,0.4"/></svg> ${item.trim()}</div>`).join('');
-            } else { document.getElementById('boxMaterial').classList.add('view-hidden'); }
+    function runCombinedFilter() {
+        const k = document.getElementById('mallSearchInput').value.toLowerCase().trim();
+        let res = localProductDatabase;
+        if (currentMallCategory !== 'all') res = res.filter(p => p.type === currentMallCategory);
+        if (k !== '') res = res.filter(p => (p.id && p.id.toLowerCase().includes(k)) || (p.nameBc && p.nameBc.toLowerCase().includes(k)) || (p.nameBi && p.nameBi.toLowerCase().includes(k)) || (p.materialBc && p.materialBc.toLowerCase().includes(k)) || (p.materialBi && p.materialBi.toLowerCase().includes(k)) || (p.hashtagBc && p.hashtagBc.toLowerCase().includes(k)) || (p.hashtagBi && p.hashtagBi.toLowerCase().includes(k)));
+        displayMallGrid(res);
+    }
 
-            const tCloud = document.getElementById('modalTags');
-            const hashtagData = currentLanguageState === 'bc' ? p.hashtagBc : p.hashtagBi;
-            if(hashtagData) {
-                tCloud.innerHTML = hashtagData.split(' ').map(tag => `<span class="tag-pill">${tag}</span>`).join('');
-            } else { tCloud.innerHTML = ''; }
+    function selectMallCategory(cat) {
+        currentMallCategory = cat;
+        document.querySelectorAll('.cat-item').forEach(i => i.classList.remove('active'));
+        document.getElementById('cat-' + cat).classList.add('active');
+        runCombinedFilter();
+    }
 
-            let msg = "";
-            if (currentLanguageState === 'bc') {
-                msg = `你好，我想咨询此款式：【${p.nameBc}】，产品编号：${p.id}`;
-            } else {
-                msg = `Hello, I would like to inquire about this arrangement: "${p.nameBi}", Product Code: ${p.id}`;
-            }
-            document.getElementById('modalWaBtn').href = `https://wa.me/${CONFIG_PHONE}?text=${encodeURIComponent(msg)}`;
+    function toggleLanguage(lang) {
+        currentLanguageState = lang;
+        document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById('btn-' + lang).classList.add('active');
+        document.querySelectorAll('[data-bc][data-bi]').forEach(el => {
+            const txt = (lang === 'bc') ? el.getAttribute('data-bc') : el.getAttribute('data-bi');
+            if(el.querySelector('.badge-pickup')) el.innerHTML = txt; else el.textContent = txt;
+        });
+        const sInput = document.getElementById('mallSearchInput');
+        if (lang === 'bc') sInput.placeholder = "搜索花名、花材、标签（如：玫瑰、满天星、#毕业快乐、Bouquet51）...";
+        else sInput.placeholder = "Search by flower name, materials, tags (e.g., Roses, Sunflower, #Graduation, Bouquet51)...";
+        if (document.getElementById('productModal').classList.contains('active') && currentActiveProduct) openProductModal(currentActiveProduct.id);
+        runCombinedFilter();
+    }
 
-            document.getElementById('productModal').classList.add('active');
-            document.body.classList.add('modal-open');
-            document.querySelector('.modal-right-body').scrollTop = 0;
-        }
-
-        function closeProductModal() { document.getElementById('productModal').classList.remove('active'); document.body.classList.remove('modal-open'); }
-        function closeProductModalOnOutsideClick(e) { if(e.target.id === 'productModal') closeProductModal(); }
-
-        function displayMallGrid(dataset) {
-            const grid = document.getElementById('catalogGridContainer');
-            grid.innerHTML = '';
-            dataset.forEach(p => {
-                const card = document.createElement('div');
-                card.className = 'catalog-card';
-                card.onclick = () => openProductModal(p.id);
-                card.innerHTML = `<div class="card-img-holder"><span class="code-tag">${p.id}</span><img src="${p.img}" onerror="this.src='https://placehold.co/400x520/f1f3f5/6c757d?text=${p.id}'"></div>
-                <div class="card-details"><div><h4 class="card-name">${currentLanguageState==='bc'?p.nameBc:p.nameBi}</h4></div>
-                <div><div class="card-price">${currentLanguageState==='bc'?p.priceBc:p.priceBi}</div><div class="card-action-btn">${currentLanguageState==='bc'?'🔍 查看细节图':'🔍 View Details'}</div></div></div>`;
-                grid.appendChild(card);
-            });
-        }
-
-        function runCombinedFilter() {
-            const k = document.getElementById('mallSearchInput').value.toLowerCase().trim();
-            let res = localProductDatabase;
-            
-            if (currentMallCategory !== 'all') {
-                res = res.filter(p => p.type === currentMallCategory);
-            }
-            
-            if (k !== '') {
-                res = res.filter(p => 
-                    (p.id && p.id.toLowerCase().includes(k)) || 
-                    (p.nameBc && p.nameBc.toLowerCase().includes(k)) || 
-                    (p.nameBi && p.nameBi.toLowerCase().includes(k)) || 
-                    (p.materialBc && p.materialBc.toLowerCase().includes(k)) || 
-                    (p.materialBi && p.materialBi.toLowerCase().includes(k)) || 
-                    (p.hashtagBc && p.hashtagBc.toLowerCase().includes(k)) ||
-                    (p.hashtagBi && p.hashtagBi.toLowerCase().includes(k))
-                );
-            }
-            displayMallGrid(res);
-        }
-
-        function selectMallCategory(cat) {
-            currentMallCategory = cat;
-            document.querySelectorAll('.cat-item').forEach(i => i.classList.remove('active'));
-            document.getElementById('cat-' + cat).classList.add('active');
-            runCombinedFilter();
-        }
-
-        function toggleLanguage(lang) {
-            currentLanguageState = lang;
-            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById('btn-' + lang).classList.add('active');
-            
-            document.querySelectorAll('[data-bc][data-bi]').forEach(el => {
-                const txt = (lang === 'bc') ? el.getAttribute('data-bc') : el.getAttribute('data-bi');
-                if(el.querySelector('.badge-pickup')) el.innerHTML = txt; else el.textContent = txt;
-            });
-            
-            const sInput = document.getElementById('mallSearchInput');
-            if (lang === 'bc') {
-                sInput.placeholder = "搜索花名、花材、标签（如：玫瑰、满天星、#毕业快乐、Bouquet51）...";
-            } else {
-                sInput.placeholder = "Search by flower name, materials, tags (e.g., Roses, Sunflower, #Graduation, Bouquet51)...";
-            }
-            
-            if (document.getElementById('productModal').classList.contains('active') && currentActiveProduct) {
-                openProductModal(currentActiveProduct.id);
-            }
-
-            runCombinedFilter();
-        }
-
-        window.addEventListener('DOMContentLoaded', () => { countSidebarBadges(); displayMallGrid(localProductDatabase); });
-    </script>
+    window.addEventListener('DOMContentLoaded', () => { countSidebarBadges(); displayMallGrid(localProductDatabase); });
+</script>
 </body>
 </html>
