@@ -52,7 +52,7 @@
         /* ========================================= */
         /* 3. 视窗一：美学首页 */
         /* ========================================= */
-        .hero { height: 100vh; background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)), url('https://images.unsplash.com/photo-1526047932273-341f2a7631f9?q=80&w=1920&auto=format&fit=crop') no-repeat center center/cover; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--clr-white); }
+        .hero { height: 100vh; background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)), url('background.jpg') no-repeat center center/cover; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--clr-white); }
         .hero-content { max-width: 800px; animation: fadeIn 1.5s ease-out; padding: 0 20px; }
         .hero-content h1 { font-family: var(--font-serif); font-size: 56px; font-weight: 300; line-height: 1.3; margin-bottom: 28px; letter-spacing: 2px; }
         .hero-content p { font-size: 14px; font-weight: 300; letter-spacing: 4px; margin-bottom: 45px; text-transform: uppercase; color: rgba(255, 255, 255, 0.85); }
@@ -74,14 +74,64 @@
         .product-category-tag { font-size: 11px; letter-spacing: 1.5px; color: var(--clr-text-muted); margin-bottom: 8px; display: block; }
         .product-title { font-family: var(--font-serif); font-size: 19px; font-weight: 400; color: var(--clr-text-dark); }
 
+        /* ===== 配送卡片样式升级：增加细腻渐变、暖色点缀和微阴影 ===== */
         .delivery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; margin-top: 50px; }
-        .delivery-card { background-color: var(--clr-beige); padding: 45px 40px; border: 1px solid rgba(42, 46, 43, 0.05); transition: var(--transition-smooth); }
-        .delivery-card:hover { background-color: var(--clr-white); border-color: var(--clr-text-dark); box-shadow: 0 20px 50px rgba(42, 46, 43, 0.03); }
-        .delivery-card h3 { font-family: var(--font-serif); font-size: 24px; font-weight: 400; margin-bottom: 25px; letter-spacing: 1px; color: var(--clr-text-dark); display: flex; align-items: center; gap: 12px; }
-        .delivery-card h3::before { content: ''; display: inline-block; width: 6px; height: 6px; background-color: var(--clr-sage); border-radius: 50%; }
+        .delivery-card { 
+            background: linear-gradient(145deg, #FFFDF9 0%, var(--clr-beige) 100%);
+            padding: 45px 40px; 
+            border: 1px solid rgba(143, 164, 153, 0.2);
+            border-radius: 24px;
+            transition: var(--transition-smooth);
+            box-shadow: 0 8px 20px rgba(42, 46, 43, 0.02);
+        }
+        .delivery-card:hover { 
+            background: var(--clr-white); 
+            border-color: var(--clr-sage); 
+            box-shadow: 0 20px 40px rgba(42, 46, 43, 0.08);
+            transform: translateY(-4px);
+        }
+        .delivery-card h3 { 
+            font-family: var(--font-serif); 
+            font-size: 24px; 
+            font-weight: 500; 
+            margin-bottom: 25px; 
+            letter-spacing: 1px; 
+            color: var(--clr-text-dark); 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+        }
+        .delivery-card h3::before { 
+            content: '🌸'; 
+            font-size: 28px;
+            background: none;
+            width: auto;
+            height: auto;
+            border-radius: 0;
+            color: #C7A67D;
+        }
         .delivery-list { list-style: none; }
-        .delivery-list li { font-size: 14.5px; color: var(--clr-text-muted); margin-bottom: 16px; line-height: 1.7; position: relative; padding-left: 20px; }
-        .delivery-list li::before { content: '–'; position: absolute; left: 0; color: var(--clr-text-muted); }
+        .delivery-list li { 
+            font-size: 15px; 
+            color: var(--clr-text-muted); 
+            margin-bottom: 16px; 
+            line-height: 1.7; 
+            position: relative; 
+            padding-left: 24px; 
+            transition: transform 0.2s ease;
+        }
+        .delivery-list li::before { 
+            content: '🪴'; 
+            position: absolute; 
+            left: 0; 
+            color: #C7A67D; 
+            font-size: 14px;
+            top: 1px;
+        }
+        .delivery-list li:hover {
+            transform: translateX(4px);
+            color: var(--clr-text-dark);
+        }
         .badge-pickup { background-color: #E68A00; color: white; padding: 2px 8px; font-size: 12px; font-weight: 500; margin-right: 6px; border-radius: 3px; display: inline-block; line-height: 1.4; }
 
         /* ========================================= */
@@ -260,6 +310,62 @@
             .modal-title { font-size: 20px; }
         }
         @keyframes modalSlideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* 新增顾客须知样式 - 优雅卡片 */
+        .notice-card {
+            background-color: var(--clr-white);
+            border: 1px solid var(--clr-light-gray);
+            padding: 48px 45px;
+            transition: var(--transition-smooth);
+            box-shadow: 0 12px 30px rgba(42, 46, 43, 0.02);
+        }
+        .notice-card:hover {
+            border-color: var(--clr-text-dark);
+            box-shadow: 0 20px 40px rgba(42, 46, 43, 0.04);
+        }
+        .notice-title {
+            font-family: var(--font-serif);
+            font-size: 26px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            margin-bottom: 24px;
+            color: var(--clr-text-dark);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .notice-title::before {
+            content: '✦';
+            font-size: 26px;
+            color: var(--clr-sage);
+            font-weight: 300;
+        }
+        .notice-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .notice-list li {
+            font-size: 15px;
+            color: var(--clr-text-muted);
+            line-height: 1.65;
+            position: relative;
+            padding-left: 24px;
+        }
+        .notice-list li::before {
+            content: '•';
+            position: absolute;
+            left: 8px;
+            color: var(--clr-sage);
+            font-weight: 600;
+            font-size: 18px;
+        }
+        @media (max-width: 768px) {
+            .notice-card { padding: 32px 28px; }
+            .notice-title { font-size: 22px; }
+            .notice-list li { font-size: 13.5px; padding-left: 20px; }
+        }
     </style>
 </head>
 <body>
@@ -353,6 +459,25 @@
 可约在大路旁、学校前等方便地点取货</li>
                     </ul>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 新增：顾客须知模块 (支持双语) -->
+    <section class="section-padding" style="padding: 0 0 100px 0;">
+        <div class="container">
+            <div class="notice-card">
+                <div class="notice-title">
+                    <span data-bc="顾客须知" data-bi="Customer Notice">顾客须知</span>
+                </div>
+                <ul class="notice-list">
+                    <li data-bc="花艺作品均为手工定制，建议提前至少3天预约" data-bi="All floral arrangements are handcrafted, please book at least 3 days in advance">花艺作品均为手工定制，建议提前至少3天预约</li>
+                    <li data-bc="花材将依据季节与库存进行适当调整" data-bi="Flower substitutions may apply based on season and availability">花材将依据季节与库存进行适当调整</li>
+                    <li data-bc="急单请先联系卖家确认档期与配送时间" data-bi="Rush orders please contact us to confirm schedule and delivery">急单请先联系卖家确认档期与配送时间</li>
+                    <li data-bc="所有订单完成后将提供实拍确认" data-bi="Real photos will be provided upon order completion">所有订单完成后将提供实拍确认</li>
+                    <li data-bc="完成订单后恕不接受临时取消或退款" data-bi="Cancellations or refunds are not accepted after order completion">完成订单后恕不接受临时取消或退款</li>
+                    <li data-bc="如需贺卡、名字牌或特别备注，请于下单时提前告知" data-bi="For greeting cards, name tags or special notes, please inform us when placing order">如需贺卡、名字牌或特别备注，请于下单时提前告知</li>
+                </ul>
             </div>
         </div>
     </section>
