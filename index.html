@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>广福花苑 | Kwang Fook Florist</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,11 +31,11 @@
         /* 2. 共有组件 (Header, Footer, WhatsApp) */
         /* ========================================= */
         header { position: fixed; top: 0; left: 0; width: 100%; background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); z-index: 2000; border-bottom: 1px solid rgba(42, 46, 43, 0.05); transition: var(--transition-smooth); }
-        .navbar { display: flex; justify-content: space-between; align-items: center; height: 80px; }
-        .logo { font-family: var(--font-serif); font-size: 24px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; }
-        .nav-right-container { display: flex; align-items: center; gap: 40px; }
-        .nav-links { display: flex; gap: 40px; }
-        .nav-links a { font-size: 13.5px; letter-spacing: 1px; font-weight: 400; color: var(--clr-text-muted); cursor: pointer; text-decoration: none; transition: var(--transition-smooth); }
+        .navbar { display: flex; justify-content: space-between; align-items: center; height: 80px; gap: 15px; flex-wrap: wrap; }
+        .logo { font-family: var(--font-serif); font-size: 24px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; white-space: nowrap; }
+        .nav-right-container { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; justify-content: flex-end; }
+        .nav-links { display: flex; gap: 25px; flex-wrap: wrap; justify-content: flex-end; }
+        .nav-links a { font-size: 13.5px; letter-spacing: 1px; font-weight: 400; color: var(--clr-text-muted); cursor: pointer; text-decoration: none; transition: var(--transition-smooth); white-space: nowrap; }
         .nav-links a:hover, .nav-links a.active { color: var(--clr-text-dark); font-weight: 500; }
         .lang-switcher { display: flex; align-items: center; gap: 8px; font-size: 13px; letter-spacing: 1px; color: var(--clr-text-muted); border-left: 1px solid var(--clr-light-gray); padding-left: 20px; }
         .lang-btn { cursor: pointer; transition: var(--transition-smooth); font-weight: 300; }
@@ -54,7 +54,7 @@
         /* 3. 视窗一：美学首页 */
         /* ========================================= */
         .hero { height: 100vh; background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)), url('https://images.unsplash.com/photo-1526047932273-341f2a7631f9?q=80&w=1920&auto=format&fit=crop') no-repeat center center/cover; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--clr-white); }
-        .hero-content { max-width: 800px; animation: fadeIn 1.5s ease-out; }
+        .hero-content { max-width: 800px; animation: fadeIn 1.5s ease-out; padding: 0 20px; }
         .hero-content h1 { font-family: var(--font-serif); font-size: 56px; font-weight: 300; line-height: 1.3; margin-bottom: 28px; letter-spacing: 2px; }
         .hero-content p { font-size: 14px; font-weight: 300; letter-spacing: 4px; margin-bottom: 45px; text-transform: uppercase; color: rgba(255, 255, 255, 0.85); }
         .btn-luxury { display: inline-block; background-color: var(--clr-white); color: var(--clr-text-dark); padding: 16px 48px; font-size: 13px; letter-spacing: 2px; font-weight: 500; border: 1px solid var(--clr-white); transition: var(--transition-smooth); cursor: pointer; text-decoration: none;}
@@ -173,6 +173,81 @@
         .modal-price-row { font-size: 24px; font-weight: 600; color: var(--clr-text-dark); margin-bottom: 15px; display: flex; align-items: center; justify-content: space-between; }
         .btn-modal-action { display: flex; align-items: center; justify-content: center; gap: 12px; background-color: var(--clr-text-dark); color: var(--clr-white); padding: 14px; font-size: 14px; letter-spacing: 2px; font-weight: 500; transition: var(--transition-smooth); text-decoration: none; text-transform: uppercase; border-radius: 2px;}
         .btn-modal-action:hover { background-color: #444; transform: translateY(-2px); }
+
+        /* ========================================= */
+        /* 6. 移动端响应式适配 (关键修复) */
+        /* ========================================= */
+        @media (max-width: 1024px) {
+            .container { padding: 0 20px; }
+            .section-padding { padding: 80px 0; }
+            .hero-content h1 { font-size: 48px; }
+            .product-img-wrapper { height: 360px; }
+        }
+
+        @media (max-width: 768px) {
+            /* 导航栏 */
+            .navbar { height: auto; padding: 15px 0; }
+            .logo { font-size: 20px; white-space: normal; }
+            .nav-right-container { width: 100%; justify-content: space-between; }
+            .nav-links { gap: 15px; justify-content: center; width: 100%; }
+            .nav-links a { font-size: 12px; white-space: nowrap; }
+            .lang-switcher { padding-left: 12px; border-left: none; }
+            
+            /* 首页 */
+            .hero { min-height: 90vh; height: auto; }
+            .hero-content h1 { font-size: 32px; letter-spacing: 1px; }
+            .hero-content p { font-size: 11px; letter-spacing: 2px; margin-bottom: 30px; }
+            .btn-luxury { padding: 12px 32px; font-size: 12px; }
+            .section-header h2 { font-size: 28px; }
+            .section-header p { font-size: 12px; }
+            .product-grid { gap: 30px 20px; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+            .product-img-wrapper { height: 300px; }
+            .delivery-grid { grid-template-columns: 1fr; gap: 30px; }
+            .delivery-card { padding: 30px 25px; }
+            
+            /* 商城视图 */
+            #view-mall { padding-top: 100px; }
+            .search-section { padding: 15px 20px; }
+            .shop-layout { flex-direction: column; }
+            .shop-sidebar { width: 100%; border-right: none; border-bottom: 1px solid var(--clr-light-gray); padding: 20px; min-height: auto; }
+            .cat-list { flex-direction: row; flex-wrap: wrap; gap: 10px; }
+            .cat-item { padding: 8px 16px; font-size: 13px; }
+            .shop-content { padding: 25px 20px; }
+            .catalog-grid { gap: 20px; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+            .card-name { font-size: 14px; }
+            .card-price { font-size: 13px; }
+            .card-action-btn { font-size: 10px; padding: 6px; }
+            
+            /* 弹窗 */
+            .modal-box { width: 95%; height: 85vh; }
+            .modal-right-body { padding: 20px; }
+            .modal-title { font-size: 22px; }
+            .modal-quote-text { font-size: 14px; }
+            .material-item { font-size: 13px; }
+            
+            /* 底部 */
+            .footer-contact { gap: 20px; flex-direction: column; align-items: center; }
+            footer p { font-size: 11px; padding-top: 20px; }
+        }
+
+        @media (max-width: 480px) {
+            .container { padding: 0 16px; }
+            .section-padding { padding: 60px 0; }
+            .hero-content h1 { font-size: 26px; }
+            .product-img-wrapper { height: 250px; }
+            .catalog-grid { gap: 15px; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+            .card-details { padding: 12px; }
+            .card-name { font-size: 12px; }
+            .code-tag { font-size: 9px; padding: 2px 6px; top: 6px; left: 6px; }
+            .cat-item { padding: 6px 12px; font-size: 12px; }
+            .shop-content { padding: 15px; }
+            .modal-box { height: 90vh; }
+            .modal-left-img { height: 200px; }
+            .modal-right-body { height: calc(100% - 200px); padding: 15px; }
+            .modal-title { font-size: 18px; }
+            .btn-modal-action { font-size: 12px; padding: 10px; }
+            .whatsapp-float { width: 50px; height: 50px; bottom: 20px; right: 20px; }
+        }
 
         @keyframes modalSlideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         
@@ -377,7 +452,7 @@
                     priceBi:`RM ${p}.00`, 
                     nameBc:`静谧远行 · ${lC}`, 
                     nameBi:`Serene Eulogy · ${lE}`, 
-                    img:`Wreath${i}.jpg`, // 🚀 这里已经修改为直接调用档案名称
+                    img:`Wreath${i}.jpg`,
                     quoteBc:'庄严素雅，表达最深切的怀念。', 
                     quoteBi:'A dignified and elegant tribute offering profound comfort and eternal remembrance.',
                     hashtagBc:'#白事花圈 #致敬 #追思',
@@ -402,7 +477,7 @@
         gofData.forEach(d => localProductDatabase.push({ 
             id:d.id, type:'opening', priceBc:'请拿图联系卖家询价', priceBi:'PM for Price Inquiry', 
             nameBc:d.nC, nameBi:d.nE, 
-            img:`${d.id}.jpg`, // 🚀 直接调用档案名称
+            img:`${d.id}.jpg`,
             hashtagBc:d.tagC, hashtagBi:d.tagE, quoteBc:d.qC, quoteBi:d.qE 
         }));
 
@@ -415,7 +490,7 @@
             { id:'Basket5', nC:'盛景花语开业花篮', nE:'Grand Vistas Celebration Basket', matC:'高端假花', matE:'Premium Artifical Foliage', tagC:'#开业必备 #祝贺花篮 #花艺设计', tagE:'#CelebrationStand #BusinessOpening #FloralMasterpiece', qC:'💐 以花传喜，以礼贺成。祝事业腾飞，日日兴旺。', qE:'💐 Conveying deep joy and honoring true achievements. May your business soar to unprecedented heights day by day.' },
             { id:'Basket6', nC:'富贵盈门礼篮', nE:'Overflowing Abundance Luxury Basket', matC:'高端工艺假花', matE:'Premium Artifical Silk Flowers', tagC:'#富贵花篮 #开业祝福 #新店开张', tagE:'#AbundanceFloralBasket #GrandOpeningGift #ThrivingVenture', qC:'✨ 黄金满地，富贵盈门。愿您开业大吉，财源滚滚来。', qE:'✨ Golden paths and overflowing luxury. May your grand opening pave the way for extraordinary financial success.' },
             { id:'Basket7', nC:'向日葵之约祝贺花篮', nE:'Golden Helianthus Celebration Basket', matC:'特选向日葵 + 时令配花', matE:'Premium Sunflowers & Seasonal Accent Foliage', tagC:'#向日葵花篮 #开业志庆 #阳光美学', tagE:'#SunflowerBasket #CorporateCongratulations #VibrantAesthetics', qC:'🌻 向日葵盛开，代表无限的希望与朝气。祝愿新店蒸蒸日上。', qE:'🌻 Vibrant sunflowers radiating infinite hope and endless vitality. Wishing your new store exponential and brilliant growth.' },
-            { id:'Basket8', nC:'向光而行荣休花篮', nE:'Chasing Light Retirement Honor Basket', matC:'特选向日葵 + 精品配花', matE:'Premium Sunflowers & Specially Selected Accompaniments', tagC:'#向日葵 #退休快乐 #感恩', tagE:'#RetirementBasket #SunflowersOfHonor #GratitudeGift', qC:'🌻 岁月沉淀荣耀，时光见证付出。愿退休生活阳光灿烂，自在从容。', qE:'🌻 A brilliant career honored by time. May your retirement chapter be profoundly peaceful, bright, and wonderfully serene.' },
+            { id:'Basket8', nC:'向光而行荣休花篮', nE:'Chasing Light Retirement Honor Basket', matC:'特选向日葵 + 精品配花', matE:'Premium Sunflowers & Specially Selected Accompaniments', tagC:'#向日葵 #退休快乐 #感恩', tagE:'#RetirementBasket #SunflowersOfHonor #GratitudeGift', qC:'🌻 岁月沉淀荣耀，时光见证付出。愿退休生活阳光灿烂，自在从容。', qE:'🌻 A brilliant career honored by time. May your retirement chapter be profoundly peaceful, wonderfully serene.' },
             { id:'Basket9', nC:'温馨祝福康乃馨花篮', nE:'Sweet Devotion Carnation Family Basket', matC:'珍选康乃馨 + 优雅配花', matE:'Selected Premium Carnations & Delicate Accents', tagC:'#温馨礼篮 #生日快乐 #祝寿花礼', tagE:'#WarmCarnationBasket #HappyBirthday #LongevityBlessings', qC:'🌸 温馨岁月，挚爱相随。愿健康常伴，笑口常开。', qE:'🌸 Surrounded by warmth and unconditional devotion. Wishing you absolute health, eternal youth, and endless smiles.' },
             { id:'Basket10', nC:'优雅淑女粉色礼篮', nE:'Blushing Pastel Luxury Hydrangea Basket', matC:'粉色名贵玫瑰 + 进口绣球 + 高级配花', matE:'Pink Premium Roses, Imported Hydrangeas & Elite Fillers', tagC:'#粉色系花篮 #女神专属 #精美花艺', tagE:'#BlushingPastelBasket #GoddessExclusive #ExquisiteFloristry', qC:'💕 温柔细腻，静谧绽放。祝您生日快乐，永远年轻美丽。', qE:'💕 Delicate, tender, and softly captivating. Wishing a beautiful soul a fantastic birthday. Stay forever youthful and radiant.' },
             { id:'Basket11', nC:'日落香槟花篮', nE:'Sunset Champagne Premium Wine Basket', matC:'进口向日葵 + 雅致配花 + 特选红酒', matE:'Imported Sunflowers, Elegant Fillers & Selected Premium Wine', tagC:'#红酒花篮 #香槟 #生日惊喜', tagE:'#PremiumWineBasket #SunsetAesthetic #BirthdaySurprise', qC:'🍾 日落微醺，鲜花盛放。把温柔与仪式感全部献上。', qE:'🍾 A gentle sunset glow met with premium blossoms and fine wine. Delivering the ultimate definition of modern luxury romance.' },
@@ -424,7 +499,7 @@
         basketData.forEach(d => localProductDatabase.push({ 
             id:d.id, type:'basket', priceBc:'请拿图联系卖家询价', priceBi:'PM for Price Inquiry', 
             nameBc:d.nC, nameBi:d.nE, 
-            img:`${d.id}.jpg`, // 🚀 直接调用档案名称
+            img:`${d.id}.jpg`,
             materialBc:d.matC, materialBi:d.matE, hashtagBc:d.tagC, hashtagBi:d.tagE, quoteBc:d.qC, quoteBi:d.qE 
         }));
 
@@ -523,7 +598,7 @@
         bouquetData1.forEach(d => localProductDatabase.push({ 
             id:d.id, type:'bouquet', priceBc:'请拿图联系卖家询价', priceBi:'PM for Price Inquiry', 
             nameBc:d.nC, nameBi:d.nE, 
-            img:`${d.id}.jpg`, // 🚀 直接调用档案名称
+            img:`${d.id}.jpg`,
             materialBc:d.matC, materialBi:d.matE, hashtagBc:d.tagC, hashtagBi:d.tagE, quoteBc:d.qC, quoteBi:d.qE 
         }));
 
