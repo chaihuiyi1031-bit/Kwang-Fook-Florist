@@ -13,7 +13,7 @@
         /* 1. 全局设计变量与基础重置 */
         /* ========================================= */
         :root {
-            --clr-white: #FFFFFF; --clr-beige: #FAF7F2; --clr-pink: #E8D3D1; --clr-sage: #8FA499; 
+            --clr-white: #FFFFFF; --clr-beige: #FAF7F2; --clr-pink: #E8D3D1; --clr-sage: #8FA499; \
             --clr-text-dark: #2A2E2B; --clr-text-muted: #7A7E7B; --clr-light-gray: #EAEAEA;
             --font-serif: 'Cormorant Garamond', 'Noto Serif SC', serif; 
             --font-sans: 'Inter', -apple-system, sans-serif; 
@@ -399,38 +399,31 @@
         ];
         basketData.forEach(d => localProductDatabase.push({ id:d.id, type:'basket', priceBc:'请拿图联系卖家询价', priceBi:'PM for Price', nameBc:d.nC, nameBi:d.nC, img:`images/baskets/${d.id}.jpg`, material:d.material, hashtag:d.tag, quote:d.q }));
 
-        // 4. 🌟 新增：批量注入第一阶段海量花束资料
+        // 4. 🌟 批量注入花束资料
         const bouquetData1 = [
-            // 毕业花束
             { id:'GRD1', nC:'前程似锦毕业花束', nE:'Graduation Bouquet', tag:'#毕业花束 #毕业快乐 #向日葵花束 #毕业季 #GraduationBouquet #毕业礼物 #毕业送花 #花束推荐', q:'🎓 愿此去前程似锦，再相逢依旧如故。' },
             { id:'GRD2', nC:'毕业快乐向阳花束', nE:'Sunny Graduation Bouquet', tag:'#毕业快乐 #向阳花束 #毕业礼物 #鲜花花束 #毕业拍摄 #花艺设计 #毕业送礼', q:'🌞 愿你永远向阳而生，一路奔赴属于自己的光。' },
             { id:'GRD3', nC:'梦想启航毕业礼', nE:'Dream Voyage Graduation Bouquet', tag:'#梦想启航 #毕业花礼 #毕业典礼鲜花 #向日葵花束 #韩系花束 #毕业拍照 #高级感花束', q:'✨ 愿你带着热爱与勇气，奔赴下一场山海。' },
             { id:'GRD4', nC:'青春收官花束', nE:'Youth Finale Bouquet', tag:'#毕业花束 #青春花礼 #毕业典礼 #高级感鲜花 #毕业送礼 #花艺设计 #仪式感礼物', q:'📖 故事暂时写到这里，但人生的新篇章才刚开始。' },
-            // 玩偶花束
             { id:'Bear1', nC:'星球漫游花礼', nE:'Star Roaming Doll Bouquet', mat:'星星人玩偶 自备 +配花（可选香皂花/编织花/假花）', tag:'#星星人花束 #玩偶礼物 #公仔花束 #氛围感花束 #花礼推荐 #ins风礼物', q:'🚀 带着浪漫去宇宙旅行，把满天星光送给特别的人。' },
             { id:'Bear2', nC:'心动小熊花束', nE:'Heartbeat Bear Bouquet', mat:'玩偶 自备 +配花（可选香皂花/编织花/假花）', tag:'#小熊花束 #玩偶系列 #浪漫礼物 #鲜花花束 #情侣送礼 #生日礼物 #花艺美学', q:'💐 小熊陪你，鲜花伴你，把温柔与浪漫一次送达。' },
             { id:'Bear3', nC:'抱抱熊玩偶花束', nE:'Hug Bear Doll Bouquet', mat:'玩偶 自备 +配花（可选香皂花/编织花/假花）', tag:'#玩偶花束 #抱抱熊花束 #公仔花束 #生日礼物 #少女感花束 #花束推荐 #仪式感礼物', q:'🧸 鲜花与玩偶的双倍浪漫，把快乐和心动一起送给你。' },
             { id:'Bear4', nC:'梦幻公仔花束', nE:'Dreamy Doll Bouquet', mat:'玩偶 自备 +配花（可选香皂花/编织花/假花）', tag:'#公仔花束 #梦幻花礼 #玩偶鲜花 #创意花束 #花束控 #少女心礼物 #精致花艺', q:'✨ 把可爱装进花束里，让惊喜加倍心动。' },
-            // 编织花束
             { id:'Crochet1', nC:'暖阳织梦花礼', nE:'Warm Sun Crochet Bouquet', mat:'双层太阳花-1，玫瑰-3，郁金香-2，胖胖郁金香-1，风铃花-2，雏菊-2，尤加利叶-2。注意：提前2个星期预定。', tag:'#编织向日葵 #手工礼物 #温柔系花束 #少女感花束 #花艺设计 #仪式感礼物', q:'✨ 用毛线编织阳光，把温暖与浪漫永久珍藏。' },
             { id:'Crochet2', nC:'阳光满满编织花束', nE:'Sunshine Crochet Bouquet', mat:'双层太阳花-1，玫瑰-4，风铃花-3，康乃馨-3，郁金香-2，💰 (可自定金额)。注意：提前2个星期预定。', tag:'#阳光花束 #编织花系列 #毛线向日葵 #韩系花束 #高级感包装 #温柔花礼 #生活仪式感', q:'💛 把阳光装进花束里，愿你的生活永远明亮温暖。' },
             { id:'Crochet3', nC:'郁见浪漫编织花束', nE:'Romantic Tulip Crochet Bouquet', mat:'郁金香-8，打开的郁金香-3，尤加利叶-3。注意：提前2个星期预定。', tag:'#郁金香编织花束 #毛线郁金香 #手工花束 #高级感花礼 #韩系花束 #编织花推荐', q:'🌷 把浪漫编织成花，让心动永远盛开。' },
             { id:'Crochet4', nC:'奶油郁金香花礼', nE:'Cream Tulip Crochet Bouquet', mat:'郁金香-11。注意：提前2个星期预定。', tag:'#奶油风花束 #编织郁金香 #温柔系花束 #毛线花礼 #少女感花束 #礼物推荐 #手作花束', q:'🩷 温柔郁金香，治愈每一天，把喜欢藏进每一针每一线。' },
             { id:'Crochet5', nC:'暖心织梦花束', nE:'Warm Heart Crochet Bouquet', mat:'Mix编织花。注意：提前2个星期预定。', tag:'#织梦花束 #编织向日葵 #手工花艺 #高级花束 #温柔系花束 #礼物灵感 #生活仪式感', q:'🌻 用双手编织温暖，把美好悄悄收藏。' },
-            // 有钱花花束
             { id:'Money1', nC:'财运满满花礼', nE:'Full Fortune Money Bouquet', mat:'💰 10张纸币（可自定金额）+配花', tag:'#发财花束 #有钱花系列 #创意花束 #暴富礼物 #仪式感花礼 #生日惊喜 #送礼推荐', q:'✨ 鲜花配钞票，浪漫与财富一个都不少。' },
             { id:'Money2', nC:'钞能力花束', nE:'Superpower Money Bouquet', mat:'💰RM50 (14张纸币)+ 太阳花+配花', tag:'#钞能力花束 #有钱花花礼 #创意花束 #生日送礼 #暴富系列 #高级包装 #仪式感生活', q:'🌟 生活不止要有花，还要有随时能花的钱。' },
             { id:'Money3', nC:'公主请暴富', nE:'Princess Get Rich Bouquet', mat:'💰RM100（10张纸币）+康乃馨', tag:'#有钱花系列 #现金花束 #创意花礼 #少女心花束 #高级感鲜花 #仪式感生活', q:'🎀 公主不仅要被爱，还要有花不完的钱。' },
-            // 零食花束
             { id:'Snack1', nC:'快乐加倍零食花束', nE:'Double Joy Snack Bouquet', mat:'香皂花+零食', tag:'#零食花束 #零食礼物 #创意花束 #生日惊喜 #零食控 #花束推荐 #仪式感礼物', q:'🍫 把快乐装进花束里，每一口都是小幸福。' },
-            { id:'Snacks2', nC:'小卖部de浪漫', nE:'Store Romance Snack Bouquet', mat:'香皂花+零食', tag:'#小卖部花束 #零食控 #创意礼物 #零食花束 #青春回忆 #生日送礼 #快乐加倍', q:'🍿 把青春和快乐包成花束，送给最特别的人。' },
+            { id:'Snacks2', nC:'小卖部de浪漫', nE:'Store Romance Snack Bouquet', mat:'香皂花+零食', tag:'#小卖部花束 #零食控 #创意礼物 #零食花束 #青春回忆 #生日送礼 #快乐加倍', q:'🍿 把青春 and 快乐包成花束，送给最特别的人。' },
             { id:'Snacks3', nC:'甜心零食花束', nE:'Sweetheart Snack Bouquet', mat:'假花+零食', tag:'#甜系花束 #零食花束 #少女感礼物 #创意花礼 #零食控必备 #浪漫礼物 #花艺设计', q:'🍭 甜的不只是零食，还有收到礼物时的心情。' },
-            // 清明节花束
             { id:'Qingming1', nC:'静念追思花礼', nE:'Silent Tribute Bouquet', tag:'#清明节花束 #白菊花束 #追思花礼 #清明祭拜 #思念花束 #纪念鲜花 #清明节', q:'🕊️ 以花寄思念，愿思念化作温柔陪伴。' },
             { id:'Qingming2', nC:'清思白菊花束', nE:'Pure White Chrysanthemum Bouquet', tag:'#追思花束 #清明鲜花 #白色花束 #纪念花礼 #思念长存 #祭祀花束 #鲜花祭拜', q:'🤍 花开无声，思念有痕，愿爱与回忆长存心间。' },
             { id:'Qingming3', nC:'清风寄念花束', nE:'Breeze Memory Bouquet', tag:'#清明花礼 #纪念亲人 #清明祭祖 #鲜花追思 #花束推荐', q:'🌿 清风寄哀思，愿思念随花轻轻传达。' },
             { id:'Qingming4', nC:'素雅思忆花束', nE:'Elegant Memory Bouquet', tag:'#素雅花束 #清明节鲜花 #白菊花礼 #纪念花束 #追忆时光 #祭拜鲜花 #清明花艺', q:'🕯️ 一束素花，一份思念，愿故人安息，思念长留。' },
-            // 节日/日常花束
             { id:'Bouquet1', nC:'Hello Kitty 梦幻花束', nE:'Hello Kitty Dream Bouquet', tag:'#HelloKitty花束 #卡通花束 #可爱花束 #定制花束 #生日礼物 #少女心花束 #花艺设计', q:'🌸 代表纯真与可爱，象征幸福与温柔的祝福。不只是花束，更是一份治愈系的心意。' },
             { id:'Bouquet2', nC:'温柔独白单支康乃馨', nE:'Gentle Monologue Carnation', mat:'1支康乃馨（支持客制花色与预算）', tag:'#单支康乃馨 #康乃馨花束 #温柔花礼 #高级感鲜花 #生日礼物 #感恩花束 #花店推荐', q:'🌷 一支花也有满满心意，温柔从来不需要太多。' }
         ];
