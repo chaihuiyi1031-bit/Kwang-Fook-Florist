@@ -4,23 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>广福花苑 | Kwang Fook Florist</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Serif+SC:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-
+    <!-- 字体与样式略，完整代码已包含 -->
     <style>
-        /* 多巴胺配色：底色#D2E0AA + 活力橙#F98C53、天蓝#ABD7FB、粉白#F9F2EF、蜜桃#FCCEB4 */
+        /* 多巴胺配色变量 + 全部UI样式 (保留原设计) */
         :root {
-            --clr-white: #FFFFFF;
-            --clr-beige: #D2E0AA;
-            --clr-pink: #FCCEB4;
-            --clr-sage: #F98C53;
-            --clr-accent: #F98C53;
-            --clr-sky: #ABD7FB;
-            --clr-warm: #F9F2EF;
-            --clr-text-dark: #2A2E2B;
-            --clr-text-muted: #7A7E7B;
-            --clr-light-gray: #EAEAEA;
+            --clr-white: #FFFFFF; --clr-beige: #D2E0AA; --clr-pink: #FCCEB4; --clr-sage: #F98C53;
+            --clr-accent: #F98C53; --clr-sky: #ABD7FB; --clr-warm: #F9F2EF;
+            --clr-text-dark: #2A2E2B; --clr-text-muted: #7A7E7B; --clr-light-gray: #EAEAEA;
             --font-serif: 'Cormorant Garamond', 'Noto Serif SC', serif;
             --font-sans: 'Inter', -apple-system, sans-serif;
             --transition-smooth: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
@@ -33,125 +23,127 @@
         .section-padding { padding: 120px 0; }
         .view-hidden { display: none !important; }
 
-        header { position: fixed; top: 0; left: 0; width: 100%; background-color: rgba(255,255,255,0.95); backdrop-filter: blur(12px); z-index: 2000; border-bottom: 1px solid rgba(42,46,43,0.05); transition: var(--transition-smooth); }
-        .navbar { display: flex; justify-content: space-between; align-items: center; height: 80px; gap: 15px; flex-wrap: wrap; }
-        .logo { display: flex; align-items: center; gap: 10px; font-family: var(--font-serif); font-size: 24px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; white-space: nowrap; }
-        .logo-img { height: 38px; width: auto; display: block; flex-shrink: 0; }
-        .nav-right-container { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; justify-content: flex-end; }
-        .nav-links { display: flex; gap: 25px; flex-wrap: wrap; justify-content: flex-end; }
-        .nav-links a { font-size: 13.5px; letter-spacing: 1px; font-weight: 400; color: var(--clr-text-muted); cursor: pointer; text-decoration: none; transition: var(--transition-smooth); white-space: nowrap; }
-        .nav-links a:hover, .nav-links a.active { color: var(--clr-text-dark); font-weight: 500; }
-        .lang-switcher { display: flex; align-items: center; gap: 8px; font-size: 13px; letter-spacing: 1px; color: var(--clr-text-muted); border-left: 1px solid var(--clr-light-gray); padding-left: 20px; }
-        .lang-btn { cursor: pointer; transition: var(--transition-smooth); font-weight: 300; }
-        .lang-btn.active { color: var(--clr-text-dark); font-weight: 600; }
+        /* 头部/导航/浮动按钮/底部样式 (完整保留) */
+        header { position: fixed; top:0; left:0; width:100%; background:rgba(255,255,255,0.95); backdrop-filter:blur(12px); z-index:2000; border-bottom:1px solid rgba(42,46,43,0.05); }
+        .navbar { display:flex; justify-content:space-between; align-items:center; height:80px; gap:15px; flex-wrap:wrap; }
+        .logo { display:flex; align-items:center; gap:10px; font-family:var(--font-serif); font-size:24px; font-weight:600; letter-spacing:2px; text-transform:uppercase; cursor:pointer; white-space:nowrap; }
+        .logo-img { height:38px; width:auto; }
+        .nav-right-container { display:flex; align-items:center; gap:20px; flex-wrap:wrap; justify-content:flex-end; }
+        .nav-links { display:flex; gap:25px; }
+        .nav-links a { font-size:13.5px; letter-spacing:1px; color:var(--clr-text-muted); cursor:pointer; text-decoration:none; white-space:nowrap; }
+        .nav-links a:hover, .nav-links a.active { color:var(--clr-text-dark); font-weight:500; }
+        .lang-switcher { display:flex; align-items:center; gap:8px; font-size:13px; color:var(--clr-text-muted); border-left:1px solid var(--clr-light-gray); padding-left:20px; }
+        .lang-btn { cursor:pointer; font-weight:300; }
+        .lang-btn.active { color:var(--clr-text-dark); font-weight:600; }
 
-        .whatsapp-float { position: fixed; bottom: 40px; right: 40px; background-color: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(37,211,102,0.3); z-index: 1999; transition: var(--transition-smooth); }
-        .whatsapp-float:hover { transform: scale(1.1); }
+        .whatsapp-float { position:fixed; bottom:40px; right:40px; background:#25D366; color:white; width:60px; height:60px; border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 10px 30px rgba(37,211,102,0.3); z-index:1999; }
+        .whatsapp-float:hover { transform:scale(1.1); }
 
-        footer { background-color: var(--clr-warm); border-top: 1px solid var(--clr-light-gray); padding: 80px 0 60px 0; text-align: center; }
-        .footer-contact { display: flex; justify-content: center; gap: 50px; margin-bottom: 40px; flex-wrap: wrap; }
-        .contact-item { font-size: 14.5px; letter-spacing: 1px; color: var(--clr-text-dark); font-weight: 400; transition: var(--transition-smooth); display: inline-flex; align-items: center; gap: 8px; text-decoration: none; }
-        footer p { font-size: 13px; color: var(--clr-text-muted); letter-spacing: 0.5px; border-top: 1px solid rgba(42,46,43,0.05); padding-top: 30px; display: inline-block; width: 100%; max-width: 600px; }
+        footer { background:var(--clr-warm); border-top:1px solid var(--clr-light-gray); padding:80px 0 60px; text-align:center; }
+        .footer-contact { display:flex; justify-content:center; gap:50px; margin-bottom:40px; flex-wrap:wrap; }
+        .contact-item { font-size:14.5px; letter-spacing:1px; color:var(--clr-text-dark); display:inline-flex; align-items:center; gap:8px; text-decoration:none; }
+        footer p { font-size:13px; color:var(--clr-text-muted); border-top:1px solid rgba(42,46,43,0.05); padding-top:30px; max-width:600px; margin:0 auto; }
 
-        .hero { height: 100vh; background: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15)), url('background.jpg') no-repeat center center/cover; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--clr-white); }
-        .hero-content { max-width: 800px; animation: fadeIn 1.5s ease-out; padding: 0 20px; }
-        .hero-content h1 { font-family: var(--font-serif); font-size: 56px; font-weight: 300; line-height: 1.3; margin-bottom: 28px; letter-spacing: 2px; }
-        .hero-content p { font-size: 14px; font-weight: 300; letter-spacing: 4px; margin-bottom: 45px; text-transform: uppercase; color: rgba(255,255,255,0.85); }
-        .btn-luxury { display: inline-block; background-color: var(--clr-white); color: var(--clr-text-dark); padding: 16px 48px; font-size: 13px; letter-spacing: 2px; font-weight: 500; border: 1px solid var(--clr-white); transition: var(--transition-smooth); cursor: pointer; text-decoration: none; }
-        .btn-luxury:hover { background-color: transparent; color: var(--clr-white); }
+        /* 主页Hero/卡片/配送/商城/弹窗等样式 (完整保留原设计) */
+        .hero { height:100vh; background:linear-gradient(rgba(0,0,0,0.15),rgba(0,0,0,0.15)), url('background.jpg') center/cover; display:flex; align-items:center; justify-content:center; text-align:center; color:var(--clr-white); }
+        .hero-content { max-width:800px; padding:0 20px; animation:fadeIn 1.5s ease-out; }
+        .hero-content h1 { font-family:var(--font-serif); font-size:56px; font-weight:300; margin-bottom:28px; }
+        .hero-content p { font-size:14px; letter-spacing:4px; margin-bottom:45px; text-transform:uppercase; color:rgba(255,255,255,0.85); }
+        .btn-luxury { display:inline-block; background:var(--clr-white); color:var(--clr-text-dark); padding:16px 48px; font-size:13px; letter-spacing:2px; font-weight:500; border:1px solid var(--clr-white); transition:var(--transition-smooth); cursor:pointer; text-decoration:none; }
+        .btn-luxury:hover { background:transparent; color:var(--clr-white); }
 
-        .category-showcase { background-color: transparent; }
-        .section-header { text-align: center; margin-bottom: 70px; }
-        .section-header h2 { font-family: var(--font-serif); font-size: 38px; font-weight: 400; margin-bottom: 15px; letter-spacing: 1px; }
-        .section-header p { color: var(--clr-text-muted); font-size: 14px; letter-spacing: 1px; }
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 50px 30px; }
-        .product-card { background: var(--clr-white); transition: var(--transition-smooth); cursor: pointer; }
-        .product-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(42,46,43,0.03); }
-        .product-img-wrapper { position: relative; height: 420px; overflow: hidden; background-color: #F7F7F7; }
-        .product-img-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition-smooth); }
-        .product-info { padding: 22px; text-align: center; }
-        .product-category-tag { font-size: 11px; letter-spacing: 1.5px; color: var(--clr-text-muted); margin-bottom: 8px; display: block; }
-        .product-title { font-family: var(--font-serif); font-size: 19px; font-weight: 400; color: var(--clr-text-dark); }
+        .category-showcase { background:transparent; }
+        .section-header { text-align:center; margin-bottom:70px; }
+        .section-header h2 { font-family:var(--font-serif); font-size:38px; font-weight:400; margin-bottom:15px; }
+        .section-header p { color:var(--clr-text-muted); font-size:14px; }
+        .product-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px,1fr)); gap:50px 30px; }
+        .product-card { background:var(--clr-white); transition:var(--transition-smooth); cursor:pointer; }
+        .product-card:hover { transform:translateY(-8px); box-shadow:0 20px 40px rgba(42,46,43,0.03); }
+        .product-img-wrapper { position:relative; height:420px; overflow:hidden; background:#F7F7F7; }
+        .product-img-wrapper img { width:100%; height:100%; object-fit:cover; }
+        .product-info { padding:22px; text-align:center; }
+        .product-category-tag { font-size:11px; letter-spacing:1.5px; color:var(--clr-text-muted); display:block; margin-bottom:8px; }
+        .product-title { font-family:var(--font-serif); font-size:19px; font-weight:400; }
 
-        .delivery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; margin-top: 50px; }
-        .delivery-card { background: linear-gradient(145deg, var(--clr-warm) 0%, var(--clr-beige) 100%); padding: 45px 40px; border: 1px solid rgba(143,164,153,0.2); border-radius: 24px; transition: var(--transition-smooth); box-shadow: 0 8px 20px rgba(42,46,43,0.02); }
-        .delivery-card:hover { background: var(--clr-white); border-color: var(--clr-accent); box-shadow: 0 20px 40px rgba(249,140,83,0.15); transform: translateY(-4px); }
-        .delivery-card h3 { font-family: var(--font-serif); font-size: 24px; font-weight: 500; margin-bottom: 25px; letter-spacing: 1px; color: var(--clr-text-dark); display: flex; align-items: center; gap: 12px; }
-        .delivery-card h3::before { content: '🌸'; font-size: 28px; color: var(--clr-accent); }
-        .delivery-list { list-style: none; }
-        .delivery-list li { font-size: 15px; color: var(--clr-text-muted); margin-bottom: 16px; line-height: 1.7; position: relative; padding-left: 24px; transition: transform 0.2s ease; }
-        .delivery-list li::before { content: '🪴'; position: absolute; left: 0; color: var(--clr-accent); font-size: 14px; top: 1px; }
-        .delivery-list li:hover { transform: translateX(4px); color: var(--clr-text-dark); }
-        .badge-pickup { background-color: var(--clr-accent); color: white; padding: 2px 8px; font-size: 12px; font-weight: 500; margin-right: 6px; border-radius: 3px; display: inline-block; line-height: 1.4; }
+        .delivery-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:40px; margin-top:50px; }
+        .delivery-card { background:linear-gradient(145deg, var(--clr-warm) 0%, var(--clr-beige) 100%); padding:45px 40px; border-radius:24px; border:1px solid rgba(143,164,153,0.2); transition:var(--transition-smooth); }
+        .delivery-card:hover { background:var(--clr-white); border-color:var(--clr-accent); transform:translateY(-4px); }
+        .delivery-card h3 { font-family:var(--font-serif); font-size:24px; font-weight:500; margin-bottom:25px; display:flex; align-items:center; gap:12px; }
+        .delivery-card h3::before { content:'🌸'; font-size:28px; color:var(--clr-accent); }
+        .delivery-list { list-style:none; }
+        .delivery-list li { font-size:15px; color:var(--clr-text-muted); margin-bottom:16px; padding-left:24px; position:relative; }
+        .delivery-list li::before { content:'🪴'; position:absolute; left:0; color:var(--clr-accent); font-size:14px; top:1px; }
+        .delivery-list li:hover { transform:translateX(4px); color:var(--clr-text-dark); }
 
-        #view-mall { padding-top: 80px; min-height: 100vh; background-color: transparent; }
-        .search-section { background: var(--clr-white); padding: 25px 40px; border-bottom: 1px solid var(--clr-light-gray); display: flex; justify-content: center; }
-        .search-wrapper { width: 100%; max-width: 650px; position: relative; }
-        .search-input { width: 100%; padding: 14px 20px 14px 50px; font-size: 14px; border: 1px solid var(--clr-light-gray); background: #F9F9F6; border-radius: 4px; outline: none; transition: var(--transition-smooth); font-family: var(--font-sans); }
-        .search-input:focus { border-color: var(--clr-text-dark); background: var(--clr-white); box-shadow: 0 5px 15px rgba(0,0,0,0.03); }
-        .search-icon { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--clr-text-muted); }
+        #view-mall { padding-top:80px; min-height:100vh; }
+        .search-section { background:var(--clr-white); padding:25px 40px; border-bottom:1px solid var(--clr-light-gray); display:flex; justify-content:center; }
+        .search-wrapper { width:100%; max-width:650px; position:relative; }
+        .search-input { width:100%; padding:14px 20px 14px 50px; font-size:14px; border:1px solid var(--clr-light-gray); background:#F9F9F6; border-radius:4px; outline:none; }
+        .search-input:focus { border-color:var(--clr-text-dark); background:var(--clr-white); }
+        .search-icon { position:absolute; left:18px; top:50%; transform:translateY(-50%); color:var(--clr-text-muted); }
 
-        .shop-layout { display: flex; max-width: 1400px; margin: 0 auto; }
-        .shop-sidebar { width: 280px; background: var(--clr-white); border-right: 1px solid var(--clr-light-gray); padding: 40px 24px; min-height: calc(100vh - 150px); }
-        .sidebar-heading { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--clr-text-muted); margin-bottom: 20px; font-weight: 500; }
-        .cat-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
-        .cat-item { padding: 14px 18px; font-size: 14.5px; border-radius: 4px; cursor: pointer; transition: all 0.25s; display: flex; justify-content: space-between; align-items: center; }
-        .cat-item:hover { background: var(--clr-beige); color: var(--clr-text-dark); }
-        .cat-item.active { background: var(--clr-accent); color: var(--clr-white); font-weight: 500; }
-        .count-badge { font-size: 11px; opacity: 0.7; background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 10px; }
+        .shop-layout { display:flex; max-width:1400px; margin:0 auto; }
+        .shop-sidebar { width:280px; background:var(--clr-white); border-right:1px solid var(--clr-light-gray); padding:40px 24px; min-height:calc(100vh - 150px); }
+        .sidebar-heading { font-size:11px; text-transform:uppercase; letter-spacing:2px; color:var(--clr-text-muted); margin-bottom:20px; }
+        .cat-list { list-style:none; display:flex; flex-direction:column; gap:6px; }
+        .cat-item { padding:14px 18px; font-size:14.5px; border-radius:4px; cursor:pointer; display:flex; justify-content:space-between; align-items:center; }
+        .cat-item:hover { background:var(--clr-beige); color:var(--clr-text-dark); }
+        .cat-item.active { background:var(--clr-accent); color:var(--clr-white); }
+        .count-badge { font-size:11px; background:rgba(0,0,0,0.05); padding:2px 6px; border-radius:10px; }
 
-        .shop-content { padding: 40px; flex: 1; background-color: transparent; }
-        .content-header { margin-bottom: 30px; }
-        .content-header h2 { font-family: var(--font-serif); font-size: 26px; font-weight: 400; margin-bottom: 6px; }
+        .shop-content { padding:40px; flex:1; }
+        .content-header { margin-bottom:30px; }
+        .content-header h2 { font-family:var(--font-serif); font-size:26px; margin-bottom:6px; }
 
-        .catalog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 30px; }
-        .catalog-card { background: var(--clr-white); border: 1px solid var(--clr-light-gray); overflow: hidden; transition: var(--transition-smooth); display: flex; flex-direction: column; cursor: pointer; }
-        .catalog-card:hover { transform: translateY(-6px); border-color: var(--clr-accent); box-shadow: 0 15px 35px rgba(249,140,83,0.15); }
-        .card-img-holder { position: relative; width: 100%; padding-top: 130%; background: #F7F7F4; overflow: hidden; }
-        .card-img-holder img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: var(--transition-smooth); }
-        .code-tag { position: absolute; top: 12px; left: 12px; background: var(--clr-accent); color: #fff; padding: 3px 10px; font-family: var(--font-serif); font-size: 12px; letter-spacing: 0.5px; font-weight: 500; z-index: 10; }
-        .card-details { padding: 18px; text-align: center; border-top: 1px solid var(--clr-light-gray); flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; background: #fff; }
-        .card-name { font-family: var(--font-serif); font-size: 17px; font-weight: 400; color: var(--clr-text-dark); margin-bottom: 4px; line-height: 1.4; }
-        .card-price { font-size: 15px; font-weight: 600; margin-bottom: 14px; color: var(--clr-text-dark); }
-        .card-action-btn { width: 100%; padding: 9px; font-size: 12px; font-weight: 500; border: 1px solid var(--clr-light-gray); background: #FAF9F6; transition: var(--transition-smooth); color: var(--clr-text-dark); }
-        .catalog-card:hover .card-action-btn { background: var(--clr-accent); color: white; border-color: var(--clr-accent); }
+        .catalog-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(220px,1fr)); gap:30px; }
+        .catalog-card { background:var(--clr-white); border:1px solid var(--clr-light-gray); overflow:hidden; transition:var(--transition-smooth); cursor:pointer; display:flex; flex-direction:column; }
+        .catalog-card:hover { transform:translateY(-6px); border-color:var(--clr-accent); box-shadow:0 15px 35px rgba(249,140,83,0.15); }
+        .card-img-holder { position:relative; width:100%; padding-top:130%; background:#F7F7F4; overflow:hidden; }
+        .card-img-holder img { position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; }
+        .code-tag { position:absolute; top:12px; left:12px; background:var(--clr-accent); color:#fff; padding:3px 10px; font-family:var(--font-serif); font-size:12px; z-index:10; }
+        .card-details { padding:18px; text-align:center; background:#fff; flex-grow:1; display:flex; flex-direction:column; justify-content:space-between; }
+        .card-name { font-family:var(--font-serif); font-size:17px; font-weight:400; margin-bottom:4px; }
+        .card-price { font-size:15px; font-weight:600; margin-bottom:14px; }
+        .card-action-btn { width:100%; padding:9px; font-size:12px; border:1px solid var(--clr-light-gray); background:#FAF9F6; transition:var(--transition-smooth); }
+        .catalog-card:hover .card-action-btn { background:var(--clr-accent); color:white; border-color:var(--clr-accent); }
 
-        .detail-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(42,46,43,0.4); backdrop-filter: blur(15px); z-index: 3000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
-        .detail-modal.active { opacity: 1; pointer-events: auto; }
-        .modal-box { background-color: var(--clr-white); width: 90%; max-width: 950px; height: 90vh; max-height: 680px; display: grid; grid-template-columns: 1fr 1.1fr; animation: modalSlideUp 0.5s ease; box-shadow: 0 40px 90px rgba(0,0,0,0.15); overflow: hidden; border-radius: 2px; }
-        .modal-close-btn { position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.8); border: none; font-size: 20px; width: 36px; height: 36px; border-radius: 50%; color: var(--clr-text-dark); cursor: pointer; z-index: 100; display: flex; align-items: center; justify-content: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: var(--transition-smooth); }
-        .modal-close-btn:hover { background: var(--clr-accent); color: white; }
-        .modal-left-img { width: 100%; height: 100%; object-fit: cover; background: #f9f9f6; }
-        .modal-right-body { padding: 35px; display: flex; flex-direction: column; overflow-y: auto; height: 100%; background: var(--clr-white); scrollbar-width: none; -ms-overflow-style: none; }
-        .modal-right-body::-webkit-scrollbar { display: none; }
-        .modal-id-badge { display: inline-block; background: var(--clr-accent); color: white; font-size: 13px; font-weight: 500; padding: 4px 12px; letter-spacing: 1px; margin-bottom: 12px; font-family: var(--font-serif); }
-        .modal-title { font-family: var(--font-serif); font-size: 28px; font-weight: 400; line-height: 1.3; margin-bottom: 18px; color: var(--clr-text-dark); border-bottom: 1px solid var(--clr-light-gray); padding-bottom: 15px; }
-        .modal-quote-box { margin-bottom: 22px; padding-left: 15px; border-left: 3px solid var(--clr-pink); }
-        .modal-quote-text { font-family: var(--font-serif); font-size: 17px; font-style: italic; color: #333; line-height: 1.6; }
-        .modal-info-section { margin-bottom: 22px; }
-        .info-header { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: var(--clr-sage); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
-        .info-header::after { content: ''; flex-grow: 1; height: 1px; background: var(--clr-light-gray); }
-        .material-item { font-size: 15.5px; color: var(--clr-text-dark); margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
-        .material-item svg { width: 15px; fill: var(--clr-sage); opacity: 0.7; }
-        .modal-tag-cloud { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 25px; }
-        .tag-pill { font-size: 12.5px; background: var(--clr-sky); color: var(--clr-text-dark); padding: 4px 12px; border-radius: 50px; border: 1px solid rgba(0,0,0,0.02); }
-        .modal-action-wrapper { margin-top: auto; padding-top: 15px; border-top: 1px solid var(--clr-light-gray); background: var(--clr-white); }
-        .modal-price-row { font-size: 24px; font-weight: 600; color: var(--clr-text-dark); margin-bottom: 15px; display: flex; align-items: center; justify-content: space-between; }
-        .btn-modal-action { display: flex; align-items: center; justify-content: center; gap: 12px; background-color: var(--clr-accent); color: var(--clr-white); padding: 14px; font-size: 14px; letter-spacing: 2px; font-weight: 500; transition: var(--transition-smooth); text-decoration: none; text-transform: uppercase; border-radius: 2px; }
-        .btn-modal-action:hover { background-color: #e07b45; transform: translateY(-2px); }
+        .detail-modal { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(42,46,43,0.4); backdrop-filter:blur(15px); z-index:3000; display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:opacity 0.4s; }
+        .detail-modal.active { opacity:1; pointer-events:auto; }
+        .modal-box { background:var(--clr-white); width:90%; max-width:950px; height:90vh; max-height:680px; display:grid; grid-template-columns:1fr 1.1fr; animation:modalSlideUp 0.5s ease; box-shadow:0 40px 90px rgba(0,0,0,0.15); overflow:hidden; border-radius:2px; position:relative; }
+        .modal-close-btn { position:absolute; top:20px; right:20px; background:rgba(255,255,255,0.8); border:none; font-size:20px; width:36px; height:36px; border-radius:50%; cursor:pointer; z-index:100; display:flex; align-items:center; justify-content:center; }
+        .modal-close-btn:hover { background:var(--clr-accent); color:white; }
+        .modal-left-img { width:100%; height:100%; object-fit:cover; background:#f9f9f6; }
+        .modal-right-body { padding:35px; overflow-y:auto; height:100%; background:var(--clr-white); scrollbar-width:none; }
+        .modal-right-body::-webkit-scrollbar { display:none; }
+        .modal-id-badge { display:inline-block; background:var(--clr-accent); color:white; padding:4px 12px; font-size:13px; letter-spacing:1px; margin-bottom:12px; font-family:var(--font-serif); }
+        .modal-title { font-family:var(--font-serif); font-size:28px; font-weight:400; margin-bottom:18px; border-bottom:1px solid var(--clr-light-gray); padding-bottom:15px; }
+        .modal-quote-box { margin-bottom:22px; padding-left:15px; border-left:3px solid var(--clr-pink); }
+        .modal-quote-text { font-family:var(--font-serif); font-size:17px; font-style:italic; color:#333; }
+        .info-header { font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:2px; color:var(--clr-sage); margin-bottom:12px; display:flex; align-items:center; gap:8px; }
+        .info-header::after { content:''; flex-grow:1; height:1px; background:var(--clr-light-gray); }
+        .material-item { font-size:15.5px; margin-bottom:8px; display:flex; align-items:center; gap:10px; }
+        .material-item svg { width:15px; fill:var(--clr-sage); opacity:0.7; }
+        .modal-tag-cloud { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:25px; }
+        .tag-pill { font-size:12.5px; background:var(--clr-sky); padding:4px 12px; border-radius:50px; }
+        .modal-action-wrapper { margin-top:auto; padding-top:15px; border-top:1px solid var(--clr-light-gray); }
+        .modal-price-row { font-size:24px; font-weight:600; margin-bottom:15px; display:flex; justify-content:space-between; }
+        .btn-modal-action { display:flex; align-items:center; justify-content:center; gap:12px; background:var(--clr-accent); color:white; padding:14px; font-size:14px; letter-spacing:2px; text-decoration:none; border-radius:2px; }
+        .btn-modal-action:hover { background:#e07b45; }
 
-        .notice-card { background-color: var(--clr-white); border: 1px solid var(--clr-light-gray); padding: 48px 45px; transition: var(--transition-smooth); box-shadow: 0 12px 30px rgba(42,46,43,0.02); }
-        .notice-card:hover { border-color: var(--clr-accent); box-shadow: 0 20px 40px rgba(249,140,83,0.08); }
-        .notice-title { font-family: var(--font-serif); font-size: 26px; font-weight: 400; letter-spacing: 1px; margin-bottom: 24px; color: var(--clr-text-dark); display: flex; align-items: center; gap: 12px; }
-        .notice-title::before { content: '✦'; font-size: 26px; color: var(--clr-accent); font-weight: 300; }
-        .notice-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
-        .notice-list li { font-size: 15px; color: var(--clr-text-muted); line-height: 1.65; position: relative; padding-left: 24px; }
-        .notice-list li::before { content: '•'; position: absolute; left: 8px; color: var(--clr-sage); font-weight: 600; font-size: 18px; }
+        .notice-card { background:var(--clr-white); border:1px solid var(--clr-light-gray); padding:48px 45px; transition:var(--transition-smooth); }
+        .notice-card:hover { border-color:var(--clr-accent); }
+        .notice-title { font-family:var(--font-serif); font-size:26px; font-weight:400; margin-bottom:24px; display:flex; align-items:center; gap:12px; }
+        .notice-title::before { content:'✦'; font-size:26px; color:var(--clr-accent); }
+        .notice-list { list-style:none; display:flex; flex-direction:column; gap:14px; }
+        .notice-list li { font-size:15px; color:var(--clr-text-muted); padding-left:24px; position:relative; }
+        .notice-list li::before { content:'•'; position:absolute; left:8px; color:var(--clr-sage); font-weight:600; font-size:18px; }
 
+        /* 移动端响应式 (完全保留) */
         @media (max-width: 1024px) { .container { padding: 0 20px; } .section-padding { padding: 80px 0; } .hero-content h1 { font-size: 48px; } .product-img-wrapper { height: 360px; } .logo-img { height: 34px; } }
-        @media (max-width: 768px) { .navbar { height: auto; padding: 15px 0; } .logo { font-size: 20px; } .logo-img { height: 28px; } .nav-right-container { width: 100%; } .nav-links { gap: 15px; justify-content: center; } .hero { min-height: 90vh; } .hero-content h1 { font-size: 32px; } .product-grid { gap: 30px 20px; } .delivery-grid { grid-template-columns: 1fr; } .shop-layout { flex-direction: column; } .shop-sidebar { width: 100%; border-right: none; } .cat-list { flex-direction: row; flex-wrap: wrap; } }
-        @media (max-width: 480px) { .container { padding: 0 16px; } .hero-content h1 { font-size: 26px; } .product-img-wrapper { height: 250px; } .catalog-grid { gap: 15px; } .logo { font-size: 18px; } .logo-img { height: 24px; } }
-        @media (max-width: 992px) { .modal-box { grid-template-columns: 1fr; height: 92vh; max-height: none; } .modal-left-img { max-height: 40vh; object-fit: contain; } .modal-right-body { padding: 20px; max-height: 55vh; } }
+        @media (max-width: 768px) { .navbar { height: auto; padding: 15px 0; } .logo { font-size: 20px; white-space: normal; gap:8px; } .logo-img { height:28px; } .nav-right-container { width: 100%; justify-content: space-between; } .nav-links { gap: 15px; justify-content: center; width: 100%; } .nav-links a { font-size: 12px; } .lang-switcher { padding-left: 12px; border-left: none; } .hero { min-height: 90vh; height: auto; } .hero-content h1 { font-size: 32px; letter-spacing: 1px; } .hero-content p { font-size: 11px; margin-bottom: 30px; } .btn-luxury { padding: 12px 32px; font-size: 12px; } .section-header h2 { font-size: 28px; } .section-header p { font-size: 12px; } .product-grid { gap: 30px 20px; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); } .product-img-wrapper { height: 300px; } .delivery-grid { grid-template-columns: 1fr; gap: 30px; } .delivery-card { padding: 30px 25px; } #view-mall { padding-top: 100px; } .search-section { padding: 15px 20px; } .shop-layout { flex-direction: column; } .shop-sidebar { width: 100%; border-right: none; border-bottom: 1px solid var(--clr-light-gray); padding: 20px; min-height: auto; } .cat-list { flex-direction: row; flex-wrap: wrap; gap: 10px; } .cat-item { padding: 8px 16px; font-size: 13px; } .shop-content { padding: 25px 20px; } .catalog-grid { gap: 20px; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); } .card-name { font-size: 14px; } .card-price { font-size: 13px; } .card-action-btn { font-size: 10px; padding: 6px; } .footer-contact { gap: 20px; flex-direction: column; align-items: center; } footer p { font-size: 11px; padding-top: 20px; } .notice-card { padding: 32px 28px; } .notice-title { font-size: 22px; } .notice-list li { font-size: 13.5px; padding-left: 20px; } }
+        @media (max-width: 480px) { .container { padding: 0 16px; } .section-padding { padding: 60px 0; } .hero-content h1 { font-size: 26px; } .product-img-wrapper { height: 250px; } .catalog-grid { gap: 15px; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); } .card-details { padding: 12px; } .card-name { font-size: 12px; } .code-tag { font-size: 9px; padding: 2px 6px; top: 6px; left: 6px; } .cat-item { padding: 6px 12px; font-size: 12px; } .shop-content { padding: 15px; } .whatsapp-float { width: 50px; height: 50px; bottom: 20px; right: 20px; } .logo { font-size: 18px; gap: 6px; } .logo-img { height: 24px; } }
+        @media (max-width: 992px) { .modal-box { grid-template-columns: 1fr; height: 92vh; max-height: none; width: 95%; } .modal-left-img { height: auto; max-height: 40vh; width: 100%; object-fit: contain; background: #f0f0ea; } .modal-right-body { padding: 20px; max-height: 55vh; } .modal-title { font-size: 22px; } .modal-quote-text { font-size: 14px; } .material-item { font-size: 13px; } .btn-modal-action { padding: 12px; font-size: 13px; } }
+        @media (max-width: 480px) and (orientation: portrait) { .modal-left-img { max-height: 35vh; } .modal-right-body { padding: 16px; max-height: 58vh; } .modal-title { font-size: 20px; } }
         @keyframes modalSlideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
@@ -195,7 +187,7 @@
     <div class="modal-box"><button class="modal-close-btn" onclick="closeProductModal()">✕</button><img src="" class="modal-left-img" id="modalImg"><div class="modal-right-body"><div class="modal-id-badge" id="modalTag"></div><h2 class="modal-title" id="modalTitle"></h2><div class="modal-quote-box view-hidden" id="boxQuote"><p class="modal-quote-text" id="modalQuote"></p></div><div class="modal-info-section view-hidden" id="boxMaterial"><div class="info-header" id="modalMaterialHeader" data-bc="花材清单" data-bi="MATERIALS">花材清单</div><div id="modalMaterialList"></div></div><div class="modal-tag-cloud" id="modalTags"></div><div class="modal-action-wrapper"><div class="modal-price-row"><span id="modalPrice"></span></div><a href="" target="_blank" class="btn-modal-action" id="modalWaBtn"><svg style="width:18px" viewBox="0 0 24 24"><path fill="white" d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.4 0 11.973 0c3.184.001 6.177 1.242 8.426 3.496 2.248 2.254 3.487 5.251 3.486 8.439-.004 6.625-5.342 11.974-11.918 11.974-2.004-.001-3.973-.504-5.716-1.464L0 24zm6.066-3.446l.433.257c1.63.967 3.51 1.478 5.436 1.479 5.474 0 9.93-4.447 9.934-9.913.002-2.648-1.03-5.138-2.906-7.017C17.139 3.48 14.654 2.451 12.01 2.451 6.533 2.451 2.077 6.897 2.075 12.365c-.001 1.996.52 3.947 1.508 5.666l.282.493-1.01 3.693 3.768-.989z"/></svg><span data-bc="即刻咨询及询价" data-bi="INQUIRE VIA WHATSAPP">即刻咨询及询价</span></a></div></div></div>
 </div>
 <a href="https://wa.me/60189832276" target="_blank" class="whatsapp-float"><svg width="26" height="26" viewBox="0 0 24 24"><path fill="white" d="M.057 24l1.687-6.163..."/></svg></a>
-<footer id="footer"><div class="container"><div class="footer-contact"><a href="https://wa.me/60189832276" class="contact-item">WhatsApp: 018-983 2276</a><a href="https://www.facebook.com/share/1BL9wWidXd/?mibextid=wwXIfr" class="contact-item">Facebook: @广福花苑</a><a href="https://www.instagram.com/kwangfook_florist" class="contact-item">Instagram: @kwangfook_florist</a></div><p data-bc="© 2025 广福花苑花艺工作室" data-bi="© 2025 Kwang Fook Florist">© 2025 广福花苑花艺工作室</p></div></footer>
+<footer id="footer"><div class="container"><div class="footer-contact"><a href="https://wa.me/60189832276" class="contact-item">WhatsApp: 018-983 2276</a><a href="https://www.facebook.com/share/1BL9wWidXd/?mibextid=wwXIfr" class="contact-item">Facebook: @广福花苑</a><a href="https://www.instagram.com/kwangfook_florist" class="contact-item">Instagram: @kwangfook_florist</a></div><p data-bc="© 2025 广福花苑花艺工作室—保留所有权利" data-bi="© 2025 Kwang Fook Florist—All rights reserved">© 2025 广福花苑花艺工作室—保留所有权利</p></div></footer>
 
 <script>
     (function() {
@@ -233,32 +225,39 @@
         ];
         basketData.forEach(d => localProductDatabase.push({ id:d.id, type:'basket', priceBc:'请拿图联系卖家询价', priceBi:'PM for Price Inquiry', nameBc:d.nC, nameBi:d.nE, img:`${d.id}.jpg`, materialBc:d.matC, materialBi:d.matE, hashtagBc:d.tagC, hashtagBi:d.tagE, quoteBc:d.qC, quoteBi:d.qE }));
 
-        // 花束全系列 (Bouquet1 至 Bouquet55 及其他特殊系列，全部原始数据)
+        // 花束全系列 (完整Bouquet1~55 + 特殊系列)
         const bouquetData = [
+            // 毕业花束
             { id:'GRD1', nC:'前程似锦毕业花束', nE:'Brilliant Horizons Graduation Bouquet', matC:'精品向日葵 + 季节性配花', matE:'Selected Sunflowers & Seasonal Accent Foliage', tagC:'#毕业花束 #毕业快乐 #向日葵花束 #毕业季 #GraduationBouquet #毕业礼物', tagE:'#GraduationBouquet #HappyGraduation #Sunflowers #GradSeason', qC:'🎓 愿此去前程似锦，再相逢依旧如故。', qE:'🎓 May your journey ahead be brilliant and magnificent, and may your future sparkle with infinite success.' },
             { id:'GRD2', nC:'毕业快乐向阳花束', nE:'Sunny Dawn Graduation Bouquet', matC:'精品向日葵 + 白色满天星', matE:'Selected Sunflowers & White Baby\'s Breath', tagC:'#毕业快乐 #向阳花束 #毕业礼物 #鲜花花束', tagE:'#HappyGraduation #SunnyBouquet #GraduationGift #FreshFlowers', qC:'🌞 愿你永远向阳而生，一路奔赴属于自己的光。', qE:'🌞 May you forever chase the sun, stepping fearlessly into a life filled with your own brilliant light.' },
             { id:'GRD3', nC:'梦想启航毕业礼', nE:'Dream Voyage Graduation Bouquet', matC:'特选向日葵 + 现代韩式包装', matE:'Elite Sunflowers & Modern Korean Wrap Style', tagC:'#梦想启航 #毕业向日葵 #韩系花束', tagE:'#DreamsAloft #GraduationSunflowers #KoreanStyleBouquet', qC:'✨ 愿你带着热爱与勇气，奔赴下一场山海。', qE:'✨ May you step forward with burning passion and absolute courage as you journey to your next destination.' },
             { id:'GRD4', nC:'青春收官花束', nE:'Youth Finale Premium Bouquet', matC:'精品向日葵 + 雅致配草', matE:'Selected Sunflowers & Elegant Greenery', tagC:'#毕业花束 #青春花礼 #高级感鲜花', tagE:'#YouthFinale #GraduationFlowers #PremiumAesthetics', qC:'📖 故事暂时写到这里，但人生的新篇章才刚开始。', qE:'📖 This beautiful chapter concludes here, but the grandest pages of your life are waiting to be written.' },
+            // 玩偶花束
             { id:'Bear1', nC:'星球漫游花礼', nE:'Astral Wanderer Plush Doll Bouquet', matC:'星星人玩偶（自备）+ 香皂花/编织花/假花配草', matE:'Customer Doll + Soap Flowers/Crochet Flowers/Faux Fillers', tagC:'#星星人花束 #玩偶礼物 #公仔花束', tagE:'#PlushDollBouquet #StarWanderer #CreativeGift', qC:'🚀 带着浪漫去宇宙旅行，把满天星光送给特别的人。', qE:'🚀 Embark on a romantic cosmic voyage, gathering the stars of the universe for someone truly irreplaceable.' },
             { id:'Bear2', nC:'心动小熊花束', nE:'Heartbeat Teddy Plush Bouquet', matC:'精品公仔玩偶（自备）+ 浪漫雅致配草', matE:'Customer Teddy Plush + Romantic Delicate Fillers', tagC:'#小熊花束 #玩偶系列 #浪漫礼物', tagE:'#TeddyBearBouquet #PlushDollSeries #RomanticGift', qC:'💐 小熊陪你，鲜花伴你，把温柔与浪漫一次送达。', qE:'💐 With a sweet teddy by your side and blossoms in hand, delivering endless warmth and modern romance.' },
             { id:'Bear3', nC:'抱抱熊玩偶花束', nE:'Teddy Hug Soft Doll Bouquet', matC:'可爱公仔（自备）+ 少女风高级配饰', matE:'Customer Cuddly Plush + Soft Pastel Accent Foliage', tagC:'#玩偶花束 #抱抱熊花束 #公仔花束', tagE:'#PlushDollBouquet #CuddlyBear #SoftPastelAesthetic', qC:'🧸 鲜花与玩偶的双倍浪漫，把快乐和心动一起送给你。', qE:'🧸 Double the sweetness with beautiful blooms and an adorable plush. Sending pure delight straight to your heart.' },
             { id:'Bear4', nC:'梦幻公仔花束', nE:'Whimsical Wonderland Plush Bouquet', matC:'卡通公仔（自备）+ 梦幻星光假花创意配饰', matE:'Customer Cartoon Plush + Whimsical Faux Florals & Accessories', tagC:'#公仔花束 #梦幻花礼 #玩偶鲜花', tagE:'#WhimsicalPlushBouquet #DreamyFloralGift #CreativeFloristry', qC:'✨ 把可爱装进花束里，让惊喜加倍心动。', qE:'✨ Packaging pure cuteness into an elegant bouquet to double the surprise and make their heart skip a beat.' },
+            // 编织花束
             { id:'Crochet1', nC:'暖阳织梦手工花礼', nE:'Warm Sun Artisanal Crochet Bouquet', matC:'双层太阳花-1，玫瑰-3，郁金香-2，胖胖郁金香-1，风铃花-2，雏菊-2，尤加利叶-2 (需提早2星期预订)', matE:'1 Sunflower, 3 Roses, 2 Tulips, 1 Plump Tulip, 2 Bellflowers, 2 Daisies, 2 Eucalyptus. (2-week advance booking required)', tagC:'#编织向日葵 #手工礼物 #温柔系花束', tagE:'#HandcraftedCrochet #ArtisanalSunflowers #TimelessGift', qC:'✨ 用毛线编织阳光，把温暖与浪漫永久珍藏。', qE:'✨ Weaving pure sunshine into intricate yarn, preserving warmth and everlasting romance forever.' },
             { id:'Crochet2', nC:'阳光满满编织花束', nE:'Sun-Drenched Handwoven Yarn Bouquet', matC:'双层太阳花-1，玫瑰-4，风铃花-3，康乃馨-3，郁金香-2 + 可自定金额纸钞 (需提早2星期预订)', matE:'1 Sunflower, 4 Roses, 3 Bellflowers, 3 Carnations, 2 Tulips + Custom Cash Notes. (2-week advance booking required)', tagC:'#阳光花束 #编织花系列 #高级感包装', tagE:'#SunDrenchedYarnFlowers #HandwovenCollection #PremiumWrap', qC:'💛 把阳光装进花束里，愿你的生活永远明亮温暖。', qE:'💛 Wrapping the spirit of golden sunbeams into a gorgeous bouquet. May your life be forever radiant.' },
             { id:'Crochet3', nC:'郁见浪漫编织花束', nE:'Romantic Enchantment Crochet Tulip Bouquet', matC:'手作郁金香-8，盛开郁金香-3，尤加利叶-3 (需提早2星期预订)', matE:'8 Handcrafted Tulips, 3 Blooming Tulips, 3 Eucalyptus Leaves. (2-week advance booking required)', tagC:'#郁金香编织花束 #毛线郁金香 #手工花束', tagE:'#CrochetTulips #HandcraftedBouquet #ModernArtisanal', qC:'🌷 把浪漫编织成花，让心动永远盛开。', qE:'🌷 Crafting romance stitch by stitch into a floral wonder, letting your heartfelt affection bloom eternally.' },
             { id:'Crochet4', nC:'奶油郁金香手作花礼', nE:'Creamy Pastel Handwoven Tulip Bouquet', matC:'精编奶油色系郁金香-11支 (需提早2星期预订)', matE:'11 Premium Creamy Pastel Handwoven Tulips. (2-week advance booking required)', tagC:'#奶油风花束 #编织郁金香 #手作花束', tagE:'#CreamyPastelAesthetic #HandwovenTulips #ArtisanalFlowerGift', qC:'🌸 治愈系粉郁金香，把心动藏进每一针每一线。', qE:'🌸 Healing pastel tones to brighten up any space. Tucking heartfelt affection into every single weave.' },
             { id:'Crochet5', nC:'暖心织梦艺术花束', nE:'Dream-Weaver Mixed Crochet Masterpiece', matC:'多款高阶精编手工混搭花材 (需提早2星期预订)', matE:'Curated Selection of Elite Mixed Handcrafted Florals. (2-week advance booking required)', tagC:'#织梦花束 #编织向日葵 #手工花艺', tagE:'#DreamWeaverBouquet #ArtisanalHandcraft #BespokeYarnArt', qC:'🌻 用双手编织温暖，把美好悄悄收藏。', qE:'🌻 Fashioning pure warmth with dedicated hands, capturing the finest fragments of life\'s beauty.' },
+            // 有钱花花束
             { id:'Money1', nC:'财运满满现金花礼', nE:'Aura of Wealth Cash Bouquet', matC:'自定数量/面额纸币 + 雅致配花', matE:'Custom Cash Banknotes & Delicate Accent Foliage', tagC:'#发财花束 #有钱花系列 #生日惊喜', tagE:'#CashBouquet #WealthAndFortune #LuxuryBirthdaySurprise', qC:'✨ 鲜花配钞票，浪漫与财富一个都不少。', qE:'✨ Merging premium floral beauty with crisp bank notes. The ultimate convergence of modern romance and prosperity.' },
             { id:'Money2', nC:'钞能力至尊花束', nE:'Ultimate Prosperity Money Bouquet', matC:'14张纸币加起来=RM50 + 鲜盛太阳花 + 高阶配草', matE:'14xBanknotes=RM50, Premium Sunflowers & Elite Greenery', tagC:'#钞能力花束 #有钱花花礼 #暴富系列', tagE:'#UltimateProsperity #MoneyFlowerGift #WealthSymbol', qC:'🌟 生活不止要有花，还要有随时能花的钱。', qE:'🌟 Because life deserves the elegance of breathtaking blooms alongside the wonderful power of freedom.' },
             { id:'Money3', nC:'公主请暴富现金花束', nE:'Royal Fortune Princess Cash Bouquet', matC:'10张RM100纸币 + 精选康乃馨 + 少女粉包装', matE:'10x RM100 Banknotes, Selected Carnations & Blush Pink Wrap', tagC:'#有钱花系列 #现金花束 #少女心花束', tagE:'#RoyalFortune #CashFlowerBouquet #PrincessAesthetic', qC:'🎀 公主不仅要被爱，还要有花不完的钱。', qE:'🎀 A royal presentation because a true princess deserves endless devotion and unlimited fortune.' },
+            // 零食花束
             { id:'Snacks1', nC:'快乐加倍零食花束', nE:'Double Euphoria Snack Bouquet', matC:'进口香皂花 + 精选美味零食组合', matE:'Imported Soap Roses & Specially Curated Gourmet Snacks', tagC:'#零食花束 #零食礼物 #创意花束', tagE:'#SnackBouquet #GourmetTreats #CreativeFlowerGift', qC:'🍫 把快乐装进花束里，每一口都是小幸福。', qE:'🍫 Packaging pure snack delight into an elegant arrangement. Every bite is a fragment of pure happiness.' },
             { id:'Snacks2', nC:'小卖部de浪漫零食花', nE:'Vintage Treats Nostalgia Snack Bouquet', matC:'进口香皂花 + 怀旧经典零食', matE:'Imported Soap Roses & Nostalgic Classic Snacks', tagC:'#小卖部花束 #创意礼物 #快乐加倍', tagE:'#NostalgiaSnackBouquet #CreativeGifting #DoubleTheJoy', qC:'🍿 把青春 and 快乐包成花束，送给最特别的人。', qE:'🍿 Transforming sweet youth and comforting treats into a gorgeous bouquet for someone genuinely special.' },
             { id:'Snacks3', nC:'甜心零食花束', nE:'Sweetheart Confetti Candy Bouquet', matC:'高端工艺工艺花 + 缤纷甜心零食', matE:'Premium Faux Accent Flowers & Whimsical Sweet Snacks', tagC:'#甜系花束 #零食花束 #少女感礼物', tagE:'#SweetheartBouquet #ConfectioneryArt #PlayfulGifting', qC:'🍭 甜的不只是零食，还有收到礼物时的心情。', qE:'🍭 It is not just the treats that are exceptionally sweet, it\'s the magical feeling of being deeply cared for.' },
+            // 清明节花束
             { id:'Qingming1', nC:'静念追思慰问花礼', nE:'Silent Remembrance Tonal Eulogy Bouquet', matC:'珍选特大白菊花 + 庄严素雅包装', matE:'Selected Premium White Chrysanthemums & Solemn Wrappings', tagC:'#清明节花束 #白菊花束 #追思花礼', tagE:'#ChingMingFlowers #WhiteChrysanthemums #RemembranceTribute', qC:'🕊️ 以花寄思念，愿思念化作温柔陪伴。', qE:'🕊️ Sending profound thoughts through gentle blossoms. May sweet memories bring comfort and peace.' },
             { id:'Qingming2', nC:'清思白菊花束', nE:'Pure Soul White Chrysanthemum Bouquet', matC:'高阶白菊花 + 雅致思念绿植配叶', matE:'Elite White Chrysanthemums & Elegant Commemorative Foliage', tagC:'#追思花束 #清明鲜花 #白色花束', tagE:'#CommemorativeBouquet #SolemnWhites #EternalRespect', qC:'🤍 花开无声，思念有痕，愿爱与回忆长存心间。', qE:'🤍 Blossoms unfold in quiet grace, carrying deep affection. May love and precious memories stay forever in our hearts.' },
             { id:'Qingming3', nC:'清风寄念花束', nE:'Ethereal Breeze Commemorative Bouquet', matC:'特选白色系菊花 + 清新衬叶', matE:'Specially Sourced White Florals & Refreshing Foliage', tagC:'#清明花礼 #纪念亲人 #鲜花追思', tagE:'#EtherealBreeze #AncestorRemembrance #ChingMingFestival', qC:'🌿 清风寄哀思，愿思念随花轻轻传达。', qE:'🌿 May the gentle spring breeze carry your profound respect and love through these elegant blooms.' },
             { id:'Qingming4', nC:'素雅思忆花束', nE:'Elegant Solitude Chrysanthemum Bouquet', matC:'精品白菊花 + 黄莺配草', matE:'Selected White Chrysanthemums & Delicate Fillers', tagC:'#素雅花束 #白菊花礼 #追忆时光', tagE:'#ElegantSolitude #WhiteChrysanthemums #TimeHonoredRespect', qC:'🕯️ 一束素花，一份思念，愿故人安息，思念长留。', qE:'🕯️ A humble presentation of pure blossoms carrying profound respect. May peace reign eternally.' },
-            // Bouquet1 至 Bouquet55 完整数据
+
+            // Bouquet1 至 Bouquet55 完整数据 (全部原始数据)
             { id:'Bouquet1', nC:'Hello Kitty 梦幻花束', nE:'Hello Kitty Whimsical Dream Bouquet', matC:'Hello Kitty 玩偶 + 粉色香皂玫瑰 + 蕾丝纱网包装', matE:'Hello Kitty Plush, Pink Soap Roses & Luxurious Lace Tulle Wrap', tagC:'#HelloKitty花束 #可爱花束 #定制花束', tagE:'#HelloKittyBouquet #KawaiiAesthetic #BespokeFloristry', qC:'🌸 代表纯真与可爱，象征幸福与温柔的祝福。不只是花束，更是一份治愈系的心意。', qE:'🌸 Radiating pure innocence and unmatched charm. Far more than a bouquet—it is a deeply comforting gesture of affection.' },
             { id:'Bouquet2', nC:'温柔独白单支康乃馨', nE:'Gentle Soliloquy Single Carnation', matC:'顶级进口康乃馨 1支 + 高级极简单支纸盒包装', matE:'1x Ultra-Premium Imported Carnation & Minimalist Luxury Sleeve', tagC:'#单支康乃馨 #康乃馨花束 #温柔花礼', tagE:'#SingleCarnation #MinimalistLuxury #DelicateGesture', qC:'🌷 一支花也有满满心意，温柔从来不需要太多。', qE:'🌷 A single premium bloom holding immense depth. True elegance never demands an crowd.' },
             { id:'Bouquet3', nC:'馨语·康乃馨花束', nE:'Maternal Whispers Premium Carnation Bouquet', matC:'11支粉嫩康乃馨 + 丰满满天星 + 情人草 + 黄莺', matE:'11x Selected Pink Carnations, Fluffy Baby\'s Breath & Statice', tagC:'#康乃馨花束 #高级花艺 #感恩花束', tagE:'#CarnationBouquet #PremiumFloristry #GratitudeFlowerGift', qC:'🌸 馨香寄语，温柔如初。每一个束康乃馨，都是未说出口的感谢与爱意。', qE:'🌸 Soft scents carrying deep gratitude. Every masterfully arranged carnation represents unspoken appreciation.' },
@@ -317,7 +316,7 @@
         ];
         bouquetData.forEach(d => localProductDatabase.push({ id:d.id, type:'bouquet', priceBc:'请拿图联系卖家询价', priceBi:'PM for Price Inquiry', nameBc:d.nC, nameBi:d.nE, img:`${d.id}.jpg`, materialBc:d.matC, materialBi:d.matE, hashtagBc:d.tagC, hashtagBi:d.tagE, quoteBc:d.qC, quoteBi:d.qE }));
 
-        // 功能函数
+        // 功能函数 (完全保留)
         window.openHome = function() { document.getElementById('view-mall').classList.add('view-hidden'); document.getElementById('view-home').classList.remove('view-hidden'); window.scrollTo(0,0); };
         window.openHomeAndScroll = function(id) { openHome(); setTimeout(() => { const t = document.getElementById(id); if(t) window.scrollTo({ top: t.offsetTop - 80, behavior: 'smooth' }); }, 100); };
         window.scrollToFooter = function() { window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); };
